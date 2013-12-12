@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Windows Desktop
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "CB_Copy_Helper", "CB_Copy_Helper\CB_Copy_Helper.vbproj", "{A796F468-F4B6-4AA9-9907-4A9CC1ACC183}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A796F468-F4B6-4AA9-9907-4A9CC1ACC183}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A796F468-F4B6-4AA9-9907-4A9CC1ACC183}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A796F468-F4B6-4AA9-9907-4A9CC1ACC183}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A796F468-F4B6-4AA9-9907-4A9CC1ACC183}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
