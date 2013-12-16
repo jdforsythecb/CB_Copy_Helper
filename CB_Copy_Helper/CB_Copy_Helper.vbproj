@@ -25,7 +25,10 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <InstallUrl>\\SNAP400\Gigs\apps\CBCopyHelper\</InstallUrl>
-    <ApplicationRevision>2</ApplicationRevision>
+    <ProductName>CB Copy Helper</ProductName>
+    <PublisherName>Church Budget Envelope Company</PublisherName>
+    <SuiteName>CB Copy Helper</SuiteName>
+    <ApplicationRevision>3</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
