@@ -213,6 +213,9 @@ Public Class CBCopyHelperForm
         '' clear the lists
         copyFileList.Clear()
         proofFileList.Clear()
+        uiLstDesignFiles.Items.Clear()
+        uiLstProofFiles.Items.Clear()
+
 
         '' trim whitespace from the search box
         Dim input As String = uiTxtFolderNumber.Text.Trim
