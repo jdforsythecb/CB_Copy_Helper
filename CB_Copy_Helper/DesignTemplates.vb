@@ -10,6 +10,7 @@ Public Class DesignTemplates
     Private Const TEMPLATEBOOKLETFRONT As String = "g:\Quark Templates\zForCBCopy_BookletFront.qxp"
     Private Const TEMPLATEBOOKLETCOVER As String = "g:\Quark Templates\zForCBCopy_BookletCover.psd"
     Private Const TEMPLATECARTON As String = "g:\Quark Templates\zForCBCopy_Carton.psd"
+    Private Const TEMPLATEBIZHUBCOVER As String = "g:\Quark Templates\zForCBCopy_BookletCoverBizhub.qxp"
 
     '' types of templates
     Public Enum TemplateTypes As Integer
@@ -19,9 +20,8 @@ Public Class DesignTemplates
         BookletFront = 4
         BookletBack = 5
         BookletCover = 6
-        Retrn = 7
-        Window = 8
-        Mailback = 9
+        BizhubCover = 7
+        Mailback = 8
     End Enum
 
     '' private copies of the public properties
@@ -99,6 +99,9 @@ Public Class DesignTemplates
             Exit Sub
         End If
 
+        '' copy to clipboard
+        Clipboard.SetText(fld.ToUpper & " " & fnt)
+
         Dim templatePath As String = getTemplatePath()
         Dim targetFileName As String = getFileName(Path.GetExtension(templatePath))
         Dim fullTargetPath As String = svpth & "\" & targetFileName
@@ -159,6 +162,8 @@ Public Class DesignTemplates
                 Return TEMPLATEBOOKLETCOVER
             Case TemplateTypes.Carton
                 Return TEMPLATECARTON
+            Case TemplateTypes.BizhubCover
+                Return TEMPLATEBIZHUBCOVER
             Case Else
                 Return ""
         End Select

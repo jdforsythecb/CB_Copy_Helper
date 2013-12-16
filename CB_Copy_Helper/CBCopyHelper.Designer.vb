@@ -42,8 +42,7 @@ Partial Class CBCopyHelperForm
         Me.uiBtnTemplateBookCover = New System.Windows.Forms.Button()
         Me.uiBtnTemplateMailback = New System.Windows.Forms.Button()
         Me.uiBtnTemplateBookFront = New System.Windows.Forms.Button()
-        Me.uiBtnTemplateReturn = New System.Windows.Forms.Button()
-        Me.uiBtnTemplateWindow = New System.Windows.Forms.Button()
+        Me.uiBtnTemplateBizhub = New System.Windows.Forms.Button()
         Me.uiBtnTemplateBookBack = New System.Windows.Forms.Button()
         Me.lblCopyFilesFound = New System.Windows.Forms.Label()
         Me.lblProofFilesFound = New System.Windows.Forms.Label()
@@ -89,14 +88,14 @@ Partial Class CBCopyHelperForm
         Me.Label3.AutoSize = True
         Me.Label3.Location = New System.Drawing.Point(201, 66)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(138, 78)
+        Me.Label3.Size = New System.Drawing.Size(141, 130)
         Me.Label3.TabIndex = 4
-        Me.Label3.Text = "Double-click to open" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Right-click for explorer" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Click buttons below to open" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & _
-    "the folder in that program"
+        Me.Label3.Text = "Double-click to open" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(copies folder # to clipboard)" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Right-click for explorer" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Left-click to copy folder" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "location to clipboard" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Click buttons below to op" & _
+    "en" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "the folder in that program"
         '
         'uiBtnOpenPNG
         '
-        Me.uiBtnOpenPNG.Location = New System.Drawing.Point(204, 161)
+        Me.uiBtnOpenPNG.Location = New System.Drawing.Point(204, 205)
         Me.uiBtnOpenPNG.Name = "uiBtnOpenPNG"
         Me.uiBtnOpenPNG.Size = New System.Drawing.Size(109, 29)
         Me.uiBtnOpenPNG.TabIndex = 3
@@ -105,7 +104,7 @@ Partial Class CBCopyHelperForm
         '
         'uiBtnOpenFontTools
         '
-        Me.uiBtnOpenFontTools.Location = New System.Drawing.Point(204, 195)
+        Me.uiBtnOpenFontTools.Location = New System.Drawing.Point(204, 239)
         Me.uiBtnOpenFontTools.Name = "uiBtnOpenFontTools"
         Me.uiBtnOpenFontTools.Size = New System.Drawing.Size(109, 26)
         Me.uiBtnOpenFontTools.TabIndex = 4
@@ -212,13 +211,13 @@ Partial Class CBCopyHelperForm
         Me.uiBtnTemplateBookCover.Name = "uiBtnTemplateBookCover"
         Me.uiBtnTemplateBookCover.Size = New System.Drawing.Size(83, 23)
         Me.uiBtnTemplateBookCover.TabIndex = 13
-        Me.uiBtnTemplateBookCover.Text = "Book Cover"
+        Me.uiBtnTemplateBookCover.Text = "UV Cover"
         Me.uiBtnTemplateBookCover.UseVisualStyleBackColor = True
         '
         'uiBtnTemplateMailback
         '
         Me.uiBtnTemplateMailback.Enabled = False
-        Me.uiBtnTemplateMailback.Location = New System.Drawing.Point(557, 156)
+        Me.uiBtnTemplateMailback.Location = New System.Drawing.Point(376, 156)
         Me.uiBtnTemplateMailback.Name = "uiBtnTemplateMailback"
         Me.uiBtnTemplateMailback.Size = New System.Drawing.Size(83, 23)
         Me.uiBtnTemplateMailback.TabIndex = 16
@@ -235,25 +234,15 @@ Partial Class CBCopyHelperForm
         Me.uiBtnTemplateBookFront.Text = "Booklet Front"
         Me.uiBtnTemplateBookFront.UseVisualStyleBackColor = True
         '
-        'uiBtnTemplateReturn
+        'uiBtnTemplateBizhub
         '
-        Me.uiBtnTemplateReturn.Enabled = False
-        Me.uiBtnTemplateReturn.Location = New System.Drawing.Point(376, 156)
-        Me.uiBtnTemplateReturn.Name = "uiBtnTemplateReturn"
-        Me.uiBtnTemplateReturn.Size = New System.Drawing.Size(83, 23)
-        Me.uiBtnTemplateReturn.TabIndex = 14
-        Me.uiBtnTemplateReturn.Text = "Return"
-        Me.uiBtnTemplateReturn.UseVisualStyleBackColor = True
-        '
-        'uiBtnTemplateWindow
-        '
-        Me.uiBtnTemplateWindow.Enabled = False
-        Me.uiBtnTemplateWindow.Location = New System.Drawing.Point(465, 156)
-        Me.uiBtnTemplateWindow.Name = "uiBtnTemplateWindow"
-        Me.uiBtnTemplateWindow.Size = New System.Drawing.Size(83, 23)
-        Me.uiBtnTemplateWindow.TabIndex = 15
-        Me.uiBtnTemplateWindow.Text = "Window"
-        Me.uiBtnTemplateWindow.UseVisualStyleBackColor = True
+        Me.uiBtnTemplateBizhub.Enabled = False
+        Me.uiBtnTemplateBizhub.Location = New System.Drawing.Point(465, 156)
+        Me.uiBtnTemplateBizhub.Name = "uiBtnTemplateBizhub"
+        Me.uiBtnTemplateBizhub.Size = New System.Drawing.Size(83, 23)
+        Me.uiBtnTemplateBizhub.TabIndex = 15
+        Me.uiBtnTemplateBizhub.Text = "Bizhub Cover"
+        Me.uiBtnTemplateBizhub.UseVisualStyleBackColor = True
         '
         'uiBtnTemplateBookBack
         '
@@ -291,8 +280,7 @@ Partial Class CBCopyHelperForm
         Me.Controls.Add(Me.lblProofFilesFound)
         Me.Controls.Add(Me.lblCopyFilesFound)
         Me.Controls.Add(Me.uiBtnTemplateBookBack)
-        Me.Controls.Add(Me.uiBtnTemplateWindow)
-        Me.Controls.Add(Me.uiBtnTemplateReturn)
+        Me.Controls.Add(Me.uiBtnTemplateBizhub)
         Me.Controls.Add(Me.uiBtnTemplateBookFront)
         Me.Controls.Add(Me.uiBtnTemplateMailback)
         Me.Controls.Add(Me.uiBtnTemplateBookCover)
@@ -339,8 +327,7 @@ Partial Class CBCopyHelperForm
     Friend WithEvents uiBtnTemplateBookCover As System.Windows.Forms.Button
     Friend WithEvents uiBtnTemplateMailback As System.Windows.Forms.Button
     Friend WithEvents uiBtnTemplateBookFront As System.Windows.Forms.Button
-    Friend WithEvents uiBtnTemplateReturn As System.Windows.Forms.Button
-    Friend WithEvents uiBtnTemplateWindow As System.Windows.Forms.Button
+    Friend WithEvents uiBtnTemplateBizhub As System.Windows.Forms.Button
     Friend WithEvents uiBtnTemplateBookBack As System.Windows.Forms.Button
     Friend WithEvents lblCopyFilesFound As System.Windows.Forms.Label
     Friend WithEvents lblProofFilesFound As System.Windows.Forms.Label

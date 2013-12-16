@@ -26,9 +26,8 @@ Public Class CBCopyHelperForm
         BookletFront = 4
         BookletBack = 5
         BookletCover = 6
-        Retrn = 7
-        Window = 8
-        Mailback = 9
+        BizhubCover = 7
+        Mailback = 8
     End Enum
 
     '' global to hold the company
@@ -178,7 +177,8 @@ Public Class CBCopyHelperForm
             End If
 
 
-        ElseIf (templateType = TemplateTypes.BookletCover) Then
+        ElseIf (templateType = TemplateTypes.BookletCover Or _
+                templateType = TemplateTypes.BizhubCover) Then
             Return "g:\CHKBK\UV COVERS"
 
 
@@ -220,8 +220,7 @@ Public Class CBCopyHelperForm
         uiBtnTemplateBookBack.Enabled = False
         uiBtnTemplateBookCover.Enabled = False
         uiBtnTemplateCarton.Enabled = False
-        uiBtnTemplateWindow.Enabled = False
-        uiBtnTemplateReturn.Enabled = False
+        uiBtnTemplateBizhub.Enabled = False
 
         '' only search if they pressed enter
         If Not (e.KeyCode = Keys.Return) Then
@@ -305,8 +304,7 @@ Public Class CBCopyHelperForm
             uiBtnTemplateBookBack.Enabled = True
             uiBtnTemplateBookCover.Enabled = True
             uiBtnTemplateCarton.Enabled = True
-            uiBtnTemplateWindow.Enabled = True
-            uiBtnTemplateReturn.Enabled = True
+            uiBtnTemplateBizhub.Enabled = True
 
         End If
 
@@ -314,9 +312,12 @@ Public Class CBCopyHelperForm
     End Sub
 
     '' double-click on design file to open
+    '' and copy folder number to clipboard
     Private Sub uiLstDesignFiles_DoubleClick(sender As Object, e As EventArgs) Handles uiLstDesignFiles.DoubleClick
         '' debug - to show the proper path/file is being selected
         'MessageBox.Show(copyFileList(uiLstDesignFiles.SelectedIndex).FullName)
+
+        Clipboard.SetText(uiTxtFolderNumber.Text)
 
         '' open the file in its default program
         Dim openFile As New ProcessStartInfo()
@@ -325,10 +326,20 @@ Public Class CBCopyHelperForm
         Process.Start(openFile)
     End Sub
 
+    '' left-click on design file to copy parent directory path to clipboard
     '' right-click on design file to open in explorer
     Private Sub uiLstDesignFiles_MouseDown(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles uiLstDesignFiles.MouseDown
-        '' determine if this is a right mouse click
-        If e.Button = Windows.Forms.MouseButtons.Right Then
+        If (e.Button = Windows.Forms.MouseButtons.Left) Then
+            '' did we actually click on an item in the box
+            Dim selInd As Integer = uiLstDesignFiles.IndexFromPoint(e.X, e.Y)
+            '' if the returned selindex is not -1, we clicked something
+            If (selInd <> -1) Then
+                '' copy the file path of the item selected, minus the filename, to the clipboard
+                Clipboard.SetText(copyFileList(selInd).DirectoryName)
+            End If
+
+            '' determine if this is a right mouse click
+        ElseIf e.Button = Windows.Forms.MouseButtons.Right Then
             '' did we actually right-click on an item in the box
             Dim selInd As Integer = uiLstDesignFiles.IndexFromPoint(e.X, e.Y)
 
@@ -358,10 +369,20 @@ Public Class CBCopyHelperForm
         Process.Start(openFile)
     End Sub
 
+    '' left-click on proof file to copy folder location to clipboard
     '' right-click on proof file to open in explorer
     Private Sub uiLstProofFiles_MouseDown(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles uiLstProofFiles.MouseDown
-        '' determine if this is a right mouse click
-        If e.Button = Windows.Forms.MouseButtons.Right Then
+        If (e.Button = Windows.Forms.MouseButtons.Left) Then
+            '' did we actually click on an item in the box
+            Dim selInd As Integer = uiLstProofFiles.IndexFromPoint(e.X, e.Y)
+            '' if the returned selindex is not -1, we clicked something
+            If (selInd <> -1) Then
+                '' copy the file path of the item selected, minus the filename, to the clipboard
+                Clipboard.SetText(proofFileList(selInd).DirectoryName)
+            End If
+
+
+        ElseIf e.Button = Windows.Forms.MouseButtons.Right Then
             '' did we actually right-click on an item in the box
             Dim selInd As Integer = uiLstProofFiles.IndexFromPoint(e.X, e.Y)
 
@@ -521,12 +542,20 @@ Public Class CBCopyHelperForm
         End If
     End Sub
 
-    Private Sub uiBtnReturn_Click(sender As Object, e As EventArgs) Handles uiBtnTemplateReturn.Click
-
-    End Sub
-
-    Private Sub uiBtnTemplateWindow_Click(sender As Object, e As EventArgs) Handles uiBtnTemplateWindow.Click
-
+    Private Sub uiBtnBizhub_Click(sender As Object, e As EventArgs) Handles uiBtnTemplateBizhub.Click
+        Dim prettyFolder As String = getPrettyFolderNumber(uiTxtFolderNumber.Text.Trim)
+        Dim fontCode As String = uiTxtFontCode.Text.Trim
+        If (prettyFolder = "") Then
+            MessageBox.Show("Please enter a valid folder number before creating a new design")
+        ElseIf (fontCode = "") Then
+            MessageBox.Show("Please enter a font code before creating a new design")
+        Else
+            '' copy template, rename, copy the folder/font to the clipboard, and open the file
+            Dim template As New DesignTemplates(prettyFolder, fontCode)
+            template.TemplateType = DesignTemplates.TemplateTypes.BizhubCover
+            template.SavePath = getSavePath(prettyFolder, TemplateTypes.BizhubCover)
+            template.createAndOpen()
+        End If
     End Sub
 
     Private Sub uiBtnTemplateMailback_Click(sender As Object, e As EventArgs) Handles uiBtnTemplateMailback.Click
