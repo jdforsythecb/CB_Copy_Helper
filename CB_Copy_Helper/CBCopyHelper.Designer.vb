@@ -42,9 +42,11 @@ Partial Class CBCopyHelperForm
         Me.uiBtnTemplateBookCover = New System.Windows.Forms.Button()
         Me.uiBtnTemplateMailback = New System.Windows.Forms.Button()
         Me.uiBtnTemplateBookFront = New System.Windows.Forms.Button()
-        Me.uiBtnReturn = New System.Windows.Forms.Button()
+        Me.uiBtnTemplateReturn = New System.Windows.Forms.Button()
         Me.uiBtnTemplateWindow = New System.Windows.Forms.Button()
         Me.uiBtnTemplateBookBack = New System.Windows.Forms.Button()
+        Me.lblCopyFilesFound = New System.Windows.Forms.Label()
+        Me.lblProofFilesFound = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'Label1
@@ -113,7 +115,7 @@ Partial Class CBCopyHelperForm
         'uiLstProofFiles
         '
         Me.uiLstProofFiles.FormattingEnabled = True
-        Me.uiLstProofFiles.Location = New System.Drawing.Point(19, 296)
+        Me.uiLstProofFiles.Location = New System.Drawing.Point(19, 327)
         Me.uiLstProofFiles.Name = "uiLstProofFiles"
         Me.uiLstProofFiles.Size = New System.Drawing.Size(179, 199)
         Me.uiLstProofFiles.TabIndex = 5
@@ -122,15 +124,15 @@ Partial Class CBCopyHelperForm
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(16, 279)
+        Me.Label4.Location = New System.Drawing.Point(16, 310)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(91, 13)
+        Me.Label4.Size = New System.Drawing.Size(95, 13)
         Me.Label4.TabIndex = 7
-        Me.Label4.Text = "Existing Proofs"
+        Me.Label4.Text = "Existing Proofs:"
         '
         'uiBtnPrintProof
         '
-        Me.uiBtnPrintProof.Location = New System.Drawing.Point(204, 377)
+        Me.uiBtnPrintProof.Location = New System.Drawing.Point(204, 408)
         Me.uiBtnPrintProof.Name = "uiBtnPrintProof"
         Me.uiBtnPrintProof.Size = New System.Drawing.Size(109, 29)
         Me.uiBtnPrintProof.TabIndex = 6
@@ -140,7 +142,7 @@ Partial Class CBCopyHelperForm
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(201, 296)
+        Me.Label5.Location = New System.Drawing.Point(201, 327)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(112, 65)
         Me.Label5.TabIndex = 10
@@ -158,6 +160,7 @@ Partial Class CBCopyHelperForm
         '
         'uiTxtFontCode
         '
+        Me.uiTxtFontCode.Enabled = False
         Me.uiTxtFontCode.Location = New System.Drawing.Point(449, 66)
         Me.uiTxtFontCode.Name = "uiTxtFontCode"
         Me.uiTxtFontCode.Size = New System.Drawing.Size(100, 20)
@@ -174,6 +177,7 @@ Partial Class CBCopyHelperForm
         '
         'uiBtnTemplateDollar
         '
+        Me.uiBtnTemplateDollar.Enabled = False
         Me.uiBtnTemplateDollar.Location = New System.Drawing.Point(376, 98)
         Me.uiBtnTemplateDollar.Name = "uiBtnTemplateDollar"
         Me.uiBtnTemplateDollar.Size = New System.Drawing.Size(83, 23)
@@ -183,6 +187,7 @@ Partial Class CBCopyHelperForm
         '
         'uiBtnTemplateCarton
         '
+        Me.uiBtnTemplateCarton.Enabled = False
         Me.uiBtnTemplateCarton.Location = New System.Drawing.Point(557, 98)
         Me.uiBtnTemplateCarton.Name = "uiBtnTemplateCarton"
         Me.uiBtnTemplateCarton.Size = New System.Drawing.Size(83, 23)
@@ -192,6 +197,7 @@ Partial Class CBCopyHelperForm
         '
         'uiBtnTemplatePremier
         '
+        Me.uiBtnTemplatePremier.Enabled = False
         Me.uiBtnTemplatePremier.Location = New System.Drawing.Point(465, 98)
         Me.uiBtnTemplatePremier.Name = "uiBtnTemplatePremier"
         Me.uiBtnTemplatePremier.Size = New System.Drawing.Size(83, 23)
@@ -201,6 +207,7 @@ Partial Class CBCopyHelperForm
         '
         'uiBtnTemplateBookCover
         '
+        Me.uiBtnTemplateBookCover.Enabled = False
         Me.uiBtnTemplateBookCover.Location = New System.Drawing.Point(557, 127)
         Me.uiBtnTemplateBookCover.Name = "uiBtnTemplateBookCover"
         Me.uiBtnTemplateBookCover.Size = New System.Drawing.Size(83, 23)
@@ -210,6 +217,7 @@ Partial Class CBCopyHelperForm
         '
         'uiBtnTemplateMailback
         '
+        Me.uiBtnTemplateMailback.Enabled = False
         Me.uiBtnTemplateMailback.Location = New System.Drawing.Point(557, 156)
         Me.uiBtnTemplateMailback.Name = "uiBtnTemplateMailback"
         Me.uiBtnTemplateMailback.Size = New System.Drawing.Size(83, 23)
@@ -219,6 +227,7 @@ Partial Class CBCopyHelperForm
         '
         'uiBtnTemplateBookFront
         '
+        Me.uiBtnTemplateBookFront.Enabled = False
         Me.uiBtnTemplateBookFront.Location = New System.Drawing.Point(376, 127)
         Me.uiBtnTemplateBookFront.Name = "uiBtnTemplateBookFront"
         Me.uiBtnTemplateBookFront.Size = New System.Drawing.Size(83, 23)
@@ -226,17 +235,19 @@ Partial Class CBCopyHelperForm
         Me.uiBtnTemplateBookFront.Text = "Booklet Front"
         Me.uiBtnTemplateBookFront.UseVisualStyleBackColor = True
         '
-        'uiBtnReturn
+        'uiBtnTemplateReturn
         '
-        Me.uiBtnReturn.Location = New System.Drawing.Point(376, 156)
-        Me.uiBtnReturn.Name = "uiBtnReturn"
-        Me.uiBtnReturn.Size = New System.Drawing.Size(83, 23)
-        Me.uiBtnReturn.TabIndex = 14
-        Me.uiBtnReturn.Text = "Return"
-        Me.uiBtnReturn.UseVisualStyleBackColor = True
+        Me.uiBtnTemplateReturn.Enabled = False
+        Me.uiBtnTemplateReturn.Location = New System.Drawing.Point(376, 156)
+        Me.uiBtnTemplateReturn.Name = "uiBtnTemplateReturn"
+        Me.uiBtnTemplateReturn.Size = New System.Drawing.Size(83, 23)
+        Me.uiBtnTemplateReturn.TabIndex = 14
+        Me.uiBtnTemplateReturn.Text = "Return"
+        Me.uiBtnTemplateReturn.UseVisualStyleBackColor = True
         '
         'uiBtnTemplateWindow
         '
+        Me.uiBtnTemplateWindow.Enabled = False
         Me.uiBtnTemplateWindow.Location = New System.Drawing.Point(465, 156)
         Me.uiBtnTemplateWindow.Name = "uiBtnTemplateWindow"
         Me.uiBtnTemplateWindow.Size = New System.Drawing.Size(83, 23)
@@ -246,6 +257,7 @@ Partial Class CBCopyHelperForm
         '
         'uiBtnTemplateBookBack
         '
+        Me.uiBtnTemplateBookBack.Enabled = False
         Me.uiBtnTemplateBookBack.Location = New System.Drawing.Point(465, 127)
         Me.uiBtnTemplateBookBack.Name = "uiBtnTemplateBookBack"
         Me.uiBtnTemplateBookBack.Size = New System.Drawing.Size(83, 23)
@@ -253,14 +265,34 @@ Partial Class CBCopyHelperForm
         Me.uiBtnTemplateBookBack.Text = "Booklet Back"
         Me.uiBtnTemplateBookBack.UseVisualStyleBackColor = True
         '
+        'lblCopyFilesFound
+        '
+        Me.lblCopyFilesFound.AutoSize = True
+        Me.lblCopyFilesFound.Location = New System.Drawing.Point(22, 268)
+        Me.lblCopyFilesFound.Name = "lblCopyFilesFound"
+        Me.lblCopyFilesFound.Size = New System.Drawing.Size(118, 13)
+        Me.lblCopyFilesFound.TabIndex = 17
+        Me.lblCopyFilesFound.Text = "0 files found in 0 folders"
+        '
+        'lblProofFilesFound
+        '
+        Me.lblProofFilesFound.AutoSize = True
+        Me.lblProofFilesFound.Location = New System.Drawing.Point(22, 529)
+        Me.lblProofFilesFound.Name = "lblProofFilesFound"
+        Me.lblProofFilesFound.Size = New System.Drawing.Size(64, 13)
+        Me.lblProofFilesFound.TabIndex = 18
+        Me.lblProofFilesFound.Text = "0 files found"
+        '
         'CBCopyHelperForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(781, 505)
+        Me.ClientSize = New System.Drawing.Size(781, 561)
+        Me.Controls.Add(Me.lblProofFilesFound)
+        Me.Controls.Add(Me.lblCopyFilesFound)
         Me.Controls.Add(Me.uiBtnTemplateBookBack)
         Me.Controls.Add(Me.uiBtnTemplateWindow)
-        Me.Controls.Add(Me.uiBtnReturn)
+        Me.Controls.Add(Me.uiBtnTemplateReturn)
         Me.Controls.Add(Me.uiBtnTemplateBookFront)
         Me.Controls.Add(Me.uiBtnTemplateMailback)
         Me.Controls.Add(Me.uiBtnTemplateBookCover)
@@ -307,8 +339,10 @@ Partial Class CBCopyHelperForm
     Friend WithEvents uiBtnTemplateBookCover As System.Windows.Forms.Button
     Friend WithEvents uiBtnTemplateMailback As System.Windows.Forms.Button
     Friend WithEvents uiBtnTemplateBookFront As System.Windows.Forms.Button
-    Friend WithEvents uiBtnReturn As System.Windows.Forms.Button
+    Friend WithEvents uiBtnTemplateReturn As System.Windows.Forms.Button
     Friend WithEvents uiBtnTemplateWindow As System.Windows.Forms.Button
     Friend WithEvents uiBtnTemplateBookBack As System.Windows.Forms.Button
+    Friend WithEvents lblCopyFilesFound As System.Windows.Forms.Label
+    Friend WithEvents lblProofFilesFound As System.Windows.Forms.Label
 
 End Class

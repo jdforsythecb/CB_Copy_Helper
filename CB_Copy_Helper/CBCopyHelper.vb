@@ -32,7 +32,7 @@ Public Class CBCopyHelperForm
     End Enum
 
     '' global to hold the company
-    Dim company As CompanyTypes = CompanyTypes.ChurchBudget
+    Dim company As New CompanyTypes
 
     '' global to hold the lists (for selectedIndex on clicks)
     Dim copyFileList As New List(Of IO.FileInfo)
@@ -71,19 +71,19 @@ Public Class CBCopyHelperForm
         If (company = CompanyTypes.ChurchBudget) Then
             Return {"g:\cb" & salts(0).ToUpper, _
                     "g:\Full Color Sheets\cb" & salts(0).ToUpper, _
-                    "g:\CHKBK", _
-                    "g:\CARTONS"
+                    "g:\CHKBK\cb\CB" & salts(0).ToUpper, _
+                    "g:\CARTONS\cb\CB" & salts(0).ToUpper
                     }
         ElseIf (company = CompanyTypes.McDaniel) Then
             Return {"g:\MCDANIEL\MC" & salts(0), _
                     "g:\Full Color Sheets\" & salts(0), _
-                    "g:\CHKBK", _
-                    "g:\CARTONS"}
+                    "g:\CHKBK\McDaniel", _
+                    "g:\CARTONS\McDaniel"}
         ElseIf (company = CompanyTypes.United) Then
             Return {"g:\UNITED\Un" & salts(0), _
                     "g:\Full Color Sheets\United\" & salts(0), _
-                    "g:\CHKBK", _
-                    "g:\CARTONS"}
+                    "g:\CHKBK\United", _
+                    "g:\CARTONS\United"}
         Else
             Return {}
         End If
@@ -114,7 +114,7 @@ Public Class CBCopyHelperForm
         '' iterate through paths
         For Each path In pathList
             Try
-                For Each fi In path.EnumerateFiles(filter)
+                For Each fi In path.EnumerateFiles(filter).OrderBy(Function(x) x.Name)
                     Try
                         If (fi.Name.Contains(salts(0)) And fi.Name.Contains(salts(1))) Then
                             fileList.Add(fi)
@@ -128,6 +128,7 @@ Public Class CBCopyHelperForm
 
             End Try
         Next
+
         Return fileList
     End Function
 
@@ -167,7 +168,7 @@ Public Class CBCopyHelperForm
         ElseIf (templateType = TemplateTypes.BookletFront Or _
                 templateType = TemplateTypes.BookletBack) Then
             If (company = CompanyTypes.ChurchBudget) Then
-                Return "g:\CHKBK\cb\" & prettyFolder
+                Return "g:\CHKBK\cb\CB" & prettyFolder.Substring(0, 1).ToUpper & "\" & prettyFolder
             ElseIf (company = CompanyTypes.McDaniel) Then
                 Return "g:\CHKBK\McDaniel\" & prettyFolder
             ElseIf (company = CompanyTypes.United) Then
@@ -178,11 +179,19 @@ Public Class CBCopyHelperForm
 
 
         ElseIf (templateType = TemplateTypes.BookletCover) Then
-            Return ""
+            Return "g:\CHKBK\UV COVERS"
 
 
         ElseIf (templateType = TemplateTypes.Carton) Then
-            Return ""
+            If (company = CompanyTypes.ChurchBudget) Then
+                Return "g:\CARTONS\cb\CB" & prettyFolder.Substring(0, 1).ToUpper
+            ElseIf (company = CompanyTypes.McDaniel) Then
+                Return "g:\CARTONS\McDaniel"
+            ElseIf (company = CompanyTypes.United) Then
+                Return "g:\CARTONS\United"
+            Else
+                Return ""
+            End If
 
 
         Else
@@ -201,6 +210,19 @@ Public Class CBCopyHelperForm
 
     Private Sub uiTxtFolderNumber_KeyDown(sender As Object, e As KeyEventArgs) Handles uiTxtFolderNumber.KeyDown
 
+        '' any time the text is changing (or even on pressing return) disable the create copy
+        '' buttons so they can't create copy for a partial folder number
+        uiTxtFontCode.Enabled = False
+        uiBtnTemplateDollar.Enabled = False
+        uiBtnTemplatePremier.Enabled = False
+        uiBtnTemplateMailback.Enabled = False
+        uiBtnTemplateBookFront.Enabled = False
+        uiBtnTemplateBookBack.Enabled = False
+        uiBtnTemplateBookCover.Enabled = False
+        uiBtnTemplateCarton.Enabled = False
+        uiBtnTemplateWindow.Enabled = False
+        uiBtnTemplateReturn.Enabled = False
+
         '' only search if they pressed enter
         If Not (e.KeyCode = Keys.Return) Then
             Exit Sub
@@ -215,6 +237,13 @@ Public Class CBCopyHelperForm
         proofFileList.Clear()
         uiLstDesignFiles.Items.Clear()
         uiLstProofFiles.Items.Clear()
+
+        '' counts for copy folders/files and proof files
+        Dim copyFileCount As Integer = 0
+        Dim copyFolderCount As Integer = 0
+        Dim proofFilecount As Integer = 0
+        '' holds a list of folders we've counted
+        Dim usedFolders As New List(Of String)
 
 
         '' trim whitespace from the search box
@@ -237,6 +266,13 @@ Public Class CBCopyHelperForm
             '' add the copy files to the list
             For Each fi In copyFileList
                 uiLstDesignFiles.Items.Add(fi.Name)
+                '' increment the file count
+                copyFileCount += 1
+                '' if this file's folder isn't in the list of used folders, add it
+                If Not (usedFolders.Contains(fi.Directory.ToString)) Then
+                    usedFolders.Add(fi.Directory.ToString)
+                    copyFolderCount += 1
+                End If
             Next
 
 
@@ -250,12 +286,27 @@ Public Class CBCopyHelperForm
             '' add the proof files to the list
             For Each fi In proofFileList
                 uiLstProofFiles.Items.Add(fi.Name)
+                '' increment the file count
+                proofFilecount += 1
             Next
 
             'MessageBox.Show("Files found: " & copyFileList.Count)
 
+            '' update the count labels
+            lblCopyFilesFound.Text = copyFileCount & " file(s) found in " & copyFolderCount & " folder(s)"
+            lblProofFilesFound.Text = proofFilecount & " proof(s) found"
 
-
+            '' now that we've "opened" that folder number, enable the buttons to add copy
+            uiTxtFontCode.Enabled = True
+            uiBtnTemplateDollar.Enabled = True
+            uiBtnTemplatePremier.Enabled = True
+            uiBtnTemplateMailback.Enabled = True
+            uiBtnTemplateBookFront.Enabled = True
+            uiBtnTemplateBookBack.Enabled = True
+            uiBtnTemplateBookCover.Enabled = True
+            uiBtnTemplateCarton.Enabled = True
+            uiBtnTemplateWindow.Enabled = True
+            uiBtnTemplateReturn.Enabled = True
 
         End If
 
@@ -407,22 +458,70 @@ Public Class CBCopyHelperForm
     End Sub
 
     Private Sub uiBtnTemplateCarton_Click(sender As Object, e As EventArgs) Handles uiBtnTemplateCarton.Click
-
+        Dim prettyFolder As String = getPrettyFolderNumber(uiTxtFolderNumber.Text.Trim)
+        Dim fontCode As String = uiTxtFontCode.Text.Trim
+        If (prettyFolder = "") Then
+            MessageBox.Show("Please enter a valid folder number before creating a new design")
+        ElseIf (fontCode = "") Then
+            MessageBox.Show("Please enter a font code before creating a new design")
+        Else
+            '' copy template, rename, copy the folder/font to the clipboard, and open the file
+            Dim template As New DesignTemplates(prettyFolder, fontCode)
+            template.TemplateType = DesignTemplates.TemplateTypes.Carton
+            template.SavePath = getSavePath(prettyFolder, TemplateTypes.Carton)
+            template.createAndOpen()
+        End If
     End Sub
 
     Private Sub uiBtnTemplateBookFront_Click(sender As Object, e As EventArgs) Handles uiBtnTemplateBookFront.Click
-
+        Dim prettyFolder As String = getPrettyFolderNumber(uiTxtFolderNumber.Text.Trim)
+        Dim fontCode As String = uiTxtFontCode.Text.Trim
+        If (prettyFolder = "") Then
+            MessageBox.Show("Please enter a valid folder number before creating a new design")
+        ElseIf (fontCode = "") Then
+            MessageBox.Show("Please enter a font code before creating a new design")
+        Else
+            '' copy template, rename, copy the folder/font to the clipboard, and open the file
+            Dim template As New DesignTemplates(prettyFolder, fontCode)
+            template.TemplateType = DesignTemplates.TemplateTypes.BookletFront
+            template.SavePath = getSavePath(prettyFolder, TemplateTypes.BookletFront)
+            template.createAndOpen()
+        End If
     End Sub
 
     Private Sub uiBtnTemplateBookBack_Click(sender As Object, e As EventArgs) Handles uiBtnTemplateBookBack.Click
-
+        Dim prettyFolder As String = getPrettyFolderNumber(uiTxtFolderNumber.Text.Trim)
+        Dim fontCode As String = uiTxtFontCode.Text.Trim
+        If (prettyFolder = "") Then
+            MessageBox.Show("Please enter a valid folder number before creating a new design")
+        ElseIf (fontCode = "") Then
+            MessageBox.Show("Please enter a font code before creating a new design")
+        Else
+            '' copy template, rename, copy the folder/font to the clipboard, and open the file
+            Dim template As New DesignTemplates(prettyFolder, fontCode)
+            template.TemplateType = DesignTemplates.TemplateTypes.BookletBack
+            template.SavePath = getSavePath(prettyFolder, TemplateTypes.BookletBack)
+            template.createAndOpen()
+        End If
     End Sub
 
     Private Sub uiBtnTemplateBookCover_Click(sender As Object, e As EventArgs) Handles uiBtnTemplateBookCover.Click
-
+        Dim prettyFolder As String = getPrettyFolderNumber(uiTxtFolderNumber.Text.Trim)
+        Dim fontCode As String = uiTxtFontCode.Text.Trim
+        If (prettyFolder = "") Then
+            MessageBox.Show("Please enter a valid folder number before creating a new design")
+        ElseIf (fontCode = "") Then
+            MessageBox.Show("Please enter a font code before creating a new design")
+        Else
+            '' copy template, rename, copy the folder/font to the clipboard, and open the file
+            Dim template As New DesignTemplates(prettyFolder, fontCode)
+            template.TemplateType = DesignTemplates.TemplateTypes.BookletCover
+            template.SavePath = getSavePath(prettyFolder, TemplateTypes.BookletCover)
+            template.createAndOpen()
+        End If
     End Sub
 
-    Private Sub uiBtnReturn_Click(sender As Object, e As EventArgs) Handles uiBtnReturn.Click
+    Private Sub uiBtnReturn_Click(sender As Object, e As EventArgs) Handles uiBtnTemplateReturn.Click
 
     End Sub
 
@@ -445,4 +544,5 @@ Public Class CBCopyHelperForm
             template.createAndOpen()
         End If
     End Sub
+
 End Class
