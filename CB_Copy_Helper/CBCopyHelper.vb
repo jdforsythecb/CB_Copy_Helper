@@ -71,18 +71,23 @@ Public Class CBCopyHelperForm
             Return {"g:\cb" & salts(0).ToUpper, _
                     "g:\Full Color Sheets\cb" & salts(0).ToUpper, _
                     "g:\CHKBK\cb\CB" & salts(0).ToUpper, _
-                    "g:\CARTONS\cb\CB" & salts(0).ToUpper
+                    "g:\CARTONS\cb\CB" & salts(0).ToUpper, _
+                    "g:\CHKBK\UV COVERS"
                     }
         ElseIf (company = CompanyTypes.McDaniel) Then
             Return {"g:\MCDANIEL\MC" & salts(0), _
                     "g:\Full Color Sheets\" & salts(0), _
                     "g:\CHKBK\McDaniel", _
-                    "g:\CARTONS\McDaniel"}
+                    "g:\CARTONS\McDaniel", _
+                    "g:\CHKBK\UV COVERS"
+                   }
         ElseIf (company = CompanyTypes.United) Then
             Return {"g:\UNITED\Un" & salts(0), _
                     "g:\Full Color Sheets\United\" & salts(0), _
                     "g:\CHKBK\United", _
-                    "g:\CARTONS\United"}
+                    "g:\CARTONS\United", _
+                    "g:\CHKBK\UV COVERS"
+                   }
         Else
             Return {}
         End If
