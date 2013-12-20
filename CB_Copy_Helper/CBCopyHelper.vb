@@ -433,8 +433,8 @@ Public Class CBCopyHelperForm
     Private Sub uiBtnOpenPNG_Click(sender As Object, e As EventArgs) Handles uiBtnOpenPNG.Click
         Dim folder As String = uiTxtFolderNumber.Text
         If (folder <> "" And folder.Length > 4) Then
-            'Call Shell(PNGFONTPATH & " -nostock -type=cbdw -folder=" & folder", AppWinStyle.NormalFocus)
-            Call Shell(PNGFONTPATH, AppWinStyle.NormalFocus)
+            Dim cmd As String = PNGFONTPATH & " /o=" & folder.ToUpper & " /t=DoubleWide_CB"
+            Call Shell(cmd, AppWinStyle.MaximizedFocus)
         Else
             MessageBox.Show("You must input a proper folder number before opening PNG Font")
         End If
