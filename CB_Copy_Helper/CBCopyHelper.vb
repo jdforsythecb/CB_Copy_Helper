@@ -4,18 +4,23 @@ Imports System.IO
 Imports System.Text.RegularExpressions
 
 Public Class CBCopyHelperForm
+    '' refresh settings
+
+
     '' temporary constants - will be settings later
     Private Const PNGFONTPATH As String = "c:\pngfont\pngfont2.exe"
     Private Const FONTTOOLSPATH As String = "c:\FontTool\fnttool3.exe"
 
     '' constants for paths
     Private Const CBPROOFPATH As String = "g:\_CBProofs\"
+    Private Const MMPROOFPATH As String = "g:\MMProofs\"
 
     '' enum for company
     Enum CompanyTypes As Integer
         ChurchBudget = 1
         McDaniel = 2
         United = 3
+        MonthlyMail = 4
     End Enum
 
     '' enum for template type
@@ -28,6 +33,8 @@ Public Class CBCopyHelperForm
         BookletCover = 6
         BizhubCover = 7
         Mailback = 8
+        Window = 9
+        Retrn = 10
     End Enum
 
     '' global to hold the company
@@ -48,21 +55,26 @@ Public Class CBCopyHelperForm
     '' helper functions
     ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
     Private Function getSearchSalts(ByVal input As String) As Array
-        '' if the first character is a letter, this is Church Budget, and salts will be first character and then the rest
-        '' else it's McDaniel or United, salts will be first two characters, then the rest
-        If (Regex.IsMatch(input.Substring(0, 1), "[A-Za-z]")) Then
-            company = CompanyTypes.ChurchBudget
-            Return {input.Substring(0, 1).ToUpper, _
-                    input.Substring(1, input.Length - 1)}
-        Else
-            If (input.Substring(0, 1) = "6") Then
-                company = CompanyTypes.United
+        If Not (company = CompanyTypes.MonthlyMail) Then
+            '' if the first character is a letter, this is Church Budget, and salts will be first character and then the rest
+            '' else it's McDaniel or United, salts will be first two characters, then the rest
+            If (Regex.IsMatch(input.Substring(0, 1), "[A-Za-z]")) Then
+                company = CompanyTypes.ChurchBudget
+                Return {input.Substring(0, 1).ToUpper, _
+                        input.Substring(1, input.Length - 1)}
             Else
-                company = CompanyTypes.McDaniel
+                If (input.Substring(0, 1) = "6") Then
+                    company = CompanyTypes.United
+                Else
+                    company = CompanyTypes.McDaniel
+                End If
+                '' both companys have the same salt pattern
+                Return {input.Substring(0, 2), _
+                        input.Substring(2)}
             End If
-            '' both companys have the same salt pattern
-            Return {input.Substring(0, 2), _
-                    input.Substring(2)}
+        Else
+            '' monthly mail doesn't have a second salt, just one
+            Return {input, ""}
         End If
     End Function
 
@@ -89,7 +101,10 @@ Public Class CBCopyHelperForm
                     "g:\CHKBK\UV COVERS"
                    }
         Else
-            Return {}
+            '' Monthly mail
+            Return {"h:\MM" & salts(0).Substring(0, 1) & "\MM" & salts(0).Substring(0, 1) & "-" & salts(0).Substring(1, 1), _
+                    "g:\WSCAN\MM" & salts(0).Substring(0, 1) & "\MM" & salts(0).Substring(0, 1) & "-" & salts(0).Substring(1, 1)
+                   }
         End If
     End Function
 
@@ -148,6 +163,10 @@ Public Class CBCopyHelperForm
             ElseIf (company = CompanyTypes.McDaniel Or company = CompanyTypes.United) Then
                 pretty = ugly.Insert(2, "-")
             End If
+        ElseIf (ugly.Length = 4) Then
+            If (company = CompanyTypes.MonthlyMail) Then
+                pretty = ugly
+            End If
         End If
 
         Return pretty
@@ -165,7 +184,8 @@ Public Class CBCopyHelperForm
             ElseIf (company = CompanyTypes.United) Then
                 Return "g:\UNITED\Un" & prettyFolder.Substring(0, 2) & "\" & prettyFolder
             Else
-                Return ""
+                '' Monthly mail
+                Return "h:\MM" & prettyFolder.Substring(0, 1) & "\MM" & prettyFolder.Substring(0, 1) & "-" & prettyFolder.Substring(1, 1)
             End If
 
 
@@ -282,7 +302,11 @@ Public Class CBCopyHelperForm
 
             '' get path(s) for proofs
             pathList.Clear()
-            pathList.Add(New IO.DirectoryInfo(CBPROOFPATH))
+            If Not (company = CompanyTypes.MonthlyMail) Then
+                pathList.Add(New IO.DirectoryInfo(CBPROOFPATH))
+            Else
+                pathList.Add(New IO.DirectoryInfo(MMPROOFPATH))
+            End If
 
             '' do a search in the proof path(s) for files containing the two salts and *.pdf
             proofFileList.AddRange(doFileSearch("*.pdf", pathList, salts))
@@ -432,8 +456,11 @@ Public Class CBCopyHelperForm
 
     Private Sub uiBtnOpenPNG_Click(sender As Object, e As EventArgs) Handles uiBtnOpenPNG.Click
         Dim folder As String = uiTxtFolderNumber.Text
-        If (folder <> "" And folder.Length > 4) Then
+        If (folder <> "" And folder.Length = 5 And Not company = CompanyTypes.MonthlyMail) Then
             Dim cmd As String = PNGFONTPATH & " /o=" & folder.ToUpper & " /t=DoubleWide_CB"
+            Call Shell(cmd, AppWinStyle.MaximizedFocus)
+        ElseIf (folder <> "" And folder.Length = 4 And company = CompanyTypes.MonthlyMail) Then
+            Dim cmd As String = PNGFONTPATH & " /o=" & folder.ToUpper & " /t=DoubleWide_MM"
             Call Shell(cmd, AppWinStyle.MaximizedFocus)
         Else
             MessageBox.Show("You must input a proper folder number before opening PNG Font")
@@ -442,9 +469,10 @@ Public Class CBCopyHelperForm
 
     Private Sub uiBtnOpenFontTools_Click(sender As Object, e As EventArgs) Handles uiBtnOpenFontTools.Click
         Dim folder As String = uiTxtFolderNumber.Text
-        If (folder <> "" And folder.Length > 4) Then
-            'Call Shell(FONTTOOLSPATH & " -folder=" & folder", AppWinStyle.NormalFocus)
-            Call Shell(FONTTOOLSPATH, AppWinStyle.NormalFocus)
+        If (folder <> "" And folder.Length = 5 And Not company = CompanyTypes.MonthlyMail) Then
+            Call Shell(FONTTOOLSPATH, AppWinStyle.MaximizedFocus)
+        ElseIf (folder <> "" And folder.Length = 4 And company = CompanyTypes.MonthlyMail) Then
+            Call Shell(FONTTOOLSPATH, AppWinStyle.MaximizedFocus)
         Else
             MessageBox.Show("You must input a proper folder number before opening PNG Font")
         End If
@@ -579,4 +607,13 @@ Public Class CBCopyHelperForm
         End If
     End Sub
 
+    Private Sub CBCopyHelperForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        '' refresh the settings on open
+        My.Settings.Reload()
+
+        If (My.Settings.isMM) Then
+            company = CompanyTypes.MonthlyMail
+        End If
+
+    End Sub
 End Class
