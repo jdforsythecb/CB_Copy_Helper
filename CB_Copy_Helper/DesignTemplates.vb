@@ -11,6 +11,7 @@ Public Class DesignTemplates
     Private Const TEMPLATEBOOKLETCOVER As String = "g:\Quark Templates\zForCBCopy_BookletCover.psd"
     Private Const TEMPLATECARTON As String = "g:\Quark Templates\zForCBCopy_Carton.psd"
     Private Const TEMPLATEBIZHUBCOVER As String = "g:\Quark Templates\zForCBCopy_BookletCoverBizhub.qxp"
+    Private Const TEMPLATEMMDOLLAR As String = "g:\CopySetting\Templates\Dollar.indd"
 
     '' types of templates
     Public Enum TemplateTypes As Integer
@@ -24,11 +25,18 @@ Public Class DesignTemplates
         Mailback = 8
     End Enum
 
+    '' company divisions
+    Public Enum CompanyTypes As Integer
+        ChurchBudget = 1
+        MonthlyMail = 2
+    End Enum
+
     '' private copies of the public properties
     Private tmpl As TemplateTypes
     Private fld As String = ""
     Private fnt As String = ""
     Private svpth As String = ""
+    Private comp As CompanyTypes
 
     '' public property allowing get/set template type
     Public Property TemplateType() As TemplateTypes
@@ -71,6 +79,16 @@ Public Class DesignTemplates
 
         Set(value As String)
             svpth = value
+        End Set
+    End Property
+
+    '' public property allowing get/set company type
+    Public Property Company() As CompanyTypes
+        Get
+            Return comp
+        End Get
+        Set(value As CompanyTypes)
+            comp = value
         End Set
     End Property
 

@@ -491,6 +491,11 @@ Public Class CBCopyHelperForm
             Dim template As New DesignTemplates(prettyFolder, fontCode)
             template.TemplateType = DesignTemplates.TemplateTypes.Dollar
             template.SavePath = getSavePath(prettyFolder, TemplateTypes.Dollar)
+            If (company = CompanyTypes.MonthlyMail) Then
+                template.Company = DesignTemplates.CompanyTypes.MonthlyMail
+            Else
+                template.Company = DesignTemplates.CompanyTypes.ChurchBudget
+            End If
             template.createAndOpen()
         End If
     End Sub
@@ -507,6 +512,11 @@ Public Class CBCopyHelperForm
             Dim template As New DesignTemplates(prettyFolder, fontCode)
             template.TemplateType = DesignTemplates.TemplateTypes.Premier
             template.SavePath = getSavePath(prettyFolder, TemplateTypes.Premier)
+            If (company = CompanyTypes.MonthlyMail) Then
+                template.Company = DesignTemplates.CompanyTypes.MonthlyMail
+            Else
+                template.Company = DesignTemplates.CompanyTypes.ChurchBudget
+            End If
             template.createAndOpen()
         End If
     End Sub
@@ -615,5 +625,12 @@ Public Class CBCopyHelperForm
             company = CompanyTypes.MonthlyMail
         End If
 
+    End Sub
+
+    Private Sub ToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem1.Click
+        'MessageBox.Show("clicked")
+        'SettingsForm.Show()
+        Dim stngFrm As New Settings()
+        stngFrm.Show()
     End Sub
 End Class
