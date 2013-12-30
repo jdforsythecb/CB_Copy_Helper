@@ -3,15 +3,18 @@
 Public Class DesignTemplates
 
     '' constants to paths of design templates
-    Private Const TEMPLATEDOLLAR As String = "g:\Quark Templates\zForCBCopy_Dollar.qxp"
-    Private Const TEMPLATEPREMIER As String = "g:\Quark Templates\zForCBCopy_Premier.qxp"
-    Private Const TEMPLATEMAILBACK As String = "g:\Quark Templates\zForCBCopy_Mailback.qxp"
-    Private Const TEMPLATEBOOKLETBACK As String = "g:\Quark Templates\zForCBCopy_BookletBack.qxp"
-    Private Const TEMPLATEBOOKLETFRONT As String = "g:\Quark Templates\zForCBCopy_BookletFront.qxp"
-    Private Const TEMPLATEBOOKLETCOVER As String = "g:\Quark Templates\zForCBCopy_BookletCover.psd"
-    Private Const TEMPLATECARTON As String = "g:\Quark Templates\zForCBCopy_Carton.psd"
-    Private Const TEMPLATEBIZHUBCOVER As String = "g:\Quark Templates\zForCBCopy_BookletCoverBizhub.qxp"
-    Private Const TEMPLATEMMDOLLAR As String = "g:\CopySetting\Templates\Dollar.indd"
+    '' Church Budget
+    Private Const TEMPLATEDOLLAR As String = "g:\CopySetting\Templates\CB\CB Dollar.qxp"
+    Private Const TEMPLATEPREMIER As String = "g:\CopySetting\Templates\CB\CB Premier.qxp"
+    Private Const TEMPLATEMAILBACK As String = "g:\CopySetting\Templates\CB\CB Mailback.qxp"
+    Private Const TEMPLATEBOOKLETBACK As String = "g:\CopySetting\Templates\CB\CB Booklet Back.qxp"
+    Private Const TEMPLATEBOOKLETFRONT As String = "g:\CopySetting\Templates\CB\CB Booklet Front.qxp"
+    Private Const TEMPLATEBOOKLETCOVER As String = "g:\CopySetting\Templates\CB\CB Booklet Cover.psd"
+    Private Const TEMPLATECARTON As String = "g:\CopySetting\Templates\CB\CB Carton.psd"
+    Private Const TEMPLATEBIZHUBCOVER As String = "g:\CopySetting\Templates\CB\CB Booklet Cover Bizhub.qxp"
+
+    '' Monthly Mail
+    Private Const TEMPLATEMMDOLLAR As String = "g:\CopySetting\Templates\MM\MM Dollar.indd"
 
     '' types of templates
     Public Enum TemplateTypes As Integer
@@ -117,12 +120,28 @@ Public Class DesignTemplates
             Exit Sub
         End If
 
-        '' copy to clipboard
-        Clipboard.SetText(fld.ToUpper & " " & fnt)
+        '' copy to clipboard "FOLDER FONT" (entered font text up until the first space)
+        '' e.g. "A0101 A Weekly" becomes "A0101 A"
+        Dim i As Integer = fnt.IndexOf(" ")
+        '' if the index is -1, then " " was not found
+        If (i <> -1) Then
+            '' use the font code up to the first " "
+            Clipboard.SetText(fld.ToUpper & " " & fnt.Substring(0, i))
+        Else
+            '' there is no " " so use the whole font code
+            Clipboard.SetText(fld.ToUpper & " " & fnt)
+        End If
 
         Dim templatePath As String = getTemplatePath()
         Dim targetFileName As String = getFileName(Path.GetExtension(templatePath))
-        Dim fullTargetPath As String = svpth & "\" & targetFileName
+        Dim fullTargetPath As String = ""
+
+        If (comp = CompanyTypes.MonthlyMail) Then
+            fullTargetPath = svpth & "\MM" & targetFileName
+        Else
+            fullTargetPath = svpth & "\" & targetFileName
+        End If
+
 
         '' check that the template file exists
         If Not (File.Exists(templatePath)) Then
@@ -133,7 +152,7 @@ Public Class DesignTemplates
         '' check that the save path exists, and if not, create it
         If Not (Directory.Exists(svpth)) Then
             Directory.CreateDirectory(svpth)
-            MessageBox.Show("Created a new folder for " & fld)
+            MessageBox.Show("Created a new folder for " & fld & "at: " & svpth)
         End If
 
         '' check that the file we're creating doesn't exist
@@ -164,24 +183,35 @@ Public Class DesignTemplates
 
     '' private helper methods
     Private Function getTemplatePath() As String
-        '' vb's switch statement
         Select Case tmpl
             Case TemplateTypes.Dollar
-                Return TEMPLATEDOLLAR
+                If (comp = CompanyTypes.ChurchBudget) Then
+                    Return TEMPLATEDOLLAR
+                Else
+                    Return TEMPLATEMMDOLLAR
+                End If
+
             Case TemplateTypes.Premier
                 Return TEMPLATEPREMIER
+
             Case TemplateTypes.Mailback
                 Return TEMPLATEMAILBACK
+
             Case TemplateTypes.BookletBack
                 Return TEMPLATEBOOKLETBACK
+
             Case TemplateTypes.BookletFront
                 Return TEMPLATEBOOKLETFRONT
+
             Case TemplateTypes.BookletCover
                 Return TEMPLATEBOOKLETCOVER
+
             Case TemplateTypes.Carton
                 Return TEMPLATECARTON
+
             Case TemplateTypes.BizhubCover
                 Return TEMPLATEBIZHUBCOVER
+
             Case Else
                 Return ""
         End Select

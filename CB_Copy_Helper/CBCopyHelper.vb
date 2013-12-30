@@ -13,7 +13,7 @@ Public Class CBCopyHelperForm
 
     '' constants for paths
     Private Const CBPROOFPATH As String = "g:\_CBProofs\"
-    Private Const MMPROOFPATH As String = "g:\MMProofs\"
+    Private Const MMPROOFPATH As String = "g:\_MMProofs\"
 
     '' enum for company
     Enum CompanyTypes As Integer
@@ -164,6 +164,7 @@ Public Class CBCopyHelperForm
                 pretty = ugly.Insert(2, "-")
             End If
         ElseIf (ugly.Length = 4) Then
+            '' for monthly mail, there are no dashes or anything, the pretty folder number is just the 4 digit number
             If (company = CompanyTypes.MonthlyMail) Then
                 pretty = ugly
             End If
@@ -184,7 +185,7 @@ Public Class CBCopyHelperForm
             ElseIf (company = CompanyTypes.United) Then
                 Return "g:\UNITED\Un" & prettyFolder.Substring(0, 2) & "\" & prettyFolder
             Else
-                '' Monthly mail
+                '' Monthly mail (don't create subfolders per church for MM)
                 Return "h:\MM" & prettyFolder.Substring(0, 1) & "\MM" & prettyFolder.Substring(0, 1) & "-" & prettyFolder.Substring(1, 1)
             End If
 
@@ -469,12 +470,16 @@ Public Class CBCopyHelperForm
 
     Private Sub uiBtnOpenFontTools_Click(sender As Object, e As EventArgs) Handles uiBtnOpenFontTools.Click
         Dim folder As String = uiTxtFolderNumber.Text
+
+        '' copy folder number to clipboard
+        Clipboard.SetText(folder)
+
         If (folder <> "" And folder.Length = 5 And Not company = CompanyTypes.MonthlyMail) Then
             Call Shell(FONTTOOLSPATH, AppWinStyle.MaximizedFocus)
         ElseIf (folder <> "" And folder.Length = 4 And company = CompanyTypes.MonthlyMail) Then
             Call Shell(FONTTOOLSPATH, AppWinStyle.MaximizedFocus)
         Else
-            MessageBox.Show("You must input a proper folder number before opening PNG Font")
+            MessageBox.Show("You must input a proper folder number before opening Font Tools")
         End If
     End Sub
 
@@ -631,6 +636,17 @@ Public Class CBCopyHelperForm
         'MessageBox.Show("clicked")
         'SettingsForm.Show()
         Dim stngFrm As New Settings()
-        stngFrm.Show()
+        '' show as a modal dialog, so this doesn't return until the dialog is closed
+        stngFrm.ShowDialog()
+
+        '' reload the settings and check the company setting
+        My.Settings.Reload()
+        If (My.Settings.isMM) Then
+            company = CompanyTypes.MonthlyMail
+        Else
+            '' if this isn't monthly mail, unset the company variable so the company
+            '' is set by the folder number
+            company = Nothing
+        End If
     End Sub
 End Class
