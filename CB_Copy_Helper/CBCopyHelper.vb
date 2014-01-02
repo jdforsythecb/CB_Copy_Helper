@@ -8,8 +8,8 @@ Public Class CBCopyHelperForm
 
 
     '' temporary constants - will be settings later
-    Private Const PNGFONTPATH As String = "c:\pngfont\pngfont2.exe"
-    Private Const FONTTOOLSPATH As String = "c:\FontTool\fnttool3.exe"
+    'Private Const PNGFONTPATH As String = "c:\pngfont\pngfont2.exe"
+    'Private Const FONTTOOLSPATH As String = "c:\FontTool\fnttool3.exe"
 
     '' constants for paths
     Private Const CBPROOFPATH As String = "g:\_CBProofs\"
@@ -458,10 +458,10 @@ Public Class CBCopyHelperForm
     Private Sub uiBtnOpenPNG_Click(sender As Object, e As EventArgs) Handles uiBtnOpenPNG.Click
         Dim folder As String = uiTxtFolderNumber.Text
         If (folder <> "" And folder.Length = 5 And Not company = CompanyTypes.MonthlyMail) Then
-            Dim cmd As String = PNGFONTPATH & " /o=" & folder.ToUpper & " /t=DoubleWide_CB"
+            Dim cmd As String = My.Settings.PngFontPath & " /o=" & folder.ToUpper & " /t=DoubleWide_CB"
             Call Shell(cmd, AppWinStyle.MaximizedFocus)
         ElseIf (folder <> "" And folder.Length = 4 And company = CompanyTypes.MonthlyMail) Then
-            Dim cmd As String = PNGFONTPATH & " /o=" & folder.ToUpper & " /t=DoubleWide_MM"
+            Dim cmd As String = My.Settings.PngFontPath & " /o=" & folder.ToUpper & " /t=DoubleWide_MM"
             Call Shell(cmd, AppWinStyle.MaximizedFocus)
         Else
             MessageBox.Show("You must input a proper folder number before opening PNG Font")
@@ -471,13 +471,14 @@ Public Class CBCopyHelperForm
     Private Sub uiBtnOpenFontTools_Click(sender As Object, e As EventArgs) Handles uiBtnOpenFontTools.Click
         Dim folder As String = uiTxtFolderNumber.Text
 
-        '' copy folder number to clipboard
-        Clipboard.SetText(folder)
-
         If (folder <> "" And folder.Length = 5 And Not company = CompanyTypes.MonthlyMail) Then
-            Call Shell(FONTTOOLSPATH, AppWinStyle.MaximizedFocus)
+            '' copy folder number to clipboard
+            Clipboard.SetText(folder)
+            Call Shell(My.Settings.FontToolsPath, AppWinStyle.MaximizedFocus)
         ElseIf (folder <> "" And folder.Length = 4 And company = CompanyTypes.MonthlyMail) Then
-            Call Shell(FONTTOOLSPATH, AppWinStyle.MaximizedFocus)
+            '' copy folder number to clipboard
+            Clipboard.SetText(folder)
+            Call Shell(My.Settings.FontToolsPath, AppWinStyle.MaximizedFocus)
         Else
             MessageBox.Show("You must input a proper folder number before opening Font Tools")
         End If
@@ -633,8 +634,6 @@ Public Class CBCopyHelperForm
     End Sub
 
     Private Sub ToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem1.Click
-        'MessageBox.Show("clicked")
-        'SettingsForm.Show()
         Dim stngFrm As New Settings()
         '' show as a modal dialog, so this doesn't return until the dialog is closed
         stngFrm.ShowDialog()

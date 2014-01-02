@@ -65,6 +65,30 @@ Namespace My
                 Me("isMM") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("c:\pngfont2.exe")>  _
+        Public Property PngFontPath() As String
+            Get
+                Return CType(Me("PngFontPath"),String)
+            End Get
+            Set
+                Me("PngFontPath") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("c:\fnttool3.exe")>  _
+        Public Property FontToolsPath() As String
+            Get
+                Return CType(Me("FontToolsPath"),String)
+            End Get
+            Set
+                Me("FontToolsPath") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

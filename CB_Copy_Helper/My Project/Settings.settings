@@ -5,5 +5,11 @@
     <Setting Name="isMM" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="PngFontPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">c:\pngfont2.exe</Value>
+    </Setting>
+    <Setting Name="FontToolsPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">c:\fnttool3.exe</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
