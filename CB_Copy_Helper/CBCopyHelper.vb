@@ -88,7 +88,7 @@ Public Class CBCopyHelperForm
                     }
         ElseIf (company = CompanyTypes.McDaniel) Then
             Return {"g:\MCDANIEL\MC" & salts(0), _
-                    "g:\Full Color Sheets\" & salts(0), _
+                    "g:\Full Color Sheets\McDaniel\" & salts(0), _
                     "g:\CHKBK\McDaniel", _
                     "g:\CARTONS\McDaniel", _
                     "g:\CHKBK\UV COVERS"
