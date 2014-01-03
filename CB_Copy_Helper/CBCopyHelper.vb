@@ -472,13 +472,11 @@ Public Class CBCopyHelperForm
         Dim folder As String = uiTxtFolderNumber.Text
 
         If (folder <> "" And folder.Length = 5 And Not company = CompanyTypes.MonthlyMail) Then
-            '' copy folder number to clipboard
-            Clipboard.SetText(folder)
-            Call Shell(My.Settings.FontToolsPath, AppWinStyle.MaximizedFocus)
+            Dim cmd As String = My.Settings.FontToolsPath & " /o=" & folder
+            Call Shell(cmd, AppWinStyle.MaximizedFocus)
         ElseIf (folder <> "" And folder.Length = 4 And company = CompanyTypes.MonthlyMail) Then
-            '' copy folder number to clipboard
-            Clipboard.SetText(folder)
-            Call Shell(My.Settings.FontToolsPath, AppWinStyle.MaximizedFocus)
+            Dim cmd As String = My.Settings.FontToolsPath & " /o=" & folder
+            Call Shell(cmd, AppWinStyle.MaximizedFocus)
         Else
             MessageBox.Show("You must input a proper folder number before opening Font Tools")
         End If
