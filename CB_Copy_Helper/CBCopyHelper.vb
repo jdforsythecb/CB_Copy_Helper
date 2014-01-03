@@ -14,6 +14,8 @@ Public Class CBCopyHelperForm
     '' constants for paths
     Private Const CBPROOFPATH As String = "g:\_CBProofs\"
     Private Const MMPROOFPATH As String = "g:\_MMProofs\"
+    Private Const STRIPINPATH As String = "g:\jdforsythe\Settings\Photoshop Scripts\CreateStripinDroplet.exe"
+    Private Const STRIPINTEMPLATE As String = "g:\jdforsythe\Templates\Photoshop\Dollar_Addressed_Stripins.psd"
 
     '' enum for company
     Enum CompanyTypes As Integer
@@ -645,5 +647,36 @@ Public Class CBCopyHelperForm
             '' is set by the folder number
             company = Nothing
         End If
+    End Sub
+
+    Private Sub uiBtnStripin_Click(sender As Object, e As EventArgs) Handles uiBtnStripin.Click
+
+        Dim folder As String = uiTxtFolderNumber.Text
+        Dim cmd As String = ""
+
+        If (folder <> "" And folder.Length = 5 And Not company = CompanyTypes.MonthlyMail) Then
+
+            '' open stripin droplet
+            cmd = STRIPINPATH & " " & STRIPINTEMPLATE
+            Call Shell(cmd, AppWinStyle.MaximizedFocus)
+
+            '' open font tools
+            cmd = My.Settings.FontToolsPath & " /o=" & folder
+            Call Shell(cmd, AppWinStyle.MaximizedFocus)
+
+        ElseIf (folder <> "" And folder.Length = 4 And company = CompanyTypes.MonthlyMail) Then
+
+            '' open stripin droplet
+            cmd = STRIPINPATH & " " & STRIPINTEMPLATE
+            Call Shell(cmd, AppWinStyle.MaximizedFocus)
+
+            '' open font tools
+            cmd = My.Settings.FontToolsPath & " /o=" & folder
+            Call Shell(cmd, AppWinStyle.MaximizedFocus)
+
+        Else
+            MessageBox.Show("You must input a proper folder number before opening Font Tools")
+        End If
+
     End Sub
 End Class

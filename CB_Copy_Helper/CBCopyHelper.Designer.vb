@@ -48,6 +48,7 @@ Partial Class CBCopyHelperForm
         Me.lblProofFilesFound = New System.Windows.Forms.Label()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.uiBtnStripin = New System.Windows.Forms.Button()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -111,7 +112,7 @@ Partial Class CBCopyHelperForm
         Me.uiBtnOpenFontTools.Name = "uiBtnOpenFontTools"
         Me.uiBtnOpenFontTools.Size = New System.Drawing.Size(109, 26)
         Me.uiBtnOpenFontTools.TabIndex = 4
-        Me.uiBtnOpenFontTools.Text = "Open in Font Tools"
+        Me.uiBtnOpenFontTools.Text = "Open in Font Tool"
         Me.uiBtnOpenFontTools.UseVisualStyleBackColor = True
         '
         'uiLstProofFiles
@@ -290,11 +291,21 @@ Partial Class CBCopyHelperForm
         Me.ToolStripMenuItem1.Size = New System.Drawing.Size(61, 20)
         Me.ToolStripMenuItem1.Text = "Settings"
         '
+        'uiBtnStripin
+        '
+        Me.uiBtnStripin.Location = New System.Drawing.Point(376, 234)
+        Me.uiBtnStripin.Name = "uiBtnStripin"
+        Me.uiBtnStripin.Size = New System.Drawing.Size(274, 23)
+        Me.uiBtnStripin.TabIndex = 20
+        Me.uiBtnStripin.Text = "Create Stripin for Font Tool"
+        Me.uiBtnStripin.UseVisualStyleBackColor = True
+        '
         'CBCopyHelperForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(781, 572)
+        Me.Controls.Add(Me.uiBtnStripin)
         Me.Controls.Add(Me.lblProofFilesFound)
         Me.Controls.Add(Me.lblCopyFilesFound)
         Me.Controls.Add(Me.uiBtnTemplateBookBack)
@@ -355,5 +366,6 @@ Partial Class CBCopyHelperForm
     Friend WithEvents lblProofFilesFound As System.Windows.Forms.Label
     Friend WithEvents MenuStrip1 As System.Windows.Forms.MenuStrip
     Friend WithEvents ToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents uiBtnStripin As System.Windows.Forms.Button
 
 End Class
