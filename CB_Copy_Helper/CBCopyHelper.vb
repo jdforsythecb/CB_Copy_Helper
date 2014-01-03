@@ -1,4 +1,9 @@
-﻿'' for IO.FileInfo
+﻿'' to do:
+'' generalize a function for template buttons like i have for quickopenpng buttons
+
+
+
+'' for IO.FileInfo
 Imports System.IO
 '' for regex-ing folder search strings
 Imports System.Text.RegularExpressions
@@ -232,6 +237,18 @@ Public Class CBCopyHelperForm
 
 
 
+
+    Private Sub quickOpenPng(jobType As QuickOpenPNGFont.JobTypes)
+        Dim comp As QuickOpenPNGFont.CompanyTypes = QuickOpenPNGFont.CompanyTypes.ChurchBudget
+        If (company = CompanyTypes.MonthlyMail) Then comp = QuickOpenPNGFont.CompanyTypes.MonthlyMail
+
+        Dim png As New QuickOpenPNGFont(My.Settings.PngFontPath, uiTxtFolderNumber.Text.Trim, _
+                                        jobType, comp)
+        png.openPNG()
+    End Sub
+
+
+
     ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
     '' event handlers
     ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
@@ -249,6 +266,14 @@ Public Class CBCopyHelperForm
         uiBtnTemplateBookCover.Enabled = False
         uiBtnTemplateCarton.Enabled = False
         uiBtnTemplateBizhub.Enabled = False
+
+        uiBtnOpenPngDW.Enabled = False
+        uiBtnOpenPngKY.Enabled = False
+        uiBtnOpenPngTN.Enabled = False
+        uiBtnOpenPngBK.Enabled = False
+        uiBtnOpenPngUV.Enabled = False
+        uiBtnOpenPngCN.Enabled = False
+        uiBtnOpenPngRT.Enabled = False
 
         '' only search if they pressed enter
         If Not (e.KeyCode = Keys.Return) Then
@@ -337,6 +362,14 @@ Public Class CBCopyHelperForm
             uiBtnTemplateBookCover.Enabled = True
             uiBtnTemplateCarton.Enabled = True
             uiBtnTemplateBizhub.Enabled = True
+
+            uiBtnOpenPngDW.Enabled = True
+            uiBtnOpenPngKY.Enabled = True
+            uiBtnOpenPngTN.Enabled = True
+            uiBtnOpenPngBK.Enabled = True
+            uiBtnOpenPngUV.Enabled = True
+            uiBtnOpenPngCN.Enabled = True
+            uiBtnOpenPngRT.Enabled = True
 
         End If
 
@@ -678,5 +711,33 @@ Public Class CBCopyHelperForm
             MessageBox.Show("You must input a proper folder number before opening Font Tools")
         End If
 
+    End Sub
+
+    Private Sub uiBtnOpenPngDW_Click(sender As Object, e As EventArgs) Handles uiBtnOpenPngDW.Click
+        quickOpenPng(QuickOpenPNGFont.JobTypes.DoubleWide)
+    End Sub
+
+    Private Sub uiBtnOpenPngKY_Click(sender As Object, e As EventArgs) Handles uiBtnOpenPngKY.Click
+        quickOpenPng(QuickOpenPNGFont.JobTypes.Kyocera)
+    End Sub
+
+    Private Sub uiBtnOpenPngTN_Click(sender As Object, e As EventArgs) Handles uiBtnOpenPngTN.Click
+        quickOpenPng(QuickOpenPNGFont.JobTypes.NumberTen)
+    End Sub
+
+    Private Sub uiBtnOpenPngBK_Click(sender As Object, e As EventArgs) Handles uiBtnOpenPngBK.Click
+        quickOpenPng(QuickOpenPNGFont.JobTypes.Booklet)
+    End Sub
+
+    Private Sub uiBtnOpenPngUV_Click(sender As Object, e As EventArgs) Handles uiBtnOpenPngUV.Click
+        quickOpenPng(QuickOpenPNGFont.JobTypes.UVCover)
+    End Sub
+
+    Private Sub uiBtnOpenPngCN_Click(sender As Object, e As EventArgs) Handles uiBtnOpenPngCN.Click
+        quickOpenPng(QuickOpenPNGFont.JobTypes.Carton)
+    End Sub
+
+    Private Sub uiBtnOpenPngRT_Click(sender As Object, e As EventArgs) Handles uiBtnOpenPngRT.Click
+        quickOpenPng(QuickOpenPNGFont.JobTypes.ReturnEnv)
     End Sub
 End Class

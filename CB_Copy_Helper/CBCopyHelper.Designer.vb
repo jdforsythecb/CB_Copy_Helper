@@ -49,6 +49,14 @@ Partial Class CBCopyHelperForm
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.uiBtnStripin = New System.Windows.Forms.Button()
+        Me.uiBtnOpenPngUV = New System.Windows.Forms.Button()
+        Me.uiBtnOpenPngBK = New System.Windows.Forms.Button()
+        Me.uiBtnOpenPngCN = New System.Windows.Forms.Button()
+        Me.uiBtnOpenPngKY = New System.Windows.Forms.Button()
+        Me.uiBtnOpenPngTN = New System.Windows.Forms.Button()
+        Me.uiBtnOpenPngDW = New System.Windows.Forms.Button()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.uiBtnOpenPngRT = New System.Windows.Forms.Button()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -300,11 +308,99 @@ Partial Class CBCopyHelperForm
         Me.uiBtnStripin.Text = "Create Stripin for Font Tool"
         Me.uiBtnStripin.UseVisualStyleBackColor = True
         '
+        'uiBtnOpenPngUV
+        '
+        Me.uiBtnOpenPngUV.Enabled = False
+        Me.uiBtnOpenPngUV.Location = New System.Drawing.Point(465, 330)
+        Me.uiBtnOpenPngUV.Name = "uiBtnOpenPngUV"
+        Me.uiBtnOpenPngUV.Size = New System.Drawing.Size(83, 23)
+        Me.uiBtnOpenPngUV.TabIndex = 25
+        Me.uiBtnOpenPngUV.Text = "UV Cover"
+        Me.uiBtnOpenPngUV.UseVisualStyleBackColor = True
+        '
+        'uiBtnOpenPngBK
+        '
+        Me.uiBtnOpenPngBK.Enabled = False
+        Me.uiBtnOpenPngBK.Location = New System.Drawing.Point(376, 330)
+        Me.uiBtnOpenPngBK.Name = "uiBtnOpenPngBK"
+        Me.uiBtnOpenPngBK.Size = New System.Drawing.Size(83, 23)
+        Me.uiBtnOpenPngBK.TabIndex = 24
+        Me.uiBtnOpenPngBK.Text = "Booklet"
+        Me.uiBtnOpenPngBK.UseVisualStyleBackColor = True
+        '
+        'uiBtnOpenPngCN
+        '
+        Me.uiBtnOpenPngCN.Enabled = False
+        Me.uiBtnOpenPngCN.Location = New System.Drawing.Point(557, 330)
+        Me.uiBtnOpenPngCN.Name = "uiBtnOpenPngCN"
+        Me.uiBtnOpenPngCN.Size = New System.Drawing.Size(83, 23)
+        Me.uiBtnOpenPngCN.TabIndex = 26
+        Me.uiBtnOpenPngCN.Text = "Carton"
+        Me.uiBtnOpenPngCN.UseVisualStyleBackColor = True
+        '
+        'uiBtnOpenPngKY
+        '
+        Me.uiBtnOpenPngKY.Enabled = False
+        Me.uiBtnOpenPngKY.Location = New System.Drawing.Point(465, 301)
+        Me.uiBtnOpenPngKY.Name = "uiBtnOpenPngKY"
+        Me.uiBtnOpenPngKY.Size = New System.Drawing.Size(83, 23)
+        Me.uiBtnOpenPngKY.TabIndex = 22
+        Me.uiBtnOpenPngKY.Text = "FC Kyocera"
+        Me.uiBtnOpenPngKY.UseVisualStyleBackColor = True
+        '
+        'uiBtnOpenPngTN
+        '
+        Me.uiBtnOpenPngTN.Enabled = False
+        Me.uiBtnOpenPngTN.Location = New System.Drawing.Point(557, 301)
+        Me.uiBtnOpenPngTN.Name = "uiBtnOpenPngTN"
+        Me.uiBtnOpenPngTN.Size = New System.Drawing.Size(83, 23)
+        Me.uiBtnOpenPngTN.TabIndex = 23
+        Me.uiBtnOpenPngTN.Text = "#10"
+        Me.uiBtnOpenPngTN.UseVisualStyleBackColor = True
+        '
+        'uiBtnOpenPngDW
+        '
+        Me.uiBtnOpenPngDW.Enabled = False
+        Me.uiBtnOpenPngDW.Location = New System.Drawing.Point(376, 301)
+        Me.uiBtnOpenPngDW.Name = "uiBtnOpenPngDW"
+        Me.uiBtnOpenPngDW.Size = New System.Drawing.Size(83, 23)
+        Me.uiBtnOpenPngDW.TabIndex = 21
+        Me.uiBtnOpenPngDW.Text = "DoubleWide"
+        Me.uiBtnOpenPngDW.UseVisualStyleBackColor = True
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label8.Location = New System.Drawing.Point(373, 283)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(135, 13)
+        Me.Label8.TabIndex = 27
+        Me.Label8.Text = "Quick-open PNG Font:"
+        '
+        'uiBtnOpenPngRT
+        '
+        Me.uiBtnOpenPngRT.Enabled = False
+        Me.uiBtnOpenPngRT.Location = New System.Drawing.Point(376, 359)
+        Me.uiBtnOpenPngRT.Name = "uiBtnOpenPngRT"
+        Me.uiBtnOpenPngRT.Size = New System.Drawing.Size(83, 23)
+        Me.uiBtnOpenPngRT.TabIndex = 28
+        Me.uiBtnOpenPngRT.Text = "Return"
+        Me.uiBtnOpenPngRT.UseVisualStyleBackColor = True
+        '
         'CBCopyHelperForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(781, 572)
+        Me.Controls.Add(Me.uiBtnOpenPngRT)
+        Me.Controls.Add(Me.Label8)
+        Me.Controls.Add(Me.uiBtnOpenPngUV)
+        Me.Controls.Add(Me.uiBtnOpenPngBK)
+        Me.Controls.Add(Me.uiBtnOpenPngCN)
+        Me.Controls.Add(Me.uiBtnOpenPngKY)
+        Me.Controls.Add(Me.uiBtnOpenPngTN)
+        Me.Controls.Add(Me.uiBtnOpenPngDW)
         Me.Controls.Add(Me.uiBtnStripin)
         Me.Controls.Add(Me.lblProofFilesFound)
         Me.Controls.Add(Me.lblCopyFilesFound)
@@ -367,5 +463,13 @@ Partial Class CBCopyHelperForm
     Friend WithEvents MenuStrip1 As System.Windows.Forms.MenuStrip
     Friend WithEvents ToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents uiBtnStripin As System.Windows.Forms.Button
+    Friend WithEvents uiBtnOpenPngUV As System.Windows.Forms.Button
+    Friend WithEvents uiBtnOpenPngBK As System.Windows.Forms.Button
+    Friend WithEvents uiBtnOpenPngCN As System.Windows.Forms.Button
+    Friend WithEvents uiBtnOpenPngKY As System.Windows.Forms.Button
+    Friend WithEvents uiBtnOpenPngTN As System.Windows.Forms.Button
+    Friend WithEvents uiBtnOpenPngDW As System.Windows.Forms.Button
+    Friend WithEvents Label8 As System.Windows.Forms.Label
+    Friend WithEvents uiBtnOpenPngRT As System.Windows.Forms.Button
 
 End Class

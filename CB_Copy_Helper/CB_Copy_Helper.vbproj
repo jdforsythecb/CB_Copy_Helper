@@ -28,7 +28,7 @@
     <ProductName>CB Copy Helper</ProductName>
     <PublisherName>Church Budget Envelope Company</PublisherName>
     <SuiteName>CB Copy Helper</SuiteName>
-    <ApplicationRevision>13</ApplicationRevision>
+    <ApplicationRevision>14</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -126,6 +126,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="QuickOpenPNGFont.vb" />
     <Compile Include="Settings.Designer.vb">
       <DependentUpon>Settings.vb</DependentUpon>
     </Compile>
