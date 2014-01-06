@@ -14,8 +14,10 @@ Public Class CBCopyHelperForm
     '' constants for paths
     Private Const CBPROOFPATH As String = "g:\_CBProofs\"
     Private Const MMPROOFPATH As String = "g:\_MMProofs\"
-    Private Const STRIPINPATH As String = "g:\jdforsythe\Settings\Photoshop Scripts\CreateStripinDroplet.exe"
-    Private Const STRIPINTEMPLATE As String = "g:\jdforsythe\Templates\Photoshop\Dollar_Addressed_Stripins.psd"
+    Private Const STRIPINDOLLARPATH As String = "g:\jdforsythe\Settings\Photoshop Scripts\CreateStripinDroplet.exe"
+    Private Const STRIPINDOLLARTEMPLATE As String = "g:\jdforsythe\Templates\Photoshop\Dollar_Addressed_Stripins.psd"
+    Private Const STRIPINBOOKLETPATH As String = "g:\jdforsythe\Settings\Photoshop Scripts\CreateStripinBookletDroplet.exe"
+    Private Const STRIPINBOOKLETTEMPLATE As String = "g:\jdforsythe\Templates\Photoshop\Booklet_Stripins.psd"
 
     '' enum for company
     Enum CompanyTypes As Integer
@@ -312,7 +314,8 @@ Public Class CBCopyHelperForm
         uiBtnOpenPngCN.Enabled = False
         uiBtnOpenPngRT.Enabled = False
 
-        uiBtnStripin.Enabled = False
+        uiBtnStripinDollar.Enabled = False
+        uiBtnStripinBooklet.Enabled = False
 
         '' only search if they pressed enter
         If Not (e.KeyCode = Keys.Return) Then
@@ -410,7 +413,8 @@ Public Class CBCopyHelperForm
             uiBtnOpenPngCN.Enabled = True
             uiBtnOpenPngRT.Enabled = True
 
-            uiBtnStripin.Enabled = True
+            uiBtnStripinDollar.Enabled = True
+            uiBtnStripinBooklet.Enabled = True
 
         End If
 
@@ -616,7 +620,7 @@ Public Class CBCopyHelperForm
         End If
     End Sub
 
-    Private Sub uiBtnStripin_Click(sender As Object, e As EventArgs) Handles uiBtnStripin.Click
+    Private Sub uiBtnStripinDollar_Click(sender As Object, e As EventArgs) Handles uiBtnStripinDollar.Click
 
         Dim folder As String = uiTxtFolderNumber.Text
         Dim cmd As String = ""
@@ -624,7 +628,7 @@ Public Class CBCopyHelperForm
         If (folder <> "" And folder.Length = 5 And Not company = CompanyTypes.MonthlyMail) Then
 
             '' open stripin droplet
-            cmd = STRIPINPATH & " " & STRIPINTEMPLATE
+            cmd = STRIPINDOLLARPATH & " " & STRIPINDOLLARTEMPLATE
             Call Shell(cmd, AppWinStyle.MaximizedFocus)
 
             '' open font tools
@@ -634,12 +638,41 @@ Public Class CBCopyHelperForm
         ElseIf (folder <> "" And folder.Length = 4 And company = CompanyTypes.MonthlyMail) Then
 
             '' open stripin droplet
-            cmd = STRIPINPATH & " " & STRIPINTEMPLATE
+            cmd = STRIPINDOLLARPATH & " " & STRIPINDOLLARTEMPLATE
             Call Shell(cmd, AppWinStyle.MaximizedFocus)
 
             '' open font tools
             cmd = My.Settings.FontToolsPath & " /o=" & folder
             Call Shell(cmd, AppWinStyle.MaximizedFocus)
+
+        Else
+            MessageBox.Show("You must input a proper folder number before opening Font Tools")
+        End If
+
+    End Sub
+
+    Private Sub uiBtnStripinBooklet_Click(sender As Object, e As EventArgs) Handles uiBtnStripinBooklet.Click
+
+        Dim folder As String = uiTxtFolderNumber.Text
+        Dim cmd As String = ""
+
+        If (folder <> "" And folder.Length = 5 And Not company = CompanyTypes.MonthlyMail) Then
+
+            '' open stripin droplet
+            cmd = STRIPINBOOKLETPATH & " " & STRIPINBOOKLETTEMPLATE
+            Call Shell(cmd, AppWinStyle.MaximizedFocus)
+
+            '' open png font
+            quickOpenPng(QuickOpenPNGFont.JobTypes.Booklet)
+
+        ElseIf (folder <> "" And folder.Length = 4 And company = CompanyTypes.MonthlyMail) Then
+
+            '' open stripin droplet
+            cmd = STRIPINBOOKLETPATH & " " & STRIPINBOOKLETTEMPLATE
+            Call Shell(cmd, AppWinStyle.MaximizedFocus)
+
+            '' open png font
+            quickOpenPng(QuickOpenPNGFont.JobTypes.Booklet)
 
         Else
             MessageBox.Show("You must input a proper folder number before opening Font Tools")
@@ -674,7 +707,6 @@ Public Class CBCopyHelperForm
     Private Sub uiBtnOpenPngRT_Click(sender As Object, e As EventArgs) Handles uiBtnOpenPngRT.Click
         quickOpenPng(QuickOpenPNGFont.JobTypes.ReturnEnv)
     End Sub
-
 
 
 End Class

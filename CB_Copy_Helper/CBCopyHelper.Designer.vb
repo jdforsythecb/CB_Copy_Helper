@@ -49,7 +49,7 @@ Partial Class CBCopyHelperForm
         Me.lblProofFilesFound = New System.Windows.Forms.Label()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.uiBtnStripin = New System.Windows.Forms.Button()
+        Me.uiBtnStripinDollar = New System.Windows.Forms.Button()
         Me.uiBtnOpenPngUV = New System.Windows.Forms.Button()
         Me.uiBtnOpenPngBK = New System.Windows.Forms.Button()
         Me.uiBtnOpenPngCN = New System.Windows.Forms.Button()
@@ -58,6 +58,7 @@ Partial Class CBCopyHelperForm
         Me.uiBtnOpenPngDW = New System.Windows.Forms.Button()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.uiBtnOpenPngRT = New System.Windows.Forms.Button()
+        Me.uiBtnStripinBooklet = New System.Windows.Forms.Button()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -300,15 +301,15 @@ Partial Class CBCopyHelperForm
         Me.ToolStripMenuItem1.Size = New System.Drawing.Size(61, 20)
         Me.ToolStripMenuItem1.Text = "Settings"
         '
-        'uiBtnStripin
+        'uiBtnStripinDollar
         '
-        Me.uiBtnStripin.Enabled = False
-        Me.uiBtnStripin.Location = New System.Drawing.Point(376, 234)
-        Me.uiBtnStripin.Name = "uiBtnStripin"
-        Me.uiBtnStripin.Size = New System.Drawing.Size(274, 23)
-        Me.uiBtnStripin.TabIndex = 20
-        Me.uiBtnStripin.Text = "Create Stripin for Font Tool"
-        Me.uiBtnStripin.UseVisualStyleBackColor = True
+        Me.uiBtnStripinDollar.Enabled = False
+        Me.uiBtnStripinDollar.Location = New System.Drawing.Point(376, 220)
+        Me.uiBtnStripinDollar.Name = "uiBtnStripinDollar"
+        Me.uiBtnStripinDollar.Size = New System.Drawing.Size(274, 23)
+        Me.uiBtnStripinDollar.TabIndex = 20
+        Me.uiBtnStripinDollar.Text = "Create Dollar Strip-in for Font Tool"
+        Me.uiBtnStripinDollar.UseVisualStyleBackColor = True
         '
         'uiBtnOpenPngUV
         '
@@ -390,11 +391,22 @@ Partial Class CBCopyHelperForm
         Me.uiBtnOpenPngRT.Text = "Return"
         Me.uiBtnOpenPngRT.UseVisualStyleBackColor = True
         '
+        'uiBtnStripinBooklet
+        '
+        Me.uiBtnStripinBooklet.Enabled = False
+        Me.uiBtnStripinBooklet.Location = New System.Drawing.Point(376, 249)
+        Me.uiBtnStripinBooklet.Name = "uiBtnStripinBooklet"
+        Me.uiBtnStripinBooklet.Size = New System.Drawing.Size(274, 23)
+        Me.uiBtnStripinBooklet.TabIndex = 29
+        Me.uiBtnStripinBooklet.Text = "Create Booklet Strip-in for PNGFont"
+        Me.uiBtnStripinBooklet.UseVisualStyleBackColor = True
+        '
         'CBCopyHelperForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(781, 572)
+        Me.Controls.Add(Me.uiBtnStripinBooklet)
         Me.Controls.Add(Me.uiBtnOpenPngRT)
         Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.uiBtnOpenPngUV)
@@ -403,7 +415,7 @@ Partial Class CBCopyHelperForm
         Me.Controls.Add(Me.uiBtnOpenPngKY)
         Me.Controls.Add(Me.uiBtnOpenPngTN)
         Me.Controls.Add(Me.uiBtnOpenPngDW)
-        Me.Controls.Add(Me.uiBtnStripin)
+        Me.Controls.Add(Me.uiBtnStripinDollar)
         Me.Controls.Add(Me.lblProofFilesFound)
         Me.Controls.Add(Me.lblCopyFilesFound)
         Me.Controls.Add(Me.uiBtnTemplateBookBack)
@@ -465,7 +477,7 @@ Partial Class CBCopyHelperForm
     Friend WithEvents lblProofFilesFound As System.Windows.Forms.Label
     Friend WithEvents MenuStrip1 As System.Windows.Forms.MenuStrip
     Friend WithEvents ToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents uiBtnStripin As System.Windows.Forms.Button
+    Friend WithEvents uiBtnStripinDollar As System.Windows.Forms.Button
     Friend WithEvents uiBtnOpenPngUV As System.Windows.Forms.Button
     Friend WithEvents uiBtnOpenPngBK As System.Windows.Forms.Button
     Friend WithEvents uiBtnOpenPngCN As System.Windows.Forms.Button
@@ -474,5 +486,6 @@ Partial Class CBCopyHelperForm
     Friend WithEvents uiBtnOpenPngDW As System.Windows.Forms.Button
     Friend WithEvents Label8 As System.Windows.Forms.Label
     Friend WithEvents uiBtnOpenPngRT As System.Windows.Forms.Button
+    Friend WithEvents uiBtnStripinBooklet As System.Windows.Forms.Button
 
 End Class
