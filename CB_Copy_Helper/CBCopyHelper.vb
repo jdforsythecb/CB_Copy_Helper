@@ -14,9 +14,9 @@ Public Class CBCopyHelperForm
     '' constants for paths
     Private Const CBPROOFPATH As String = "g:\_CBProofs\"
     Private Const MMPROOFPATH As String = "g:\_MMProofs\"
-    Private Const STRIPINDOLLARPATH As String = "g:\jdforsythe\Settings\Photoshop Scripts\CreateStripinDroplet.exe"
+    Private Const STRIPINDOLLARPATH As String = "g:\jdforsythe\Settings\Photoshop Scripts\StripinsForCBCopyHelper\CreateStripinDollarDroplet.exe"
     Private Const STRIPINDOLLARTEMPLATE As String = "g:\jdforsythe\Templates\Photoshop\Dollar_Addressed_Stripins.psd"
-    Private Const STRIPINBOOKLETPATH As String = "g:\jdforsythe\Settings\Photoshop Scripts\CreateStripinBookletDroplet.exe"
+    Private Const STRIPINBOOKLETPATH As String = "g:\jdforsythe\Settings\Photoshop Scripts\StripinsForCBCopyHelper\CreateStripinBookletDroplet.exe"
     Private Const STRIPINBOOKLETTEMPLATE As String = "g:\jdforsythe\Templates\Photoshop\Booklet_Stripins.psd"
 
     '' enum for company
