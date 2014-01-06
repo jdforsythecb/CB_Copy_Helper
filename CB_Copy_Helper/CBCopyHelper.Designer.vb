@@ -302,6 +302,7 @@ Partial Class CBCopyHelperForm
         '
         'uiBtnStripin
         '
+        Me.uiBtnStripin.Enabled = False
         Me.uiBtnStripin.Location = New System.Drawing.Point(376, 234)
         Me.uiBtnStripin.Name = "uiBtnStripin"
         Me.uiBtnStripin.Size = New System.Drawing.Size(274, 23)

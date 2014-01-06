@@ -312,6 +312,8 @@ Public Class CBCopyHelperForm
         uiBtnOpenPngCN.Enabled = False
         uiBtnOpenPngRT.Enabled = False
 
+        uiBtnStripin.Enabled = False
+
         '' only search if they pressed enter
         If Not (e.KeyCode = Keys.Return) Then
             Exit Sub
@@ -407,6 +409,8 @@ Public Class CBCopyHelperForm
             uiBtnOpenPngUV.Enabled = True
             uiBtnOpenPngCN.Enabled = True
             uiBtnOpenPngRT.Enabled = True
+
+            uiBtnStripin.Enabled = True
 
         End If
 
