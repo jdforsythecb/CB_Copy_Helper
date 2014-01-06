@@ -8,11 +8,11 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("CB_Copy_Helper")> 
+<Assembly: AssemblyTitle("CB Copy Helper")> 
 <Assembly: AssemblyDescription("")> 
-<Assembly: AssemblyCompany("Microsoft")> 
-<Assembly: AssemblyProduct("CB_Copy_Helper")> 
-<Assembly: AssemblyCopyright("Copyright © Microsoft 2013")> 
+<Assembly: AssemblyCompany("Church Budget Envelope Company")> 
+<Assembly: AssemblyProduct("CB Copy Helper")> 
+<Assembly: AssemblyCopyright("Copyright © 2014 Church Budget Envelope Company")> 
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(False)>
@@ -31,5 +31,5 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("1.0.0.0")> 
-<Assembly: AssemblyFileVersion("1.0.0.0")> 
+<Assembly: AssemblyVersion("1.1.0.0")> 
+<Assembly: AssemblyFileVersion("1.1.0.0")> 

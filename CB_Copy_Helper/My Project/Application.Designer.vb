@@ -34,5 +34,10 @@ Namespace My
         Protected Overrides Sub OnCreateMainForm()
             Me.MainForm = Global.CB_Copy_Helper.CBCopyHelperForm
         End Sub
+        
+        <Global.System.Diagnostics.DebuggerStepThroughAttribute()>  _
+        Protected Overrides Sub OnCreateSplashScreen()
+            Me.SplashScreen = Global.CB_Copy_Helper.SplashScreen
+        End Sub
     End Class
 End Namespace

@@ -1,5 +1,6 @@
 ﻿'' to do:
-'' generalize a function for template buttons like i have for quickopenpng buttons
+'' separate search results for cover, carton, booklet
+'' alert if church's own folder doesn't exist (offer to move files into one) - checkbox in settings - only for setters
 
 
 
@@ -9,12 +10,6 @@ Imports System.IO
 Imports System.Text.RegularExpressions
 
 Public Class CBCopyHelperForm
-    '' refresh settings
-
-
-    '' temporary constants - will be settings later
-    'Private Const PNGFONTPATH As String = "c:\pngfont\pngfont2.exe"
-    'Private Const FONTTOOLSPATH As String = "c:\FontTool\fnttool3.exe"
 
     '' constants for paths
     Private Const CBPROOFPATH As String = "g:\_CBProofs\"
@@ -159,7 +154,7 @@ Public Class CBCopyHelperForm
     End Function
 
     '' returns a prettified folder number (e.g. "A-0101" instead of "A0101")
-    '' if it returns an empty string, then the folder number wasn't value
+    '' if it returns an empty string, then the folder number wasn't valid
     Private Function getPrettyFolderNumber(ByVal ugly As String) As String
         Dim pretty As String = ""
         '' not taking into account weird things like premier, all folder numbers for CB are 5 characters
@@ -235,8 +230,50 @@ Public Class CBCopyHelperForm
 
     End Function
 
+    Private Sub openTemplate(template As TemplateTypes)
+        Dim prettyFolder As String = getPrettyFolderNumber(uiTxtFolderNumber.Text.Trim)
+        Dim fontCode As String = uiTxtFontCode.Text.Trim
+        If (prettyFolder = "") Then
+            MessageBox.Show("Please enter a valid folder number before creating a new design")
+        ElseIf (fontCode = "") Then
+            MessageBox.Show("Please enter a font code before creating a new design")
+        Else
 
+            '' copy template, rename, copy the folder/font to the clipboard, and open the file
+            Dim templateOpen As New DesignTemplates(prettyFolder, fontCode)
 
+            Select Case template
+                Case TemplateTypes.Dollar
+                    templateOpen.TemplateType = DesignTemplates.TemplateTypes.Dollar
+                Case TemplateTypes.Premier
+                    templateOpen.TemplateType = DesignTemplates.TemplateTypes.Premier
+                Case TemplateTypes.Mailback
+                    templateOpen.TemplateType = DesignTemplates.TemplateTypes.Mailback
+                Case TemplateTypes.BookletFront
+                    templateOpen.TemplateType = DesignTemplates.TemplateTypes.BookletFront
+                Case TemplateTypes.BookletBack
+                    templateOpen.TemplateType = DesignTemplates.TemplateTypes.BookletBack
+                Case TemplateTypes.BookletCover
+                    templateOpen.TemplateType = DesignTemplates.TemplateTypes.BookletCover
+                Case TemplateTypes.Carton
+                    templateOpen.TemplateType = DesignTemplates.TemplateTypes.Carton
+                Case TemplateTypes.BizhubCover
+                    templateOpen.TemplateType = DesignTemplates.TemplateTypes.BizhubCover
+                Case Else
+                    MessageBox.Show("Template Type error. Call for help.")
+            End Select
+
+            templateOpen.SavePath = getSavePath(prettyFolder, template)
+
+            If (company = CompanyTypes.MonthlyMail) Then
+                templateOpen.Company = DesignTemplates.CompanyTypes.MonthlyMail
+            Else
+                templateOpen.Company = DesignTemplates.CompanyTypes.ChurchBudget
+            End If
+
+            templateOpen.createAndOpen()
+        End If
+    End Sub
 
     Private Sub quickOpenPng(jobType As QuickOpenPNGFont.JobTypes)
         Dim comp As QuickOpenPNGFont.CompanyTypes = QuickOpenPNGFont.CompanyTypes.ChurchBudget
@@ -518,142 +555,35 @@ Public Class CBCopyHelperForm
     End Sub
 
     Private Sub uiBtnTemplateDollar_Click(sender As Object, e As EventArgs) Handles uiBtnTemplateDollar.Click
-        Dim prettyFolder As String = getPrettyFolderNumber(uiTxtFolderNumber.Text.Trim)
-        Dim fontCode As String = uiTxtFontCode.Text.Trim
-        If (prettyFolder = "") Then
-            MessageBox.Show("Please enter a valid folder number before creating a new design")
-        ElseIf (fontCode = "") Then
-            MessageBox.Show("Please enter a font code before creating a new design")
-        Else
-
-            '' copy template, rename, copy the folder/font to the clipboard, and open the file
-            Dim template As New DesignTemplates(prettyFolder, fontCode)
-            template.TemplateType = DesignTemplates.TemplateTypes.Dollar
-            template.SavePath = getSavePath(prettyFolder, TemplateTypes.Dollar)
-            If (company = CompanyTypes.MonthlyMail) Then
-                template.Company = DesignTemplates.CompanyTypes.MonthlyMail
-            Else
-                template.Company = DesignTemplates.CompanyTypes.ChurchBudget
-            End If
-            template.createAndOpen()
-        End If
+        openTemplate(TemplateTypes.Dollar)
     End Sub
 
     Private Sub uiBtnTemplatePremier_Click(sender As Object, e As EventArgs) Handles uiBtnTemplatePremier.Click
-        Dim prettyFolder As String = getPrettyFolderNumber(uiTxtFolderNumber.Text.Trim)
-        Dim fontCode As String = uiTxtFontCode.Text.Trim
-        If (prettyFolder = "") Then
-            MessageBox.Show("Please enter a valid folder number before creating a new design")
-        ElseIf (fontCode = "") Then
-            MessageBox.Show("Please enter a font code before creating a new design")
-        Else
-            '' copy template, rename, copy the folder/font to the clipboard, and open the file
-            Dim template As New DesignTemplates(prettyFolder, fontCode)
-            template.TemplateType = DesignTemplates.TemplateTypes.Premier
-            template.SavePath = getSavePath(prettyFolder, TemplateTypes.Premier)
-            If (company = CompanyTypes.MonthlyMail) Then
-                template.Company = DesignTemplates.CompanyTypes.MonthlyMail
-            Else
-                template.Company = DesignTemplates.CompanyTypes.ChurchBudget
-            End If
-            template.createAndOpen()
-        End If
+        openTemplate(TemplateTypes.Premier)
     End Sub
 
     Private Sub uiBtnTemplateCarton_Click(sender As Object, e As EventArgs) Handles uiBtnTemplateCarton.Click
-        Dim prettyFolder As String = getPrettyFolderNumber(uiTxtFolderNumber.Text.Trim)
-        Dim fontCode As String = uiTxtFontCode.Text.Trim
-        If (prettyFolder = "") Then
-            MessageBox.Show("Please enter a valid folder number before creating a new design")
-        ElseIf (fontCode = "") Then
-            MessageBox.Show("Please enter a font code before creating a new design")
-        Else
-            '' copy template, rename, copy the folder/font to the clipboard, and open the file
-            Dim template As New DesignTemplates(prettyFolder, fontCode)
-            template.TemplateType = DesignTemplates.TemplateTypes.Carton
-            template.SavePath = getSavePath(prettyFolder, TemplateTypes.Carton)
-            template.createAndOpen()
-        End If
+        openTemplate(TemplateTypes.Carton)
     End Sub
 
     Private Sub uiBtnTemplateBookFront_Click(sender As Object, e As EventArgs) Handles uiBtnTemplateBookFront.Click
-        Dim prettyFolder As String = getPrettyFolderNumber(uiTxtFolderNumber.Text.Trim)
-        Dim fontCode As String = uiTxtFontCode.Text.Trim
-        If (prettyFolder = "") Then
-            MessageBox.Show("Please enter a valid folder number before creating a new design")
-        ElseIf (fontCode = "") Then
-            MessageBox.Show("Please enter a font code before creating a new design")
-        Else
-            '' copy template, rename, copy the folder/font to the clipboard, and open the file
-            Dim template As New DesignTemplates(prettyFolder, fontCode)
-            template.TemplateType = DesignTemplates.TemplateTypes.BookletFront
-            template.SavePath = getSavePath(prettyFolder, TemplateTypes.BookletFront)
-            template.createAndOpen()
-        End If
+        openTemplate(TemplateTypes.BookletFront)
     End Sub
 
     Private Sub uiBtnTemplateBookBack_Click(sender As Object, e As EventArgs) Handles uiBtnTemplateBookBack.Click
-        Dim prettyFolder As String = getPrettyFolderNumber(uiTxtFolderNumber.Text.Trim)
-        Dim fontCode As String = uiTxtFontCode.Text.Trim
-        If (prettyFolder = "") Then
-            MessageBox.Show("Please enter a valid folder number before creating a new design")
-        ElseIf (fontCode = "") Then
-            MessageBox.Show("Please enter a font code before creating a new design")
-        Else
-            '' copy template, rename, copy the folder/font to the clipboard, and open the file
-            Dim template As New DesignTemplates(prettyFolder, fontCode)
-            template.TemplateType = DesignTemplates.TemplateTypes.BookletBack
-            template.SavePath = getSavePath(prettyFolder, TemplateTypes.BookletBack)
-            template.createAndOpen()
-        End If
+        openTemplate(TemplateTypes.BookletBack)
     End Sub
 
     Private Sub uiBtnTemplateBookCover_Click(sender As Object, e As EventArgs) Handles uiBtnTemplateBookCover.Click
-        Dim prettyFolder As String = getPrettyFolderNumber(uiTxtFolderNumber.Text.Trim)
-        Dim fontCode As String = uiTxtFontCode.Text.Trim
-        If (prettyFolder = "") Then
-            MessageBox.Show("Please enter a valid folder number before creating a new design")
-        ElseIf (fontCode = "") Then
-            MessageBox.Show("Please enter a font code before creating a new design")
-        Else
-            '' copy template, rename, copy the folder/font to the clipboard, and open the file
-            Dim template As New DesignTemplates(prettyFolder, fontCode)
-            template.TemplateType = DesignTemplates.TemplateTypes.BookletCover
-            template.SavePath = getSavePath(prettyFolder, TemplateTypes.BookletCover)
-            template.createAndOpen()
-        End If
+        openTemplate(TemplateTypes.BookletCover)
     End Sub
 
     Private Sub uiBtnBizhub_Click(sender As Object, e As EventArgs) Handles uiBtnTemplateBizhub.Click
-        Dim prettyFolder As String = getPrettyFolderNumber(uiTxtFolderNumber.Text.Trim)
-        Dim fontCode As String = uiTxtFontCode.Text.Trim
-        If (prettyFolder = "") Then
-            MessageBox.Show("Please enter a valid folder number before creating a new design")
-        ElseIf (fontCode = "") Then
-            MessageBox.Show("Please enter a font code before creating a new design")
-        Else
-            '' copy template, rename, copy the folder/font to the clipboard, and open the file
-            Dim template As New DesignTemplates(prettyFolder, fontCode)
-            template.TemplateType = DesignTemplates.TemplateTypes.BizhubCover
-            template.SavePath = getSavePath(prettyFolder, TemplateTypes.BizhubCover)
-            template.createAndOpen()
-        End If
+        openTemplate(TemplateTypes.BizhubCover)
     End Sub
 
     Private Sub uiBtnTemplateMailback_Click(sender As Object, e As EventArgs) Handles uiBtnTemplateMailback.Click
-        Dim prettyFolder As String = getPrettyFolderNumber(uiTxtFolderNumber.Text.Trim)
-        Dim fontCode As String = uiTxtFontCode.Text.Trim
-        If (prettyFolder = "") Then
-            MessageBox.Show("Please enter a valid folder number before creating a new design")
-        ElseIf (fontCode = "") Then
-            MessageBox.Show("Please enter a font code before creating a new design")
-        Else
-            '' copy template, rename, copy the folder/font to the clipboard, and open the file
-            Dim template As New DesignTemplates(prettyFolder, fontCode)
-            template.TemplateType = DesignTemplates.TemplateTypes.Mailback
-            template.SavePath = getSavePath(prettyFolder, TemplateTypes.Mailback)
-            template.createAndOpen()
-        End If
+        openTemplate(TemplateTypes.Mailback)
     End Sub
 
     Private Sub CBCopyHelperForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -740,4 +670,7 @@ Public Class CBCopyHelperForm
     Private Sub uiBtnOpenPngRT_Click(sender As Object, e As EventArgs) Handles uiBtnOpenPngRT.Click
         quickOpenPng(QuickOpenPNGFont.JobTypes.ReturnEnv)
     End Sub
+
+
+
 End Class
