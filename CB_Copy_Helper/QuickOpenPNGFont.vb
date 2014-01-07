@@ -2,16 +2,16 @@
     '' church budget
     Private Const CBDW As String = "DoubleWide_CB"
     Private Const CBBK As String = "Booklet"
-    Private Const CBUV As String = "BookletCovers"
-    Private Const CBCN As String = "Cartons_CB"
-    Private Const CBTN As String = "Kyocera_CB_Num10"
+    Private Const CBUV As String = "BookletCover"
+    Private Const CBCN As String = "Carton_CB"
+    Private Const CBTN As String = "Num10_CB"
     Private Const CBKY As String = "Kyocera_CB"
 
     '' monthly mail
     Private Const MMDW As String = "DoubleWide_MM"
-    Private Const MMCN As String = "Cartons_MM"
-    Private Const MMTN As String = "Kyocera_MM_Num10"
-    Private Const MMRT As String = "Kyocera_MM_Return"
+    Private Const MMCN As String = "Carton_MM"
+    Private Const MMTN As String = "Num10_MM"
+    Private Const MMRT As String = "Return_MM"
     Private Const MMKY As String = "Kyocera_MM"
 
     Private pngfntpath As String = ""
