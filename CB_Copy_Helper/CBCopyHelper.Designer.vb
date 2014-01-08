@@ -28,7 +28,6 @@ Partial Class CBCopyHelperForm
         Me.Label2 = New System.Windows.Forms.Label()
         Me.uiLstDesignFiles = New System.Windows.Forms.ListBox()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.uiBtnOpenPNG = New System.Windows.Forms.Button()
         Me.uiBtnOpenFontTools = New System.Windows.Forms.Button()
         Me.uiLstProofFiles = New System.Windows.Forms.ListBox()
         Me.Label4 = New System.Windows.Forms.Label()
@@ -59,6 +58,8 @@ Partial Class CBCopyHelperForm
         Me.Label8 = New System.Windows.Forms.Label()
         Me.uiBtnOpenPngRT = New System.Windows.Forms.Button()
         Me.uiBtnStripinBooklet = New System.Windows.Forms.Button()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.uiBtnPrintAllFonts = New System.Windows.Forms.Button()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -102,25 +103,15 @@ Partial Class CBCopyHelperForm
         Me.Label3.AutoSize = True
         Me.Label3.Location = New System.Drawing.Point(201, 89)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(141, 130)
+        Me.Label3.Size = New System.Drawing.Size(141, 91)
         Me.Label3.TabIndex = 4
-        Me.Label3.Text = "Double-click to open" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(copies folder # to clipboard)" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Right-click for explorer" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Left-click to copy folder" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "location to clipboard" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Click buttons below to op" & _
-    "en" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "the folder in that program"
-        '
-        'uiBtnOpenPNG
-        '
-        Me.uiBtnOpenPNG.Location = New System.Drawing.Point(204, 228)
-        Me.uiBtnOpenPNG.Name = "uiBtnOpenPNG"
-        Me.uiBtnOpenPNG.Size = New System.Drawing.Size(109, 29)
-        Me.uiBtnOpenPNG.TabIndex = 3
-        Me.uiBtnOpenPNG.Text = "Open in PNG Font"
-        Me.uiBtnOpenPNG.UseVisualStyleBackColor = True
+        Me.Label3.Text = "Double-click to open" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(copies folder # to clipboard)" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Right-click for explorer" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Left-click to copy folder" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "location to clipboard"
         '
         'uiBtnOpenFontTools
         '
-        Me.uiBtnOpenFontTools.Location = New System.Drawing.Point(204, 262)
+        Me.uiBtnOpenFontTools.Location = New System.Drawing.Point(376, 422)
         Me.uiBtnOpenFontTools.Name = "uiBtnOpenFontTools"
-        Me.uiBtnOpenFontTools.Size = New System.Drawing.Size(109, 26)
+        Me.uiBtnOpenFontTools.Size = New System.Drawing.Size(131, 26)
         Me.uiBtnOpenFontTools.TabIndex = 4
         Me.uiBtnOpenFontTools.Text = "Open in Font Tool"
         Me.uiBtnOpenFontTools.UseVisualStyleBackColor = True
@@ -401,11 +392,32 @@ Partial Class CBCopyHelperForm
         Me.uiBtnStripinBooklet.Text = "Create Booklet Strip-in for PNGFont"
         Me.uiBtnStripinBooklet.UseVisualStyleBackColor = True
         '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label9.Location = New System.Drawing.Point(373, 402)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(134, 13)
+        Me.Label9.TabIndex = 30
+        Me.Label9.Text = "Quick-open Font Tool:"
+        '
+        'uiBtnPrintAllFonts
+        '
+        Me.uiBtnPrintAllFonts.Location = New System.Drawing.Point(513, 422)
+        Me.uiBtnPrintAllFonts.Name = "uiBtnPrintAllFonts"
+        Me.uiBtnPrintAllFonts.Size = New System.Drawing.Size(127, 26)
+        Me.uiBtnPrintAllFonts.TabIndex = 31
+        Me.uiBtnPrintAllFonts.Text = "Print All Fonts"
+        Me.uiBtnPrintAllFonts.UseVisualStyleBackColor = True
+        '
         'CBCopyHelperForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(781, 572)
+        Me.Controls.Add(Me.uiBtnPrintAllFonts)
+        Me.Controls.Add(Me.Label9)
         Me.Controls.Add(Me.uiBtnStripinBooklet)
         Me.Controls.Add(Me.uiBtnOpenPngRT)
         Me.Controls.Add(Me.Label8)
@@ -434,7 +446,6 @@ Partial Class CBCopyHelperForm
         Me.Controls.Add(Me.uiLstProofFiles)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.uiBtnOpenFontTools)
-        Me.Controls.Add(Me.uiBtnOpenPNG)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.uiLstDesignFiles)
         Me.Controls.Add(Me.Label2)
@@ -456,7 +467,6 @@ Partial Class CBCopyHelperForm
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents uiLstDesignFiles As System.Windows.Forms.ListBox
     Friend WithEvents Label3 As System.Windows.Forms.Label
-    Friend WithEvents uiBtnOpenPNG As System.Windows.Forms.Button
     Friend WithEvents uiBtnOpenFontTools As System.Windows.Forms.Button
     Friend WithEvents uiLstProofFiles As System.Windows.Forms.ListBox
     Friend WithEvents Label4 As System.Windows.Forms.Label
@@ -487,5 +497,7 @@ Partial Class CBCopyHelperForm
     Friend WithEvents Label8 As System.Windows.Forms.Label
     Friend WithEvents uiBtnOpenPngRT As System.Windows.Forms.Button
     Friend WithEvents uiBtnStripinBooklet As System.Windows.Forms.Button
+    Friend WithEvents Label9 As System.Windows.Forms.Label
+    Friend WithEvents uiBtnPrintAllFonts As System.Windows.Forms.Button
 
 End Class

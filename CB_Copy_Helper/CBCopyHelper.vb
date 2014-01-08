@@ -278,12 +278,22 @@ Public Class CBCopyHelperForm
     End Sub
 
     Private Sub quickOpenPng(jobType As QuickOpenPNGFont.JobTypes)
-        Dim comp As QuickOpenPNGFont.CompanyTypes = QuickOpenPNGFont.CompanyTypes.ChurchBudget
-        If (company = CompanyTypes.MonthlyMail) Then comp = QuickOpenPNGFont.CompanyTypes.MonthlyMail
+        Dim folder As String = uiTxtFolderNumber.Text.Trim
+        Dim comp As QuickOpenPNGFont.CompanyTypes
+
+        If (company = CompanyTypes.MonthlyMail And folder <> "" And folder.Length = 4) Then
+            comp = QuickOpenPNGFont.CompanyTypes.MonthlyMail
+        ElseIf (folder <> "" And folder.Length = 5) Then
+            comp = QuickOpenPNGFont.CompanyTypes.ChurchBudget
+        Else
+            MessageBox.Show("You must input a proper folder number before opening PNG Font")
+            Exit Sub
+        End If
 
         Dim png As New QuickOpenPNGFont(My.Settings.PngFontPath, uiTxtFolderNumber.Text.Trim, _
                                         jobType, comp)
         png.openPNG()
+
     End Sub
 
 
@@ -316,6 +326,9 @@ Public Class CBCopyHelperForm
 
         uiBtnStripinDollar.Enabled = False
         uiBtnStripinBooklet.Enabled = False
+
+        uiBtnOpenFontTools.Enabled = False
+        uiBtnPrintAllFonts.Enabled = False
 
         '' only search if they pressed enter
         If Not (e.KeyCode = Keys.Return) Then
@@ -415,6 +428,9 @@ Public Class CBCopyHelperForm
 
             uiBtnStripinDollar.Enabled = True
             uiBtnStripinBooklet.Enabled = True
+
+            uiBtnOpenFontTools.Enabled = True
+            uiBtnPrintAllFonts.Enabled = True
 
         End If
 
@@ -535,30 +551,28 @@ Public Class CBCopyHelperForm
         End If
     End Sub
 
-    Private Sub uiBtnOpenPNG_Click(sender As Object, e As EventArgs) Handles uiBtnOpenPNG.Click
-        Dim folder As String = uiTxtFolderNumber.Text
-        If (folder <> "" And folder.Length = 5 And Not company = CompanyTypes.MonthlyMail) Then
-            Dim cmd As String = My.Settings.PngFontPath & " /o=" & folder.ToUpper & " /t=DoubleWide_CB"
-            Call Shell(cmd, AppWinStyle.MaximizedFocus)
-        ElseIf (folder <> "" And folder.Length = 4 And company = CompanyTypes.MonthlyMail) Then
-            Dim cmd As String = My.Settings.PngFontPath & " /o=" & folder.ToUpper & " /t=DoubleWide_MM"
-            Call Shell(cmd, AppWinStyle.MaximizedFocus)
-        Else
-            MessageBox.Show("You must input a proper folder number before opening PNG Font")
-        End If
-    End Sub
 
     Private Sub uiBtnOpenFontTools_Click(sender As Object, e As EventArgs) Handles uiBtnOpenFontTools.Click
         Dim folder As String = uiTxtFolderNumber.Text
 
-        If (folder <> "" And folder.Length = 5 And Not company = CompanyTypes.MonthlyMail) Then
-            Dim cmd As String = My.Settings.FontToolsPath & " /o=" & folder
-            Call Shell(cmd, AppWinStyle.MaximizedFocus)
-        ElseIf (folder <> "" And folder.Length = 4 And company = CompanyTypes.MonthlyMail) Then
+        If (folder <> "" And folder.Length = 5 And Not company = CompanyTypes.MonthlyMail) Or _
+           (folder <> "" And folder.Length = 4 And company = CompanyTypes.MonthlyMail) Then
             Dim cmd As String = My.Settings.FontToolsPath & " /o=" & folder
             Call Shell(cmd, AppWinStyle.MaximizedFocus)
         Else
             MessageBox.Show("You must input a proper folder number before opening Font Tools")
+        End If
+    End Sub
+
+    Private Sub uiBtnPrintAllFonts_Click(sender As Object, e As EventArgs) Handles uiBtnPrintAllFonts.Click
+        Dim folder As String = uiTxtFolderNumber.Text
+
+        If (folder <> "" And folder.Length = 5 And Not company = CompanyTypes.MonthlyMail) Or _
+           (folder <> "" And folder.Length = 4 And company = CompanyTypes.MonthlyMail) Then
+            Dim cmd As String = My.Settings.FontToolsPath & " /o=" & folder & " /p"
+            Call Shell(cmd, AppWinStyle.MaximizedFocus)
+        Else
+            MessageBox.Show("You must input a proper folder number before printing fonts")
         End If
     End Sub
 
@@ -707,6 +721,7 @@ Public Class CBCopyHelperForm
     Private Sub uiBtnOpenPngRT_Click(sender As Object, e As EventArgs) Handles uiBtnOpenPngRT.Click
         quickOpenPng(QuickOpenPNGFont.JobTypes.ReturnEnv)
     End Sub
+
 
 
 End Class
