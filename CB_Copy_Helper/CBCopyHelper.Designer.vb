@@ -60,6 +60,7 @@ Partial Class CBCopyHelperForm
         Me.uiBtnStripinBooklet = New System.Windows.Forms.Button()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.uiBtnPrintAllFonts = New System.Windows.Forms.Button()
+        Me.uiBtnOpenFTPremier = New System.Windows.Forms.Button()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -411,11 +412,21 @@ Partial Class CBCopyHelperForm
         Me.uiBtnPrintAllFonts.Text = "Print All Fonts"
         Me.uiBtnPrintAllFonts.UseVisualStyleBackColor = True
         '
+        'uiBtnOpenFTPremier
+        '
+        Me.uiBtnOpenFTPremier.Location = New System.Drawing.Point(376, 454)
+        Me.uiBtnOpenFTPremier.Name = "uiBtnOpenFTPremier"
+        Me.uiBtnOpenFTPremier.Size = New System.Drawing.Size(131, 26)
+        Me.uiBtnOpenFTPremier.TabIndex = 32
+        Me.uiBtnOpenFTPremier.Text = "Open in FT (Premier)"
+        Me.uiBtnOpenFTPremier.UseVisualStyleBackColor = True
+        '
         'CBCopyHelperForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(781, 572)
+        Me.Controls.Add(Me.uiBtnOpenFTPremier)
         Me.Controls.Add(Me.uiBtnPrintAllFonts)
         Me.Controls.Add(Me.Label9)
         Me.Controls.Add(Me.uiBtnStripinBooklet)
@@ -499,5 +510,6 @@ Partial Class CBCopyHelperForm
     Friend WithEvents uiBtnStripinBooklet As System.Windows.Forms.Button
     Friend WithEvents Label9 As System.Windows.Forms.Label
     Friend WithEvents uiBtnPrintAllFonts As System.Windows.Forms.Button
+    Friend WithEvents uiBtnOpenFTPremier As System.Windows.Forms.Button
 
 End Class

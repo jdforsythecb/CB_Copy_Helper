@@ -576,6 +576,19 @@ Public Class CBCopyHelperForm
         End If
     End Sub
 
+    Private Sub uiBtnOpenFTPremier_Click(sender As Object, e As EventArgs) Handles uiBtnOpenFTPremier.Click
+        Dim folder As String = uiTxtFolderNumber.Text
+
+        If (folder <> "" And folder.Length = 5 And Not company = CompanyTypes.MonthlyMail) Or _
+           (folder <> "" And folder.Length = 4 And company = CompanyTypes.MonthlyMail) Then
+            '' prepend a "p" to the folder on the command-line to open the premier font
+            Dim cmd As String = My.Settings.FontToolsPath & " /o=p" & folder
+            Call Shell(cmd, AppWinStyle.MaximizedFocus)
+        Else
+            MessageBox.Show("You must input a proper folder number before opening Font Tools")
+        End If
+    End Sub
+
     Private Sub uiBtnTemplateDollar_Click(sender As Object, e As EventArgs) Handles uiBtnTemplateDollar.Click
         openTemplate(TemplateTypes.Dollar)
     End Sub
@@ -721,6 +734,7 @@ Public Class CBCopyHelperForm
     Private Sub uiBtnOpenPngRT_Click(sender As Object, e As EventArgs) Handles uiBtnOpenPngRT.Click
         quickOpenPng(QuickOpenPNGFont.JobTypes.ReturnEnv)
     End Sub
+
 
 
 
