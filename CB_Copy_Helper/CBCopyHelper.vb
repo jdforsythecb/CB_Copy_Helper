@@ -88,21 +88,24 @@ Public Class CBCopyHelperForm
                     "g:\Full Color Sheets\cb" & salts(0).ToUpper, _
                     "g:\CHKBK\cb\CB" & salts(0).ToUpper, _
                     "g:\CARTONS\cb\CB" & salts(0).ToUpper, _
-                    "g:\CHKBK\UV COVERS"
+                    "g:\CHKBK\UV COVERS", _
+                    "g:\CHKBK\CUTS"
                     }
         ElseIf (company = CompanyTypes.McDaniel) Then
             Return {"g:\MCDANIEL\MC" & salts(0), _
                     "g:\Full Color Sheets\McDaniel\" & salts(0), _
                     "g:\CHKBK\McDaniel", _
                     "g:\CARTONS\McDaniel", _
-                    "g:\CHKBK\UV COVERS"
+                    "g:\CHKBK\UV COVERS", _
+                    "g:\CHKBK\CUTS"
                    }
         ElseIf (company = CompanyTypes.United) Then
             Return {"g:\UNITED\Un" & salts(0), _
                     "g:\Full Color Sheets\United\" & salts(0), _
                     "g:\CHKBK\United", _
                     "g:\CARTONS\United", _
-                    "g:\CHKBK\UV COVERS"
+                    "g:\CHKBK\UV COVERS", _
+                    "g:\CHKBK\CUTS"
                    }
         Else
             '' Monthly mail
@@ -139,7 +142,7 @@ Public Class CBCopyHelperForm
             Try
                 For Each fi In path.EnumerateFiles(filter).OrderBy(Function(x) x.Name)
                     Try
-                        If (fi.Name.Contains(salts(0)) And fi.Name.Contains(salts(1))) Then
+                        If ((fi.Name.Contains(salts(0).ToUpper()) Or fi.Name.Contains(salts(0).ToLower())) And fi.Name.Contains(salts(1))) Then
                             fileList.Add(fi)
                         End If
                     Catch ex As Exception
