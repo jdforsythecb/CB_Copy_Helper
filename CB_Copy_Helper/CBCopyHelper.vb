@@ -49,8 +49,32 @@ Public Class CBCopyHelperForm
     Dim proofFileList As New List(Of IO.FileInfo)
 
 
+    '' draggable state
+    Dim drag As Boolean
+    Dim mousex As Integer
+    Dim mousey As Integer
 
 
+
+    ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    '' overriding windows forms titlebar drag method - to enable dragging window without border/caption
+    ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    '' see msdn.microsoft.com/en-us/ms645618(VS.85).aspx - constants we're looking for
+    Private Const WM_NCHITTEST As Integer = &H84
+    Private Const HTCLIENT As Integer = &H1
+    Private Const HTCAPTION As Integer = &H2
+
+    Protected Overrides Sub WndProc(ByRef m As Message)
+        '' call the default class code
+        MyBase.WndProc(m)
+
+        '' our own implementation to see if we're getting the WM_NCHITTEST
+        'If Not ((m.Result = 0) Or (m.Result = 1) Or (m.Result = 14)) Then Console.WriteLine(m.Result)
+        Select Case m.Msg
+            Case WM_NCHITTEST
+                If m.Result = HTCLIENT Then m.Result = HTCAPTION
+        End Select
+    End Sub
 
 
 
@@ -88,24 +112,24 @@ Public Class CBCopyHelperForm
                     "g:\Full Color Sheets\cb" & salts(0).ToUpper, _
                     "g:\CHKBK\cb\CB" & salts(0).ToUpper, _
                     "g:\CARTONS\cb\CB" & salts(0).ToUpper, _
-                    "g:\CHKBK\UV COVERS", _
-                    "g:\CHKBK\CUTS"
+                    "g:\CHKBK\CUTS", _
+                    "g:\CHKBK\UV COVERS"
                     }
         ElseIf (company = CompanyTypes.McDaniel) Then
             Return {"g:\MCDANIEL\MC" & salts(0), _
                     "g:\Full Color Sheets\McDaniel\" & salts(0), _
                     "g:\CHKBK\McDaniel", _
                     "g:\CARTONS\McDaniel", _
-                    "g:\CHKBK\UV COVERS", _
-                    "g:\CHKBK\CUTS"
+                    "g:\CHKBK\CUTS", _
+                    "g:\CHKBK\UV COVERS"
                    }
         ElseIf (company = CompanyTypes.United) Then
             Return {"g:\UNITED\Un" & salts(0), _
                     "g:\Full Color Sheets\United\" & salts(0), _
                     "g:\CHKBK\United", _
                     "g:\CARTONS\United", _
-                    "g:\CHKBK\UV COVERS", _
-                    "g:\CHKBK\CUTS"
+                    "g:\CHKBK\CUTS", _
+                    "g:\CHKBK\UV COVERS"
                    }
         Else
             '' Monthly mail
@@ -299,7 +323,32 @@ Public Class CBCopyHelperForm
 
     End Sub
 
+    Private Sub toggleButtons(enabled As Boolean)
+        uiTxtFontCode.Enabled = enabled
+        uiBtnTemplateDollar.Enabled = enabled
+        uiBtnTemplatePremier.Enabled = enabled
+        uiBtnTemplateMailback.Enabled = enabled
+        uiBtnTemplateBookFront.Enabled = enabled
+        uiBtnTemplateBookBack.Enabled = enabled
+        uiBtnTemplateBookCover.Enabled = enabled
+        uiBtnTemplateCarton.Enabled = enabled
+        uiBtnTemplateBizhub.Enabled = enabled
 
+        uiBtnOpenPngDW.Enabled = enabled
+        uiBtnOpenPngKY.Enabled = enabled
+        uiBtnOpenPngTN.Enabled = enabled
+        uiBtnOpenPngBK.Enabled = enabled
+        uiBtnOpenPngUV.Enabled = enabled
+        uiBtnOpenPngCN.Enabled = enabled
+        uiBtnOpenPngRT.Enabled = enabled
+
+        uiBtnStripinDollar.Enabled = enabled
+        'uiBtnStripinBooklet.Enabled = enabled
+
+        uiBtnOpenFontTools.Enabled = enabled
+        uiBtnPrintAllFonts.Enabled = enabled
+        uiBtnOpenFTPremier.Enabled = enabled
+    End Sub
 
     ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
     '' event handlers
@@ -309,29 +358,7 @@ Public Class CBCopyHelperForm
 
         '' any time the text is changing (or even on pressing return) disable the create copy
         '' buttons so they can't create copy for a partial folder number
-        uiTxtFontCode.Enabled = False
-        uiBtnTemplateDollar.Enabled = False
-        uiBtnTemplatePremier.Enabled = False
-        uiBtnTemplateMailback.Enabled = False
-        uiBtnTemplateBookFront.Enabled = False
-        uiBtnTemplateBookBack.Enabled = False
-        uiBtnTemplateBookCover.Enabled = False
-        uiBtnTemplateCarton.Enabled = False
-        uiBtnTemplateBizhub.Enabled = False
-
-        uiBtnOpenPngDW.Enabled = False
-        uiBtnOpenPngKY.Enabled = False
-        uiBtnOpenPngTN.Enabled = False
-        uiBtnOpenPngBK.Enabled = False
-        uiBtnOpenPngUV.Enabled = False
-        uiBtnOpenPngCN.Enabled = False
-        uiBtnOpenPngRT.Enabled = False
-
-        uiBtnStripinDollar.Enabled = False
-        uiBtnStripinBooklet.Enabled = False
-
-        uiBtnOpenFontTools.Enabled = False
-        uiBtnPrintAllFonts.Enabled = False
+        toggleButtons(False)
 
         '' only search if they pressed enter
         If Not (e.KeyCode = Keys.Return) Then
@@ -352,6 +379,7 @@ Public Class CBCopyHelperForm
         Dim copyFileCount As Integer = 0
         Dim copyFolderCount As Integer = 0
         Dim proofFilecount As Integer = 0
+
         '' holds a list of folders we've counted
         Dim usedFolders As New List(Of String)
 
@@ -411,29 +439,7 @@ Public Class CBCopyHelperForm
             lblProofFilesFound.Text = proofFilecount & " proof(s) found"
 
             '' now that we've "opened" that folder number, enable the buttons to add copy
-            uiTxtFontCode.Enabled = True
-            uiBtnTemplateDollar.Enabled = True
-            uiBtnTemplatePremier.Enabled = True
-            uiBtnTemplateMailback.Enabled = True
-            uiBtnTemplateBookFront.Enabled = True
-            uiBtnTemplateBookBack.Enabled = True
-            uiBtnTemplateBookCover.Enabled = True
-            uiBtnTemplateCarton.Enabled = True
-            uiBtnTemplateBizhub.Enabled = True
-
-            uiBtnOpenPngDW.Enabled = True
-            uiBtnOpenPngKY.Enabled = True
-            uiBtnOpenPngTN.Enabled = True
-            uiBtnOpenPngBK.Enabled = True
-            uiBtnOpenPngUV.Enabled = True
-            uiBtnOpenPngCN.Enabled = True
-            uiBtnOpenPngRT.Enabled = True
-
-            uiBtnStripinDollar.Enabled = True
-            uiBtnStripinBooklet.Enabled = True
-
-            uiBtnOpenFontTools.Enabled = True
-            uiBtnPrintAllFonts.Enabled = True
+            toggleButtons(True)
 
         End If
 
@@ -634,7 +640,7 @@ Public Class CBCopyHelperForm
 
     End Sub
 
-    Private Sub ToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem1.Click
+    Private Sub ToolStripMenuItem1_Click(sender As Object, e As EventArgs)
         Dim stngFrm As New Settings()
         '' show as a modal dialog, so this doesn't return until the dialog is closed
         stngFrm.ShowDialog()
@@ -681,7 +687,7 @@ Public Class CBCopyHelperForm
 
     End Sub
 
-    Private Sub uiBtnStripinBooklet_Click(sender As Object, e As EventArgs) Handles uiBtnStripinBooklet.Click
+    Private Sub uiBtnStripinBooklet_Click(sender As Object, e As EventArgs)
 
         Dim folder As String = uiTxtFolderNumber.Text
         Dim cmd As String = ""
@@ -739,6 +745,99 @@ Public Class CBCopyHelperForm
     End Sub
 
 
+    Private Sub uiBtnSettings_Click(sender As Object, e As EventArgs) Handles uiBtnSettings.Click
+        Dim stngFrm As New Settings()
+        '' show as a modal dialog, so this doesn't return until the dialog is closed
+        stngFrm.ShowDialog()
+
+        '' reload the settings and check the company setting
+        My.Settings.Reload()
+        If (My.Settings.isMM) Then
+            company = CompanyTypes.MonthlyMail
+        Else
+            '' if this isn't monthly mail, unset the company variable so the company
+            '' is set by the folder number
+            company = Nothing
+        End If
+    End Sub
+
+    Private Sub uiBtnClose_Click(sender As Object, e As EventArgs) Handles uiBtnClose.Click
+        Me.Dispose()
+    End Sub
+
+    Private Sub uiBtnMinimize_Click(sender As Object, e As EventArgs) Handles uiBtnMinimize.Click
+        Me.WindowState = FormWindowState.Minimized
+    End Sub
 
 
+    '' drag to move window functions
+    Private Sub dragWindowMouseDown(sender As Object, e As System.Windows.Forms.MouseEventArgs)
+        drag = True
+        mousex = Windows.Forms.Cursor.Position.X - Me.Left
+        mousey = Windows.Forms.Cursor.Position.Y - Me.Top
+    End Sub
+
+    Private Sub dragWindowMouseMove(sender As Object, e As System.Windows.Forms.MouseEventArgs)
+        If drag Then
+            Me.Top = Windows.Forms.Cursor.Position.Y - mousey
+            Me.Left = Windows.Forms.Cursor.Position.X - mousex
+        End If
+    End Sub
+
+    Private Sub dragWindowMouseUp(sender As Object, e As System.Windows.Forms.MouseEventArgs)
+        drag = False
+    End Sub
+
+
+
+    Private Sub Panel1_MouseDown(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles Panel1.MouseDown
+        dragWindowMouseDown(sender, e)
+    End Sub
+
+    Private Sub Panel1_MouseMove(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles Panel1.MouseMove
+        dragWindowMouseMove(sender, e)
+    End Sub
+
+    Private Sub Panel1_MouseUp(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles Panel1.MouseUp
+        dragWindowMouseUp(sender, e)
+    End Sub
+
+
+    Private Sub Label10_MouseDown(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles Label10.MouseDown
+        dragWindowMouseDown(sender, e)
+    End Sub
+
+    Private Sub Label10_MouseMove(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles Label10.MouseMove
+        dragWindowMouseMove(sender, e)
+    End Sub
+
+    Private Sub Label10_MouseUp(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles Label10.MouseUp
+        dragWindowMouseUp(sender, e)
+    End Sub
+
+
+    Private Sub Label11_MouseDown(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles Label11.MouseDown
+        dragWindowMouseDown(sender, e)
+    End Sub
+
+    Private Sub Label11_MouseMove(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles Label11.MouseMove
+        dragWindowMouseMove(sender, e)
+    End Sub
+
+    Private Sub Label11_MouseUp(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles Label11.MouseUp
+        dragWindowMouseUp(sender, e)
+    End Sub
+
+
+    Private Sub Label12_MouseDown(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles Label12.MouseDown
+        dragWindowMouseDown(sender, e)
+    End Sub
+
+    Private Sub Label12_MouseMove(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles Label12.MouseMove
+        dragWindowMouseMove(sender, e)
+    End Sub
+
+    Private Sub Label12_MouseUp(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles Label12.MouseUp
+        dragWindowMouseUp(sender, e)
+    End Sub
 End Class
