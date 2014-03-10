@@ -41,6 +41,15 @@ Public Class CBCopyHelperForm
         Retrn = 10
     End Enum
 
+    '' enum for types of folders
+    Enum DesignFileTypes As Integer
+        Envelopes = 1
+        Booklets = 2
+        Covers = 3
+        Cartons = 4
+        OldBizHub = 5
+    End Enum
+
     '' global to hold the company
     Dim company As New CompanyTypes
 
@@ -49,8 +58,32 @@ Public Class CBCopyHelperForm
     Dim proofFileList As New List(Of IO.FileInfo)
 
 
+    '' draggable state
+    Dim drag As Boolean
+    Dim mousex As Integer
+    Dim mousey As Integer
 
 
+
+    ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    '' overriding windows forms titlebar drag method - to enable dragging window without border/caption
+    ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    '' see msdn.microsoft.com/en-us/ms645618(VS.85).aspx - constants we're looking for
+    Private Const WM_NCHITTEST As Integer = &H84
+    Private Const HTCLIENT As Integer = &H1
+    Private Const HTCAPTION As Integer = &H2
+
+    Protected Overrides Sub WndProc(ByRef m As Message)
+        '' call the default class code
+        MyBase.WndProc(m)
+
+        '' our own implementation to see if we're getting the WM_NCHITTEST
+        'If Not ((m.Result = 0) Or (m.Result = 1) Or (m.Result = 14)) Then Console.WriteLine(m.Result)
+        Select Case m.Msg
+            Case WM_NCHITTEST
+                If m.Result = HTCLIENT Then m.Result = HTCAPTION
+        End Select
+    End Sub
 
 
 
@@ -82,30 +115,37 @@ Public Class CBCopyHelperForm
         End If
     End Function
 
+    '' gets an array of all top level paths to search recursively in for the salts
+    '' returns an array of arrays
+    '' [0] top level path
+    '' [1] type of design files at that path DesignFileTypes.Envelopes, etc
     Private Function getArrayOfTopLevelPaths(ByVal salts() As String) As Array
         If (company = CompanyTypes.ChurchBudget) Then
             Return {"g:\cb" & salts(0).ToUpper, _
                     "g:\Full Color Sheets\cb" & salts(0).ToUpper, _
                     "g:\CHKBK\cb\CB" & salts(0).ToUpper, _
+                    "g:\CHKBK\CUTS", _
                     "g:\CARTONS\cb\CB" & salts(0).ToUpper, _
                     "g:\CHKBK\UV COVERS", _
-                    "g:\CHKBK\CUTS"
+                    "g:\Full Color Sheets\_Coated\cb" & salts(0).ToUpper
                     }
         ElseIf (company = CompanyTypes.McDaniel) Then
             Return {"g:\MCDANIEL\MC" & salts(0), _
                     "g:\Full Color Sheets\McDaniel\" & salts(0), _
                     "g:\CHKBK\McDaniel", _
+                    "g:\CHKBK\CUTS", _
                     "g:\CARTONS\McDaniel", _
                     "g:\CHKBK\UV COVERS", _
-                    "g:\CHKBK\CUTS"
+                    "g:\Full Color Sheets\_Coated\McDaniel\" & salts(0)
                    }
         ElseIf (company = CompanyTypes.United) Then
             Return {"g:\UNITED\Un" & salts(0), _
                     "g:\Full Color Sheets\United\" & salts(0), _
                     "g:\CHKBK\United", _
+                    "g:\CHKBK\CUTS", _
                     "g:\CARTONS\United", _
                     "g:\CHKBK\UV COVERS", _
-                    "g:\CHKBK\CUTS"
+                    "g:\Full Color Sheets\_Coated\United\" & salts(0)
                    }
         Else
             '' Monthly mail
@@ -117,6 +157,7 @@ Public Class CBCopyHelperForm
 
     Private Function getFolderTrees(ByRef paths() As String) As List(Of IO.DirectoryInfo)
         Dim pathLst As New List(Of IO.DirectoryInfo)
+
         For Each Path As String In paths
             Dim dir As New IO.DirectoryInfo(Path)
             '' add each top level path
@@ -132,6 +173,7 @@ Public Class CBCopyHelperForm
                 '' console.writeline("{0}", LongPath.Message)
             End Try
         Next
+
         Return pathLst
     End Function
 
@@ -299,7 +341,32 @@ Public Class CBCopyHelperForm
 
     End Sub
 
+    Private Sub toggleButtons(enabled As Boolean)
+        uiTxtFontCode.Enabled = enabled
+        uiBtnTemplateDollar.Enabled = enabled
+        uiBtnTemplatePremier.Enabled = enabled
+        uiBtnTemplateMailback.Enabled = enabled
+        uiBtnTemplateBookFront.Enabled = enabled
+        uiBtnTemplateBookBack.Enabled = enabled
+        uiBtnTemplateBookCover.Enabled = enabled
+        uiBtnTemplateCarton.Enabled = enabled
+        uiBtnTemplateBizhub.Enabled = enabled
 
+        uiBtnOpenPngDW.Enabled = enabled
+        uiBtnOpenPngKY.Enabled = enabled
+        uiBtnOpenPngTN.Enabled = enabled
+        uiBtnOpenPngBK.Enabled = enabled
+        uiBtnOpenPngUV.Enabled = enabled
+        uiBtnOpenPngCN.Enabled = enabled
+        uiBtnOpenPngRT.Enabled = enabled
+
+        uiBtnStripinDollar.Enabled = enabled
+        'uiBtnStripinBooklet.Enabled = enabled
+
+        uiBtnOpenFontTools.Enabled = enabled
+        uiBtnPrintAllFonts.Enabled = enabled
+        uiBtnOpenFTPremier.Enabled = enabled
+    End Sub
 
     ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
     '' event handlers
@@ -309,29 +376,7 @@ Public Class CBCopyHelperForm
 
         '' any time the text is changing (or even on pressing return) disable the create copy
         '' buttons so they can't create copy for a partial folder number
-        uiTxtFontCode.Enabled = False
-        uiBtnTemplateDollar.Enabled = False
-        uiBtnTemplatePremier.Enabled = False
-        uiBtnTemplateMailback.Enabled = False
-        uiBtnTemplateBookFront.Enabled = False
-        uiBtnTemplateBookBack.Enabled = False
-        uiBtnTemplateBookCover.Enabled = False
-        uiBtnTemplateCarton.Enabled = False
-        uiBtnTemplateBizhub.Enabled = False
-
-        uiBtnOpenPngDW.Enabled = False
-        uiBtnOpenPngKY.Enabled = False
-        uiBtnOpenPngTN.Enabled = False
-        uiBtnOpenPngBK.Enabled = False
-        uiBtnOpenPngUV.Enabled = False
-        uiBtnOpenPngCN.Enabled = False
-        uiBtnOpenPngRT.Enabled = False
-
-        uiBtnStripinDollar.Enabled = False
-        uiBtnStripinBooklet.Enabled = False
-
-        uiBtnOpenFontTools.Enabled = False
-        uiBtnPrintAllFonts.Enabled = False
+        toggleButtons(False)
 
         '' only search if they pressed enter
         If Not (e.KeyCode = Keys.Return) Then
@@ -352,6 +397,7 @@ Public Class CBCopyHelperForm
         Dim copyFileCount As Integer = 0
         Dim copyFolderCount As Integer = 0
         Dim proofFilecount As Integer = 0
+
         '' holds a list of folders we've counted
         Dim usedFolders As New List(Of String)
 
@@ -411,29 +457,7 @@ Public Class CBCopyHelperForm
             lblProofFilesFound.Text = proofFilecount & " proof(s) found"
 
             '' now that we've "opened" that folder number, enable the buttons to add copy
-            uiTxtFontCode.Enabled = True
-            uiBtnTemplateDollar.Enabled = True
-            uiBtnTemplatePremier.Enabled = True
-            uiBtnTemplateMailback.Enabled = True
-            uiBtnTemplateBookFront.Enabled = True
-            uiBtnTemplateBookBack.Enabled = True
-            uiBtnTemplateBookCover.Enabled = True
-            uiBtnTemplateCarton.Enabled = True
-            uiBtnTemplateBizhub.Enabled = True
-
-            uiBtnOpenPngDW.Enabled = True
-            uiBtnOpenPngKY.Enabled = True
-            uiBtnOpenPngTN.Enabled = True
-            uiBtnOpenPngBK.Enabled = True
-            uiBtnOpenPngUV.Enabled = True
-            uiBtnOpenPngCN.Enabled = True
-            uiBtnOpenPngRT.Enabled = True
-
-            uiBtnStripinDollar.Enabled = True
-            uiBtnStripinBooklet.Enabled = True
-
-            uiBtnOpenFontTools.Enabled = True
-            uiBtnPrintAllFonts.Enabled = True
+            toggleButtons(True)
 
         End If
 
@@ -579,6 +603,16 @@ Public Class CBCopyHelperForm
         End If
     End Sub
 
+    Private Sub uiBtnPrintAllPremier_Click(sender As Object, e As EventArgs) Handles uiBtnPrintAllPremier.Click
+        Dim folder As String = uiTxtFolderNumber.Text
+
+        If (folder <> "" And folder.Length = 5 And Not company = CompanyTypes.MonthlyMail) Or _
+            (folder <> "" And folder.Length = 4 And company = CompanyTypes.MonthlyMail) Then
+            Dim cmd As String = My.Settings.FontToolsPath & " /o=p" & folder & " /p"
+            Call Shell(cmd, AppWinStyle.MaximizedFocus)
+        End If
+    End Sub
+
     Private Sub uiBtnOpenFTPremier_Click(sender As Object, e As EventArgs) Handles uiBtnOpenFTPremier.Click
         Dim folder As String = uiTxtFolderNumber.Text
 
@@ -634,7 +668,7 @@ Public Class CBCopyHelperForm
 
     End Sub
 
-    Private Sub ToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem1.Click
+    Private Sub ToolStripMenuItem1_Click(sender As Object, e As EventArgs)
         Dim stngFrm As New Settings()
         '' show as a modal dialog, so this doesn't return until the dialog is closed
         stngFrm.ShowDialog()
@@ -681,7 +715,7 @@ Public Class CBCopyHelperForm
 
     End Sub
 
-    Private Sub uiBtnStripinBooklet_Click(sender As Object, e As EventArgs) Handles uiBtnStripinBooklet.Click
+    Private Sub uiBtnStripinBooklet_Click(sender As Object, e As EventArgs)
 
         Dim folder As String = uiTxtFolderNumber.Text
         Dim cmd As String = ""
@@ -739,6 +773,155 @@ Public Class CBCopyHelperForm
     End Sub
 
 
+    Private Sub uiBtnSettings_Click(sender As Object, e As EventArgs) Handles uiBtnSettings.Click
+        Dim stngFrm As New Settings()
+        '' show as a modal dialog, so this doesn't return until the dialog is closed
+        stngFrm.ShowDialog()
+
+        '' reload the settings and check the company setting
+        My.Settings.Reload()
+        If (My.Settings.isMM) Then
+            company = CompanyTypes.MonthlyMail
+        Else
+            '' if this isn't monthly mail, unset the company variable so the company
+            '' is set by the folder number
+            company = Nothing
+        End If
+    End Sub
+
+    Private Sub uiBtnClose_Click(sender As Object, e As EventArgs) Handles uiBtnClose.Click
+        Me.Dispose()
+    End Sub
+
+    Private Sub uiBtnMinimize_Click(sender As Object, e As EventArgs) Handles uiBtnMinimize.Click
+        Me.WindowState = FormWindowState.Minimized
+    End Sub
 
 
+    '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    '' drag to move window functions ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Private Sub dragWindowMouseDown(sender As Object, e As System.Windows.Forms.MouseEventArgs)
+        drag = True
+        mousex = Windows.Forms.Cursor.Position.X - Me.Left
+        mousey = Windows.Forms.Cursor.Position.Y - Me.Top
+    End Sub
+
+    Private Sub dragWindowMouseMove(sender As Object, e As System.Windows.Forms.MouseEventArgs)
+        If drag Then
+            Me.Top = Windows.Forms.Cursor.Position.Y - mousey
+            Me.Left = Windows.Forms.Cursor.Position.X - mousex
+        End If
+    End Sub
+
+    Private Sub dragWindowMouseUp(sender As Object, e As System.Windows.Forms.MouseEventArgs)
+        drag = False
+    End Sub
+
+    Private Sub Panel1_MouseDown(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles Panel1.MouseDown
+        dragWindowMouseDown(sender, e)
+    End Sub
+
+    Private Sub Panel1_MouseMove(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles Panel1.MouseMove
+        dragWindowMouseMove(sender, e)
+    End Sub
+
+    Private Sub Panel1_MouseUp(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles Panel1.MouseUp
+        dragWindowMouseUp(sender, e)
+    End Sub
+
+
+    Private Sub Label10_MouseDown(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles Label10.MouseDown
+        dragWindowMouseDown(sender, e)
+    End Sub
+
+    Private Sub Label10_MouseMove(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles Label10.MouseMove
+        dragWindowMouseMove(sender, e)
+    End Sub
+
+    Private Sub Label10_MouseUp(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles Label10.MouseUp
+        dragWindowMouseUp(sender, e)
+    End Sub
+
+
+    Private Sub Label11_MouseDown(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles Label11.MouseDown
+        dragWindowMouseDown(sender, e)
+    End Sub
+
+    Private Sub Label11_MouseMove(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles Label11.MouseMove
+        dragWindowMouseMove(sender, e)
+    End Sub
+
+    Private Sub Label11_MouseUp(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles Label11.MouseUp
+        dragWindowMouseUp(sender, e)
+    End Sub
+
+
+    Private Sub Label12_MouseDown(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles Label12.MouseDown
+        dragWindowMouseDown(sender, e)
+    End Sub
+
+    Private Sub Label12_MouseMove(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles Label12.MouseMove
+        dragWindowMouseMove(sender, e)
+    End Sub
+
+    Private Sub Label12_MouseUp(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles Label12.MouseUp
+        dragWindowMouseUp(sender, e)
+    End Sub
+
+    '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    '' end drag to move window functions ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+
+
+
+    '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    '' shortcut button clicks '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Private Sub uiBtnShortcutPngFont_Click(sender As Object, e As EventArgs) Handles uiBtnShortcutPngFont.Click
+        '' when using PngFont shortcut, copy folder number to clipboard (if not empty)
+        If (uiTxtFolderNumber.Text.Trim <> "") Then Clipboard.SetText(uiTxtFolderNumber.Text.Trim)
+
+        Dim cmd As String = My.Settings.PngFontPath
+        Call Shell(cmd, AppWinStyle.MaximizedFocus)
+    End Sub
+
+    Private Sub uiBtnShortcutFontTool_Click(sender As Object, e As EventArgs) Handles uiBtnShortcutFontTool.Click
+        '' when using FontTool shortcut, copy folder number to clipboard, if not empty
+        If (uiTxtFolderNumber.Text.Trim <> "") Then Clipboard.SetText(uiTxtFolderNumber.Text.Trim)
+
+        Dim cmd As String = My.Settings.FontToolsPath
+        Call Shell(cmd, AppWinStyle.MaximizedFocus)
+    End Sub
+
+    Private Sub uiBtnShortcutPhotoshop_Click(sender As Object, e As EventArgs) Handles uiBtnShortcutPhotoshop.Click
+        Dim cmd As String = My.Settings.PhotoshopPath
+        Call Shell(cmd, AppWinStyle.MaximizedFocus)
+    End Sub
+
+    Private Sub uiBtnShortcutQuark_Click(sender As Object, e As EventArgs) Handles uiBtnShortcutQuark.Click
+        Dim cmd As String = My.Settings.QuarkPath
+        Call Shell(cmd, AppWinStyle.MaximizedFocus)
+    End Sub
+
+    Private Sub uiBtnShortcutColorPrint_Click(sender As Object, e As EventArgs) Handles uiBtnShortcutColorPrint.Click
+        Dim cmd As String = My.Settings.ColorPrintPath
+        Call Shell(cmd, AppWinStyle.MaximizedFocus)
+    End Sub
+
+    Private Sub uiBtnShortcutWinshell_Click(sender As Object, e As EventArgs) Handles uiBtnShortcutWinshell.Click
+        Dim cmd As String = My.Settings.WinshellPath
+        Call Shell(cmd, AppWinStyle.MaximizedFocus)
+    End Sub
+
+    Private Sub uiBtnShortcutDWC_Click(sender As Object, e As EventArgs) Handles uiBtnShortcutDWC.Click
+        Dim cmd As String = My.Settings.DWCPath
+        Call Shell(cmd, AppWinStyle.MaximizedFocus)
+    End Sub
+
+    Private Sub uiBtnShortcutJobBuilder_Click(sender As Object, e As EventArgs) Handles uiBtnShortcutJobBuilder.Click
+        Dim cmd As String = My.Settings.JobBuilderPath
+        Call Shell(cmd, AppWinStyle.MaximizedFocus)
+    End Sub
 End Class

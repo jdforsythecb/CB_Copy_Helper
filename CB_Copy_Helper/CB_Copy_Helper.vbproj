@@ -29,8 +29,8 @@
     <ProductName>CB Copy Helper</ProductName>
     <PublisherName>Church Budget Envelope Company</PublisherName>
     <SuiteName>CB Copy Helper</SuiteName>
-    <ApplicationRevision>4</ApplicationRevision>
-    <ApplicationVersion>1.2.0.%2a</ApplicationVersion>
+    <ApplicationRevision>3</ApplicationRevision>
+    <ApplicationVersion>2.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -107,6 +107,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationEvents.vb" />
     <Compile Include="CBCopyHelper.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -150,9 +151,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Settings.resx">
       <DependentUpon>Settings.vb</DependentUpon>
@@ -199,6 +200,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="CBCopyHelper.ico" />
+    <None Include="WinShell.png" />
+    <None Include="JobBuilder.png" />
+    <None Include="DoubleWideCombine.png" />
+    <None Include="ColorPRINT.png" />
+    <None Include="QuarkXPress.png" />
+    <None Include="Photoshop.png" />
+    <None Include="FontTool.png" />
+    <None Include="pngfont.png" />
+    <None Include="rightmouse.png" />
+    <None Include="leftmouse.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

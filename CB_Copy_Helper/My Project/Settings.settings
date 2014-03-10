@@ -6,10 +6,28 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="PngFontPath" Type="System.String" Scope="User">
-      <Value Profile="(Default)">c:\pngfont2.exe</Value>
+      <Value Profile="(Default)">c:\pngfont\pngfont2.exe</Value>
     </Setting>
     <Setting Name="FontToolsPath" Type="System.String" Scope="User">
-      <Value Profile="(Default)">c:\fnttool3.exe</Value>
+      <Value Profile="(Default)">c:\fonttool\fnttool3.exe</Value>
+    </Setting>
+    <Setting Name="PhotoshopPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="QuarkPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ColorPrintPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="WinshellPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="DWCPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="JobBuilderPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>
