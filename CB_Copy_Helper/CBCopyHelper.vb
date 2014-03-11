@@ -63,8 +63,6 @@ Public Class CBCopyHelperForm
     Dim mousex As Integer
     Dim mousey As Integer
 
-
-
     ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
     '' overriding windows forms titlebar drag method - to enable dragging window without border/caption
     ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
@@ -84,8 +82,6 @@ Public Class CBCopyHelperForm
                 If m.Result = HTCLIENT Then m.Result = HTCAPTION
         End Select
     End Sub
-
-
 
 
     ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
@@ -924,4 +920,5 @@ Public Class CBCopyHelperForm
         Dim cmd As String = My.Settings.JobBuilderPath
         Call Shell(cmd, AppWinStyle.MaximizedFocus)
     End Sub
+
 End Class
