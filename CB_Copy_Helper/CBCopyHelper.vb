@@ -879,7 +879,8 @@ Public Class CBCopyHelperForm
         If (uiTxtFolderNumber.Text.Trim <> "") Then Clipboard.SetText(uiTxtFolderNumber.Text.Trim)
 
         Dim cmd As String = My.Settings.PngFontPath
-        Call Shell(cmd, AppWinStyle.MaximizedFocus)
+        Dim psi As New ProcessStartInfo(cmd)
+        Process.Start(psi)
     End Sub
 
     Private Sub uiBtnShortcutFontTool_Click(sender As Object, e As EventArgs) Handles uiBtnShortcutFontTool.Click
@@ -887,37 +888,47 @@ Public Class CBCopyHelperForm
         If (uiTxtFolderNumber.Text.Trim <> "") Then Clipboard.SetText(uiTxtFolderNumber.Text.Trim)
 
         Dim cmd As String = My.Settings.FontToolsPath
-        Call Shell(cmd, AppWinStyle.MaximizedFocus)
+        Dim psi As New ProcessStartInfo(cmd)
+        Process.Start(psi)
     End Sub
 
     Private Sub uiBtnShortcutPhotoshop_Click(sender As Object, e As EventArgs) Handles uiBtnShortcutPhotoshop.Click
         Dim cmd As String = My.Settings.PhotoshopPath
-        Call Shell(cmd, AppWinStyle.MaximizedFocus)
+        Dim psi As New ProcessStartInfo(cmd)
+        Process.Start(psi)
     End Sub
 
     Private Sub uiBtnShortcutQuark_Click(sender As Object, e As EventArgs) Handles uiBtnShortcutQuark.Click
         Dim cmd As String = My.Settings.QuarkPath
-        Call Shell(cmd, AppWinStyle.MaximizedFocus)
+        Dim psi As New ProcessStartInfo(cmd)
+        Process.Start(psi)
     End Sub
 
     Private Sub uiBtnShortcutColorPrint_Click(sender As Object, e As EventArgs) Handles uiBtnShortcutColorPrint.Click
         Dim cmd As String = My.Settings.ColorPrintPath
-        Call Shell(cmd, AppWinStyle.MaximizedFocus)
+        'Call Shell(cmd, AppWinStyle.MaximizedFocus)
+        '' set the working directory and start the process
+        Dim psi As New ProcessStartInfo(cmd)
+        psi.WorkingDirectory = IO.Path.GetDirectoryName(cmd)
+        Process.Start(psi)
     End Sub
 
     Private Sub uiBtnShortcutWinshell_Click(sender As Object, e As EventArgs) Handles uiBtnShortcutWinshell.Click
         Dim cmd As String = My.Settings.WinshellPath
-        Call Shell(cmd, AppWinStyle.MaximizedFocus)
+        Dim psi As New ProcessStartInfo(cmd)
+        Process.Start(psi)
     End Sub
 
     Private Sub uiBtnShortcutDWC_Click(sender As Object, e As EventArgs) Handles uiBtnShortcutDWC.Click
         Dim cmd As String = My.Settings.DWCPath
-        Call Shell(cmd, AppWinStyle.MaximizedFocus)
+        Dim psi As New ProcessStartInfo(cmd)
+        Process.Start(psi)
     End Sub
 
     Private Sub uiBtnShortcutJobBuilder_Click(sender As Object, e As EventArgs) Handles uiBtnShortcutJobBuilder.Click
         Dim cmd As String = My.Settings.JobBuilderPath
-        Call Shell(cmd, AppWinStyle.MaximizedFocus)
+        Dim psi As New ProcessStartInfo(cmd)
+        Process.Start(psi)
     End Sub
 
 End Class
