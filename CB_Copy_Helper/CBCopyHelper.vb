@@ -920,20 +920,4 @@ Public Class CBCopyHelperForm
         Call Shell(cmd, AppWinStyle.MaximizedFocus)
     End Sub
 
-    Private Sub Label11_MouseUp(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles Label11.MouseUp
-        dragWindowMouseUp(sender, e)
-    End Sub
-
-
-    Private Sub Label12_MouseDown(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles Label12.MouseDown
-        dragWindowMouseDown(sender, e)
-    End Sub
-
-    Private Sub Label12_MouseMove(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles Label12.MouseMove
-        dragWindowMouseMove(sender, e)
-    End Sub
-
-    Private Sub Label12_MouseUp(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles Label12.MouseUp
-        dragWindowMouseUp(sender, e)
-    End Sub
 End Class
