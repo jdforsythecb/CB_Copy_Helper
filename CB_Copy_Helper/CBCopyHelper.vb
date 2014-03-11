@@ -379,6 +379,9 @@ Public Class CBCopyHelperForm
             Exit Sub
         End If
 
+        '' prevent 'ding' sound when pressing enter in text box
+        e.SuppressKeyPress = True
+
         '' highlight the text in the box
         uiTxtFolderNumber.SelectAll()
 
