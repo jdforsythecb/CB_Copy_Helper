@@ -92,6 +92,7 @@ Partial Class CBCopyHelperForm
         Me.uiBtnShortcutPhotoshop = New System.Windows.Forms.Button()
         Me.uiBtnShortcutFontTool = New System.Windows.Forms.Button()
         Me.uiBtnShortcutPngFont = New System.Windows.Forms.Button()
+        Me.uiBtnViewPNGs = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -945,12 +946,22 @@ Partial Class CBCopyHelperForm
         Me.uiBtnShortcutPngFont.TabIndex = 0
         Me.uiBtnShortcutPngFont.UseVisualStyleBackColor = False
         '
+        'uiBtnViewPNGs
+        '
+        Me.uiBtnViewPNGs.Location = New System.Drawing.Point(249, 74)
+        Me.uiBtnViewPNGs.Name = "uiBtnViewPNGs"
+        Me.uiBtnViewPNGs.Size = New System.Drawing.Size(75, 23)
+        Me.uiBtnViewPNGs.TabIndex = 43
+        Me.uiBtnViewPNGs.Text = "See PNGs"
+        Me.uiBtnViewPNGs.UseVisualStyleBackColor = True
+        '
         'CBCopyHelperForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.InactiveCaptionText
         Me.ClientSize = New System.Drawing.Size(781, 630)
+        Me.Controls.Add(Me.uiBtnViewPNGs)
         Me.Controls.Add(Me.Panel7)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Panel6)
@@ -1066,5 +1077,6 @@ Partial Class CBCopyHelperForm
     Friend WithEvents uiBtnShortcutDWC As System.Windows.Forms.Button
     Friend WithEvents uiBtnShortcutJobBuilder As System.Windows.Forms.Button
     Friend WithEvents uiBtnShortcutWinshell As System.Windows.Forms.Button
+    Friend WithEvents uiBtnViewPNGs As System.Windows.Forms.Button
 
 End Class

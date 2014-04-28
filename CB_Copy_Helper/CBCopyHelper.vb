@@ -934,4 +934,12 @@ Public Class CBCopyHelperForm
         Process.Start(psi)
     End Sub
 
+    Private Sub uiBtnViewPNGs_Click(sender As Object, e As EventArgs) Handles uiBtnViewPNGs.Click
+        Dim pngFrm As New PNGImages()
+        pngFrm.FolderNum = uiTxtFolderNumber.Text.Trim
+        '' show as a modal dialog, so this doesn't return until the dialog is closed
+        pngFrm.ShowDialog()
+
+    End Sub
+
 End Class
