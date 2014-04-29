@@ -22,6 +22,7 @@ Partial Class PNGImages
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PNGImages))
         Me.uiTxtPNGFolder = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.uiBtnPNGSearch = New System.Windows.Forms.Button()
@@ -68,6 +69,7 @@ Partial Class PNGImages
         Me.uiPicBoxEnvelope.Location = New System.Drawing.Point(192, 9)
         Me.uiPicBoxEnvelope.Name = "uiPicBoxEnvelope"
         Me.uiPicBoxEnvelope.Size = New System.Drawing.Size(535, 529)
+        Me.uiPicBoxEnvelope.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.uiPicBoxEnvelope.TabIndex = 4
         Me.uiPicBoxEnvelope.TabStop = False
         '
@@ -75,12 +77,14 @@ Partial Class PNGImages
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(739, 549)
+        Me.ClientSize = New System.Drawing.Size(739, 614)
         Me.Controls.Add(Me.uiPicBoxEnvelope)
         Me.Controls.Add(Me.uiListBoxPNGFonts)
         Me.Controls.Add(Me.uiBtnPNGSearch)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.uiTxtPNGFolder)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.KeyPreview = True
         Me.Name = "PNGImages"
         Me.Text = "PNGImages"
         CType(Me.uiPicBoxEnvelope, System.ComponentModel.ISupportInitialize).EndInit()

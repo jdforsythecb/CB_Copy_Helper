@@ -22,6 +22,7 @@ Partial Class Settings
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Settings))
         Me.btnCancelSettings = New System.Windows.Forms.Button()
         Me.btnSaveSettings = New System.Windows.Forms.Button()
         Me.rdioMM = New System.Windows.Forms.RadioButton()
@@ -458,6 +459,7 @@ Partial Class Settings
         Me.Controls.Add(Me.btnSaveSettings)
         Me.Controls.Add(Me.rdioMM)
         Me.Controls.Add(Me.rdioCB)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "Settings"
         Me.Text = "Settings"
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()

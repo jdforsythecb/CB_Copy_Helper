@@ -1,5 +1,6 @@
 ﻿Imports System.Xml
 Imports System.IO
+Imports System.Drawing.Imaging
 
 Public Class PNGImages
 
@@ -26,6 +27,10 @@ Public Class PNGImages
         '' clear list on new search
         uiListBoxPNGFonts.Items.Clear()
         images.Clear()
+
+        '' select all text in box
+        uiTxtPNGFolder.SelectAll()
+
 
         Dim folder As String = uiTxtPNGFolder.Text.Trim
         Dim folderFile As String = "g:\PNGFonts\" & folder & ".fnx"
@@ -89,6 +94,11 @@ Public Class PNGImages
             uiListBoxPNGFonts.Items.Add(pair.Key)
         Next
 
+        '' if there are entries in the list, select the first one
+        If (uiListBoxPNGFonts.Items.Count > 0) Then
+            uiListBoxPNGFonts.SetSelected(0, True)
+        End If
+
     End Sub
 
     Private Sub decodeImage(ByVal base64 As String)
@@ -97,28 +107,68 @@ Public Class PNGImages
         Dim bmp As New Bitmap(ms)
         ms.Close()
 
-        uiPicBoxEnvelope.SizeMode = PictureBoxSizeMode.Zoom
+        '' this is now set manually in designer
+        'uiPicBoxEnvelope.SizeMode = PictureBoxSizeMode.Zoom
         uiPicBoxEnvelope.Image = bmp
 
     End Sub
 
 
-    Private Sub uiLstBoxPNGFonts_MouseDown(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles uiListBoxPNGFonts.MouseDown
-        If (e.Button = Windows.Forms.MouseButtons.Left) Then
-            '' did we actually click on an item in the box
-            Dim selInd As Integer = uiListBoxPNGFonts.IndexFromPoint(e.X, e.Y)
-            '' if the returned selindex is not -1, we clicked something
-            If (selInd <> -1) Then
-                '' show the selected image in the PictureBox
-                Dim id = uiListBoxPNGFonts.SelectedItem.ToString
-                Dim imageInfo As Dictionary(Of String, String) = images.Item(id)
-                Console.WriteLine("id = " & id)
-                Console.WriteLine("code = " & imageInfo.Item("fontCode"))
-                Console.WriteLine("title = " & imageInfo.Item("fontTitle"))
-                Console.WriteLine("image = " & imageInfo.Item("image").Substring(0, 10))
-                decodeImage(imageInfo.Item("image"))
-            End If
+    '   Private Sub uiLstBoxPNGFonts_MouseDown(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles uiListBoxPNGFonts.MouseDown
+    '       If (e.Button = Windows.Forms.MouseButtons.Left) Then
+    '' did we actually click on an item in the box
+    '   Dim selInd As Integer = uiListBoxPNGFonts.IndexFromPoint(e.X, e.Y)
+    '' if the returned selindex is not -1, we clicked something
+    '          If (selInd <> -1) Then
+    '' show the selected image in the PictureBox
+    '   Dim id = uiListBoxPNGFonts.SelectedItem.ToString
+    'Dim imageInfo As Dictionary(Of String, String) = images.Item(id)
+    'Console.WriteLine("id = " & id)
+    'Console.WriteLine("code = " & imageInfo.Item("fontCode"))
+    'Console.WriteLine("title = " & imageInfo.Item("fontTitle"))
+    'Console.WriteLine("image = " & imageInfo.Item("image").Substring(0, 10))
+    'decodeImage(imageInfo.Item("image"))
+    '              showImage(id)
+    '         End If
 
+    '    End If
+    'End Sub
+
+    Private Sub uiListBoxPNGFonts_SelectedIndexChanged(sender As Object, e As EventArgs) Handles uiListBoxPNGFonts.SelectedIndexChanged
+        Dim id = uiListBoxPNGFonts.SelectedItem.ToString
+        showImage(id)
+    End Sub
+
+
+    Private Sub showImage(id As String)
+        Dim imageInfo As Dictionary(Of String, String) = images.Item(id)
+        Console.WriteLine("id = " & id)
+        Console.WriteLine("code = " & imageInfo.Item("fontCode"))
+        Console.WriteLine("title = " & imageInfo.Item("fontTitle"))
+        Console.WriteLine("image = " & imageInfo.Item("image").Substring(0, 10))
+        decodeImage(imageInfo.Item("image"))
+    End Sub
+
+
+    Private Sub uiTxtPNGFolder_KeyDown(sender As Object, e As KeyEventArgs) Handles uiTxtPNGFolder.KeyDown
+        If (e.KeyCode = Keys.Return) Then uiBtnPNGSearch_Click(sender, EventArgs.Empty)
+    End Sub
+
+    Private Sub PNGImages_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
+        If (e.Control AndAlso e.KeyCode = Keys.C) Then
+            copyImageToClipboardPNG()
         End If
+    End Sub
+
+    Private Sub copyImageToClipboardPNG()
+        '' only export if there's a selected envelope in the list
+        If Not (uiListBoxPNGFonts.SelectedItems.Count() = 1) Then Exit Sub
+
+        Dim bmp As New Bitmap(uiPicBoxEnvelope.Image)
+        Dim clipboardPNG As String = "c:\eps\dump\clipboard.png"
+        If (File.Exists(clipboardPNG)) Then File.Delete(clipboardPNG)
+
+        bmp.Save(clipboardPNG, ImageFormat.Png)
+
     End Sub
 End Class
