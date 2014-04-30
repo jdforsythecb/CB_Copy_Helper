@@ -32,13 +32,26 @@ Public Class PNGImages
         uiTxtPNGFolder.SelectAll()
 
 
-        Dim folder As String = uiTxtPNGFolder.Text.Trim
-        Dim folderFile As String = "g:\PNGFonts\" & folder & ".fnx"
+        fold = uiTxtPNGFolder.Text.Trim
+        Dim folderFile As String = "g:\PNGFonts\" & fold & ".fnx"
         'Dim folderFile As String = "g:\jdforsythe\dev\CB_Copy_Helper\CB_Copy_Helper\WELCOME.xmll"
 
         '' if the file doesn't exist, display a message and quit processing
         If (Not File.Exists(folderFile)) Then
-            MessageBox.Show("Folder " & folderFile & " does not exist in PNG Font")
+            'MessageBox.Show("Folder " & folderFile & " does not exist in PNG Font")
+            '' write a message in the picture box
+            uiPicBoxEnvelope.Image = Nothing
+            uiPicBoxEnvelope.Refresh()
+
+
+            Dim g As System.Drawing.Graphics
+            g = uiPicBoxEnvelope.CreateGraphics
+
+            ' x.DrawRectangle(New Pen(Brushes.White, 200), New Rectangle(0, 0, 200, 200))
+            g.DrawString(fold & " Not Found", New Font("Arial", 24, FontStyle.Regular), Brushes.DarkBlue, New PointF(0, 0))
+
+
+
             Exit Sub
         End If
 
