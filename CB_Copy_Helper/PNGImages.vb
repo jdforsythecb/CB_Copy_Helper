@@ -38,20 +38,18 @@ Public Class PNGImages
 
         '' if the file doesn't exist, display a message and quit processing
         If (Not File.Exists(folderFile)) Then
-            'MessageBox.Show("Folder " & folderFile & " does not exist in PNG Font")
-            '' write a message in the picture box
+
+            '' clear the image in the picturebox and refresh it (to background color)
             uiPicBoxEnvelope.Image = Nothing
             uiPicBoxEnvelope.Refresh()
 
-
+            '' create a new drawing object and use it to put a message in the picturebox
             Dim g As System.Drawing.Graphics
             g = uiPicBoxEnvelope.CreateGraphics
-
             ' x.DrawRectangle(New Pen(Brushes.White, 200), New Rectangle(0, 0, 200, 200))
             g.DrawString(fold & " Not Found", New Font("Arial", 24, FontStyle.Regular), Brushes.DarkBlue, New PointF(0, 0))
-
-
-
+            '' force garbage collection
+            g.Dispose()
             Exit Sub
         End If
 
