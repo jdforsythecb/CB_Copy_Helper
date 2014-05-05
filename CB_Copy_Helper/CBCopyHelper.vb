@@ -1006,4 +1006,28 @@ Public Class CBCopyHelperForm
             End If
         End If
     End Sub
+
+
+    Private Sub uiBtnPrintPNGPreview_Click(sender As Object, e As EventArgs) Handles uiBtnPrintPNGPreview.Click
+        PrintDocument.OriginAtMargins = True
+
+        '' set portrait / landscape based on uiPictureBox dimensions
+        Dim bmp As Bitmap = uiPictureBoxPNGPreview.Image
+        If (bmp.Width > bmp.Height) Then PrintDocument.DefaultPageSettings.Landscape = True
+        PrintPreviewDialog.ShowDialog()
+    End Sub
+
+
+    Private Sub PrintDocument_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles PrintDocument.PrintPage
+        Dim bmp As Bitmap = uiPictureBoxPNGPreview.Image
+
+        Dim scaleX As Double = e.MarginBounds.Width / bmp.Width
+        Dim scaleY As Double = e.MarginBounds.Height / bmp.Height
+
+        '' scale by amount needed to fit page
+        Dim scale As Double = If(scaleX < scaleY, scaleX, scaleY)
+
+        e.Graphics.DrawImage(bmp, 0, 0, CInt(bmp.Width * scale), CInt(bmp.Height * scale))
+
+    End Sub
 End Class

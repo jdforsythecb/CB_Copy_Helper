@@ -100,6 +100,9 @@ Partial Class CBCopyHelperForm
         Me.uiPictureBoxPNGPreview = New System.Windows.Forms.PictureBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label18 = New System.Windows.Forms.Label()
+        Me.PrintDocument = New System.Drawing.Printing.PrintDocument()
+        Me.uiBtnPrintPNGPreview = New System.Windows.Forms.Button()
+        Me.PrintPreviewDialog = New System.Windows.Forms.PrintPreviewDialog()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -960,7 +963,7 @@ Partial Class CBCopyHelperForm
         Me.uiBtnViewPNGs.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.uiBtnViewPNGs.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.uiBtnViewPNGs.ForeColor = System.Drawing.Color.Salmon
-        Me.uiBtnViewPNGs.Location = New System.Drawing.Point(979, 63)
+        Me.uiBtnViewPNGs.Location = New System.Drawing.Point(867, 63)
         Me.uiBtnViewPNGs.Name = "uiBtnViewPNGs"
         Me.uiBtnViewPNGs.Size = New System.Drawing.Size(87, 23)
         Me.uiBtnViewPNGs.TabIndex = 43
@@ -1008,7 +1011,7 @@ Partial Class CBCopyHelperForm
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label5.ForeColor = System.Drawing.Color.Salmon
-        Me.Label5.Location = New System.Drawing.Point(668, 82)
+        Me.Label5.Location = New System.Drawing.Point(668, 68)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(126, 13)
         Me.Label5.TabIndex = 46
@@ -1019,11 +1022,40 @@ Partial Class CBCopyHelperForm
         Me.Label18.AutoSize = True
         Me.Label18.Font = New System.Drawing.Font("Verdana", 6.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label18.ForeColor = System.Drawing.Color.Salmon
-        Me.Label18.Location = New System.Drawing.Point(800, 83)
+        Me.Label18.Location = New System.Drawing.Point(669, 85)
         Me.Label18.Name = "Label18"
         Me.Label18.Size = New System.Drawing.Size(154, 10)
         Me.Label18.TabIndex = 47
         Me.Label18.Text = "CTRL+C copies to clipboard.png"
+        '
+        'PrintDocument
+        '
+        Me.PrintDocument.DocumentName = "PNGImage"
+        Me.PrintDocument.OriginAtMargins = True
+        '
+        'uiBtnPrintPNGPreview
+        '
+        Me.uiBtnPrintPNGPreview.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.uiBtnPrintPNGPreview.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.uiBtnPrintPNGPreview.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.uiBtnPrintPNGPreview.ForeColor = System.Drawing.Color.Salmon
+        Me.uiBtnPrintPNGPreview.Location = New System.Drawing.Point(960, 63)
+        Me.uiBtnPrintPNGPreview.Name = "uiBtnPrintPNGPreview"
+        Me.uiBtnPrintPNGPreview.Size = New System.Drawing.Size(103, 23)
+        Me.uiBtnPrintPNGPreview.TabIndex = 48
+        Me.uiBtnPrintPNGPreview.Text = "Print Envelope"
+        Me.uiBtnPrintPNGPreview.UseVisualStyleBackColor = False
+        '
+        'PrintPreviewDialog
+        '
+        Me.PrintPreviewDialog.AutoScrollMargin = New System.Drawing.Size(0, 0)
+        Me.PrintPreviewDialog.AutoScrollMinSize = New System.Drawing.Size(0, 0)
+        Me.PrintPreviewDialog.ClientSize = New System.Drawing.Size(400, 300)
+        Me.PrintPreviewDialog.Document = Me.PrintDocument
+        Me.PrintPreviewDialog.Enabled = True
+        Me.PrintPreviewDialog.Icon = CType(resources.GetObject("PrintPreviewDialog.Icon"), System.Drawing.Icon)
+        Me.PrintPreviewDialog.Name = "PrintPreviewDialog"
+        Me.PrintPreviewDialog.Visible = False
         '
         'CBCopyHelperForm
         '
@@ -1031,6 +1063,7 @@ Partial Class CBCopyHelperForm
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.InactiveCaptionText
         Me.ClientSize = New System.Drawing.Size(1074, 617)
+        Me.Controls.Add(Me.uiBtnPrintPNGPreview)
         Me.Controls.Add(Me.Label18)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.uiPictureBoxPNGPreview)
@@ -1161,5 +1194,8 @@ Partial Class CBCopyHelperForm
     Friend WithEvents uiPictureBoxPNGPreview As System.Windows.Forms.PictureBox
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents Label18 As System.Windows.Forms.Label
+    Friend WithEvents PrintDocument As System.Drawing.Printing.PrintDocument
+    Friend WithEvents uiBtnPrintPNGPreview As System.Windows.Forms.Button
+    Friend WithEvents PrintPreviewDialog As System.Windows.Forms.PrintPreviewDialog
 
 End Class
