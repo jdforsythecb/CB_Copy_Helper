@@ -29,8 +29,8 @@
     <ProductName>CB Copy Helper</ProductName>
     <PublisherName>Church Budget Envelope Company</PublisherName>
     <SuiteName>CB Copy Helper</SuiteName>
-    <ApplicationRevision>4</ApplicationRevision>
-    <ApplicationVersion>2.2.0.%2a</ApplicationVersion>
+    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationVersion>3.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -83,6 +83,10 @@
     <ApplicationIcon>CBCopyHelper.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PNGFontBridge, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\PNGFontBridge\bin\Release\PNGFontBridge.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />

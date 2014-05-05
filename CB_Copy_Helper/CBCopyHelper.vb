@@ -8,6 +8,8 @@
 Imports System.IO
 '' for regex-ing folder search strings
 Imports System.Text.RegularExpressions
+'' for PNG Font Bridge
+Imports PNGFontBridge
 
 Public Class CBCopyHelperForm
 
@@ -56,6 +58,9 @@ Public Class CBCopyHelperForm
     '' global to hold the lists (for selectedIndex on clicks)
     Dim copyFileList As New List(Of IO.FileInfo)
     Dim proofFileList As New List(Of IO.FileInfo)
+    Dim pngFontList As New Dictionary(Of String, Dictionary(Of String, String))
+    '' PNGFontBridge instance
+    Dim PNGPreview As New PNGFontBridge.PNGFontBridge
 
 
     '' draggable state
@@ -364,6 +369,40 @@ Public Class CBCopyHelperForm
         uiBtnOpenFTPremier.Enabled = enabled
     End Sub
 
+
+    Private Sub loadPNGFonts()
+        Dim folder = uiTxtFolderNumber.Text.Trim
+
+        pngFontList.Clear()
+        uiListViewPNGs.Items.Clear()
+        uiPictureBoxPNGPreview.Image = Nothing
+
+        '' get the list of copy from this folder into the listview for png preview (suppress errors)
+        pngFontList = PNGPreview.getCopyListFromFolderNumber(folder, True)
+
+        For Each env As KeyValuePair(Of String, Dictionary(Of String, String)) In pngFontList
+            '' add the items to the list view
+            Dim resultItem As New ListViewItem
+            '' id
+            resultItem.Text = env.Key
+            '' code
+            resultItem.SubItems.Add(env.Value.Item("fontCode"))
+            '' title
+            resultItem.SubItems.Add(env.Value.Item("fontTitle"))
+            '' add the listview item to the listview
+            uiListViewPNGs.Items.Add(resultItem)
+        Next
+
+        '' if there were any results, select the first one
+        If (uiListViewPNGs.Items.Count > 0) Then uiListViewPNGs.Items(0).Selected = True
+
+    End Sub
+
+    Private Sub showPNGImage(ByVal id As String)
+        Dim imageInfo As Dictionary(Of String, String) = pngFontList.Item(id)
+        uiPictureBoxPNGPreview.Image = PNGPreview.getBitmapFromBase64(imageInfo.Item("image"))
+    End Sub
+
     ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
     '' event handlers
     ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
@@ -457,6 +496,9 @@ Public Class CBCopyHelperForm
 
             '' now that we've "opened" that folder number, enable the buttons to add copy
             toggleButtons(True)
+
+            '' set off the PNG Preview search
+            loadPNGFonts()
 
         End If
 
@@ -942,4 +984,26 @@ Public Class CBCopyHelperForm
 
     End Sub
 
+    Private Sub uiListViewPNGs_SelectedIndexChanged(sender As Object, e As EventArgs) Handles uiListViewPNGs.SelectedIndexChanged
+        '' make sure one and only one item is selected (is multiselect=false, so this should be true)
+        If (uiListViewPNGs.SelectedItems.Count() = 1) Then
+            Dim id As String = uiListViewPNGs.SelectedItems(0).Text
+
+            showPNGImage(id)
+
+        End If
+
+    End Sub
+
+
+
+    Private Sub CBCopyHelperForm_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
+        '' if they pressed control plus c
+        If (e.Control AndAlso e.KeyCode = Keys.C) Then
+            '' and there's a selected image
+            If (uiListViewPNGs.SelectedItems.Count = 1) Then
+                PNGPreview.copyBitmapToClipboardPNG(uiPictureBoxPNGPreview.Image)
+            End If
+        End If
+    End Sub
 End Class

@@ -62,6 +62,7 @@ Partial Class PNGImages
         Me.uiListBoxPNGFonts.Location = New System.Drawing.Point(12, 53)
         Me.uiListBoxPNGFonts.Name = "uiListBoxPNGFonts"
         Me.uiListBoxPNGFonts.Size = New System.Drawing.Size(120, 485)
+        Me.uiListBoxPNGFonts.Sorted = True
         Me.uiListBoxPNGFonts.TabIndex = 3
         '
         'uiPicBoxEnvelope
