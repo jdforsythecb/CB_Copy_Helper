@@ -498,7 +498,12 @@ Public Class CBCopyHelperForm
             toggleButtons(True)
 
             '' set off the PNG Preview search
-            loadPNGFonts()
+            Try
+                loadPNGFonts()
+            Catch ex As Exception
+                '' don't worry about an exception
+            End Try
+
 
         End If
 

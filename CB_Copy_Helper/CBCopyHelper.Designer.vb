@@ -541,7 +541,7 @@ Partial Class CBCopyHelperForm
         Me.Panel1.Controls.Add(Me.Label10)
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(1086, 42)
+        Me.Panel1.Size = New System.Drawing.Size(1078, 42)
         Me.Panel1.TabIndex = 33
         '
         'uiBtnMinimize
@@ -550,9 +550,9 @@ Partial Class CBCopyHelperForm
         Me.uiBtnMinimize.FlatAppearance.BorderSize = 0
         Me.uiBtnMinimize.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.uiBtnMinimize.Image = CType(resources.GetObject("uiBtnMinimize.Image"), System.Drawing.Image)
-        Me.uiBtnMinimize.Location = New System.Drawing.Point(992, 0)
+        Me.uiBtnMinimize.Location = New System.Drawing.Point(969, 0)
         Me.uiBtnMinimize.Name = "uiBtnMinimize"
-        Me.uiBtnMinimize.Size = New System.Drawing.Size(48, 38)
+        Me.uiBtnMinimize.Size = New System.Drawing.Size(52, 38)
         Me.uiBtnMinimize.TabIndex = 25
         Me.uiBtnMinimize.UseVisualStyleBackColor = False
         '
@@ -562,9 +562,9 @@ Partial Class CBCopyHelperForm
         Me.uiBtnClose.FlatAppearance.BorderSize = 0
         Me.uiBtnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.uiBtnClose.Image = CType(resources.GetObject("uiBtnClose.Image"), System.Drawing.Image)
-        Me.uiBtnClose.Location = New System.Drawing.Point(1033, -1)
+        Me.uiBtnClose.Location = New System.Drawing.Point(1010, -1)
         Me.uiBtnClose.Name = "uiBtnClose"
-        Me.uiBtnClose.Size = New System.Drawing.Size(48, 38)
+        Me.uiBtnClose.Size = New System.Drawing.Size(52, 38)
         Me.uiBtnClose.TabIndex = 24
         Me.uiBtnClose.UseVisualStyleBackColor = False
         '
@@ -574,9 +574,9 @@ Partial Class CBCopyHelperForm
         Me.uiBtnSettings.FlatAppearance.BorderSize = 0
         Me.uiBtnSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.uiBtnSettings.Image = CType(resources.GetObject("uiBtnSettings.Image"), System.Drawing.Image)
-        Me.uiBtnSettings.Location = New System.Drawing.Point(946, -1)
+        Me.uiBtnSettings.Location = New System.Drawing.Point(920, 0)
         Me.uiBtnSettings.Name = "uiBtnSettings"
-        Me.uiBtnSettings.Size = New System.Drawing.Size(48, 38)
+        Me.uiBtnSettings.Size = New System.Drawing.Size(52, 38)
         Me.uiBtnSettings.TabIndex = 23
         Me.uiBtnSettings.UseVisualStyleBackColor = False
         '
@@ -839,7 +839,7 @@ Partial Class CBCopyHelperForm
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label3.ForeColor = System.Drawing.Color.Salmon
-        Me.Label3.Location = New System.Drawing.Point(277, 48)
+        Me.Label3.Location = New System.Drawing.Point(270, 64)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(73, 13)
         Me.Label3.TabIndex = 40
@@ -856,7 +856,7 @@ Partial Class CBCopyHelperForm
         Me.Panel7.Controls.Add(Me.uiBtnShortcutPhotoshop)
         Me.Panel7.Controls.Add(Me.uiBtnShortcutFontTool)
         Me.Panel7.Controls.Add(Me.uiBtnShortcutPngFont)
-        Me.Panel7.Location = New System.Drawing.Point(356, 48)
+        Me.Panel7.Location = New System.Drawing.Point(349, 48)
         Me.Panel7.Name = "Panel7"
         Me.Panel7.Size = New System.Drawing.Size(306, 45)
         Me.Panel7.TabIndex = 42
@@ -1062,7 +1062,7 @@ Partial Class CBCopyHelperForm
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.InactiveCaptionText
-        Me.ClientSize = New System.Drawing.Size(1074, 617)
+        Me.ClientSize = New System.Drawing.Size(1078, 617)
         Me.Controls.Add(Me.uiBtnPrintPNGPreview)
         Me.Controls.Add(Me.Label18)
         Me.Controls.Add(Me.Label5)
