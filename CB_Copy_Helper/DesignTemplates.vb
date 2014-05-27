@@ -14,7 +14,7 @@ Public Class DesignTemplates
     Private Const TEMPLATEBIZHUBCOVER As String = "g:\CopySetting\Templates\Quark\Booklet Cover Bizhub.qxp"
 
     '' Monthly Mail
-    Private Const TEMPLATEMMDOLLAR As String = "g:\CopySetting\Templates\Indesign\Dollar Envelope.indd"
+    Private Const TEMPLATEMMDOLLAR As String = "g:\CopySetting\Templates\Indesign\Dollar Envelope MM.indd"
 
     '' types of templates
     Public Enum TemplateTypes As Integer
