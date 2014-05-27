@@ -4,17 +4,17 @@ Public Class DesignTemplates
 
     '' constants to paths of design templates
     '' Church Budget
-    Private Const TEMPLATEDOLLAR As String = "g:\CopySetting\Templates\CB\CB Dollar.qxp"
-    Private Const TEMPLATEPREMIER As String = "g:\CopySetting\Templates\CB\CB Premier.qxp"
-    Private Const TEMPLATEMAILBACK As String = "g:\CopySetting\Templates\CB\CB Mailback.qxp"
-    Private Const TEMPLATEBOOKLETBACK As String = "g:\CopySetting\Templates\CB\CB Booklet Back.qxp"
-    Private Const TEMPLATEBOOKLETFRONT As String = "g:\CopySetting\Templates\CB\CB Booklet Front.qxp"
-    Private Const TEMPLATEBOOKLETCOVER As String = "g:\CopySetting\Templates\CB\CB Booklet Cover.psd"
-    Private Const TEMPLATECARTON As String = "g:\CopySetting\Templates\CB\CB Carton.psd"
-    Private Const TEMPLATEBIZHUBCOVER As String = "g:\CopySetting\Templates\CB\CB Booklet Cover Bizhub.qxp"
+    Private Const TEMPLATEDOLLAR As String = "g:\CopySetting\Templates\Indesign\Dollar Envelope.indd"
+    Private Const TEMPLATEPREMIER As String = "g:\CopySetting\Templates\Indesign\Premier Envelope.indd"
+    Private Const TEMPLATEMAILBACK As String = "g:\CopySetting\Templates\Quark\Mailback.qxp"
+    Private Const TEMPLATEBOOKLETBACK As String = "g:\CopySetting\Templates\Quark\Booklet Back.qxp"
+    Private Const TEMPLATEBOOKLETFRONT As String = "g:\CopySetting\Templates\Indesign\Booklet Front.indd"
+    Private Const TEMPLATEBOOKLETCOVER As String = "g:\CopySetting\Templates\Photoshop\Booklet Cover.psd"
+    Private Const TEMPLATECARTON As String = "g:\CopySetting\Templates\Photoshop\Carton.psd"
+    Private Const TEMPLATEBIZHUBCOVER As String = "g:\CopySetting\Templates\Quark\Booklet Cover Bizhub.qxp"
 
     '' Monthly Mail
-    Private Const TEMPLATEMMDOLLAR As String = "g:\CopySetting\Templates\MM\MM Dollar.indd"
+    Private Const TEMPLATEMMDOLLAR As String = "g:\CopySetting\Templates\Indesign\Dollar Envelope.indd"
 
     '' types of templates
     Public Enum TemplateTypes As Integer

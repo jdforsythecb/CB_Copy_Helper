@@ -400,7 +400,13 @@ Public Class CBCopyHelperForm
 
     Private Sub showPNGImage(ByVal id As String)
         Dim imageInfo As Dictionary(Of String, String) = pngFontList.Item(id)
-        uiPictureBoxPNGPreview.Image = PNGPreview.getBitmapFromBase64(imageInfo.Item("image"))
+        '' if the image isn't blank...
+        If Not (imageInfo.Item("image") = "") Then
+            uiPictureBoxPNGPreview.Image = PNGPreview.getBitmapFromBase64(imageInfo.Item("image"))
+        Else
+            '' if the image is empty, clear out the image in the display
+            uiPictureBoxPNGPreview.Image = Nothing
+        End If
     End Sub
 
     ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''

@@ -29,8 +29,8 @@
     <ProductName>CB Copy Helper</ProductName>
     <PublisherName>Church Budget Envelope Company</PublisherName>
     <SuiteName>CB Copy Helper</SuiteName>
-    <ApplicationRevision>8</ApplicationRevision>
-    <ApplicationVersion>3.1.0.%2a</ApplicationVersion>
+    <ApplicationRevision>4</ApplicationRevision>
+    <ApplicationVersion>3.2.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -82,11 +82,10 @@
   <PropertyGroup>
     <ApplicationIcon>CBCopyHelper.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="PNGFontBridge, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\PNGFontBridge\bin\Release\PNGFontBridge.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
@@ -177,6 +176,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="CB_Copy_Helper_TemporaryKey.pfx" />
+    <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
@@ -223,6 +223,12 @@
     <None Include="pngfont.png" />
     <None Include="rightmouse.png" />
     <None Include="leftmouse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\PNGFontBridge\PNGFontBridge.vbproj">
+      <Project>{a14e8c59-e372-43e1-8633-4e842b0b89e3}</Project>
+      <Name>PNGFontBridge</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
