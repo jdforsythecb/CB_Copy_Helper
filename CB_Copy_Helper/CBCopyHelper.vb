@@ -40,7 +40,7 @@ Public Class CBCopyHelperForm
         BizhubCover = 7
         Mailback = 8
         Window = 9
-        Retrn = 10
+        ReturnEnv = 10
     End Enum
 
     '' enum for types of folders
@@ -226,7 +226,8 @@ Public Class CBCopyHelperForm
     Private Function getSavePath(prettyFolder As String, templateType As TemplateTypes) As String
         If (templateType = TemplateTypes.Dollar Or _
             templateType = TemplateTypes.Premier Or _
-            templateType = TemplateTypes.Mailback) Then
+            templateType = TemplateTypes.Mailback Or _
+            templateType = TemplateTypes.ReturnEnv) Then
 
             If (company = CompanyTypes.ChurchBudget) Then
                 Return "g:\CB" & prettyFolder.Substring(0, 1).ToUpper & "\" & prettyFolder
@@ -307,6 +308,8 @@ Public Class CBCopyHelperForm
                     templateOpen.TemplateType = DesignTemplates.TemplateTypes.Carton
                 Case TemplateTypes.BizhubCover
                     templateOpen.TemplateType = DesignTemplates.TemplateTypes.BizhubCover
+                Case TemplateTypes.ReturnEnv
+                    templateOpen.TemplateType = DesignTemplates.TemplateTypes.ReturnEnv
                 Case Else
                     MessageBox.Show("Template Type error. Call for help.")
             End Select
@@ -352,6 +355,7 @@ Public Class CBCopyHelperForm
         uiBtnTemplateBookCover.Enabled = enabled
         uiBtnTemplateCarton.Enabled = enabled
         uiBtnTemplateBizhub.Enabled = enabled
+        uiBtnTemplateReturn.Enabled = enabled
 
         uiBtnOpenPngDW.Enabled = enabled
         uiBtnOpenPngKY.Enabled = enabled
@@ -367,6 +371,9 @@ Public Class CBCopyHelperForm
         uiBtnOpenFontTools.Enabled = enabled
         uiBtnPrintAllFonts.Enabled = enabled
         uiBtnOpenFTPremier.Enabled = enabled
+        uiBtnPrintAllPremier.Enabled = enabled
+        uiBtnOpenFTReturn.Enabled = enabled
+        uiBtnOpenFTWindow.Enabled = enabled
     End Sub
 
 
@@ -631,51 +638,59 @@ Public Class CBCopyHelperForm
     End Sub
 
 
-    Private Sub uiBtnOpenFontTools_Click(sender As Object, e As EventArgs) Handles uiBtnOpenFontTools.Click
-        Dim folder As String = uiTxtFolderNumber.Text
-
+    Private Sub openFontTool(ByVal folder As String, Optional ByVal character As String = "", Optional ByVal prepend As Boolean = True)
         If (folder <> "" And folder.Length = 5 And Not company = CompanyTypes.MonthlyMail) Or _
            (folder <> "" And folder.Length = 4 And company = CompanyTypes.MonthlyMail) Then
-            Dim cmd As String = My.Settings.FontToolsPath & " /o=" & folder
+            Dim cmd As String = ""
+            If (prepend) Then
+                cmd = My.Settings.FontToolsPath & " /o=" & character & folder
+            Else
+                cmd = My.Settings.FontToolsPath & " /o=" & folder & character
+            End If
+
             Call Shell(cmd, AppWinStyle.MaximizedFocus)
         Else
             MessageBox.Show("You must input a proper folder number before opening Font Tools")
         End If
     End Sub
 
-    Private Sub uiBtnPrintAllFonts_Click(sender As Object, e As EventArgs) Handles uiBtnPrintAllFonts.Click
-        Dim folder As String = uiTxtFolderNumber.Text
-
+    Private Sub printFonttool(ByVal folder As String, Optional ByVal character As String = "", Optional ByVal prepend As Boolean = True)
         If (folder <> "" And folder.Length = 5 And Not company = CompanyTypes.MonthlyMail) Or _
            (folder <> "" And folder.Length = 4 And company = CompanyTypes.MonthlyMail) Then
-            Dim cmd As String = My.Settings.FontToolsPath & " /o=" & folder & " /p"
+            Dim cmd As String = ""
+            If (prepend) Then
+                cmd = My.Settings.FontToolsPath & " /o=" & character & folder & " /p"
+            Else
+                cmd = My.Settings.FontToolsPath & " /o=" & folder & character & " /p"
+            End If
             Call Shell(cmd, AppWinStyle.MaximizedFocus)
         Else
             MessageBox.Show("You must input a proper folder number before printing fonts")
         End If
     End Sub
 
-    Private Sub uiBtnPrintAllPremier_Click(sender As Object, e As EventArgs) Handles uiBtnPrintAllPremier.Click
-        Dim folder As String = uiTxtFolderNumber.Text
+    Private Sub uiBtnOpenFontTools_Click(sender As Object, e As EventArgs) Handles uiBtnOpenFontTools.Click
+        openFontTool(uiTxtFolderNumber.Text)
+    End Sub
 
-        If (folder <> "" And folder.Length = 5 And Not company = CompanyTypes.MonthlyMail) Or _
-            (folder <> "" And folder.Length = 4 And company = CompanyTypes.MonthlyMail) Then
-            Dim cmd As String = My.Settings.FontToolsPath & " /o=p" & folder & " /p"
-            Call Shell(cmd, AppWinStyle.MaximizedFocus)
-        End If
+    Private Sub uiBtnPrintAllFonts_Click(sender As Object, e As EventArgs) Handles uiBtnPrintAllFonts.Click
+        printFonttool(uiTxtFolderNumber.Text)
+    End Sub
+
+    Private Sub uiBtnPrintAllPremier_Click(sender As Object, e As EventArgs) Handles uiBtnPrintAllPremier.Click
+        printFonttool(uiTxtFolderNumber.Text, "p", True)
     End Sub
 
     Private Sub uiBtnOpenFTPremier_Click(sender As Object, e As EventArgs) Handles uiBtnOpenFTPremier.Click
-        Dim folder As String = uiTxtFolderNumber.Text
+        openFontTool(uiTxtFolderNumber.Text, "p", True)
+    End Sub
 
-        If (folder <> "" And folder.Length = 5 And Not company = CompanyTypes.MonthlyMail) Or _
-           (folder <> "" And folder.Length = 4 And company = CompanyTypes.MonthlyMail) Then
-            '' prepend a "p" to the folder on the command-line to open the premier font
-            Dim cmd As String = My.Settings.FontToolsPath & " /o=p" & folder
-            Call Shell(cmd, AppWinStyle.MaximizedFocus)
-        Else
-            MessageBox.Show("You must input a proper folder number before opening Font Tools")
-        End If
+    Private Sub uiBtnOpenFTReturn_Click(sender As Object, e As EventArgs) Handles uiBtnOpenFTReturn.Click
+        openFontTool(uiTxtFolderNumber.Text, "r", False)
+    End Sub
+
+    Private Sub uiBtnOpenFTWindow_Click(sender As Object, e As EventArgs) Handles uiBtnOpenFTWindow.Click
+        openFontTool(uiTxtFolderNumber.Text, "w", False)
     End Sub
 
     Private Sub uiBtnTemplateDollar_Click(sender As Object, e As EventArgs) Handles uiBtnTemplateDollar.Click
@@ -708,6 +723,10 @@ Public Class CBCopyHelperForm
 
     Private Sub uiBtnTemplateMailback_Click(sender As Object, e As EventArgs) Handles uiBtnTemplateMailback.Click
         openTemplate(TemplateTypes.Mailback)
+    End Sub
+
+    Private Sub uiBtnTemplateReturn_Click(sender As Object, e As EventArgs) Handles uiBtnTemplateReturn.Click
+        openTemplate(TemplateTypes.ReturnEnv)
     End Sub
 
     Private Sub CBCopyHelperForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -1041,4 +1060,6 @@ Public Class CBCopyHelperForm
         e.Graphics.DrawImage(bmp, 0, 0, CInt(bmp.Width * scale), CInt(bmp.Height * scale))
 
     End Sub
+
+    
 End Class

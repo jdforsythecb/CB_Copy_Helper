@@ -79,6 +79,7 @@ Partial Class CBCopyHelperForm
         Me.Label19 = New System.Windows.Forms.Label()
         Me.PictureBox8 = New System.Windows.Forms.PictureBox()
         Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.uiBtnTemplateReturn = New System.Windows.Forms.Button()
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.Panel6 = New System.Windows.Forms.Panel()
         Me.uiBtnPrintAllPremier = New System.Windows.Forms.Button()
@@ -103,6 +104,8 @@ Partial Class CBCopyHelperForm
         Me.PrintDocument = New System.Drawing.Printing.PrintDocument()
         Me.uiBtnPrintPNGPreview = New System.Windows.Forms.Button()
         Me.PrintPreviewDialog = New System.Windows.Forms.PrintPreviewDialog()
+        Me.uiBtnOpenFTWindow = New System.Windows.Forms.Button()
+        Me.uiBtnOpenFTReturn = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -143,7 +146,7 @@ Partial Class CBCopyHelperForm
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.Color.Salmon
-        Me.Label2.Location = New System.Drawing.Point(6, 111)
+        Me.Label2.Location = New System.Drawing.Point(6, 101)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(146, 13)
         Me.Label2.TabIndex = 2
@@ -152,7 +155,7 @@ Partial Class CBCopyHelperForm
         'uiLstDesignFiles
         '
         Me.uiLstDesignFiles.FormattingEnabled = True
-        Me.uiLstDesignFiles.Location = New System.Drawing.Point(9, 131)
+        Me.uiLstDesignFiles.Location = New System.Drawing.Point(9, 121)
         Me.uiLstDesignFiles.Name = "uiLstDesignFiles"
         Me.uiLstDesignFiles.Size = New System.Drawing.Size(187, 290)
         Me.uiLstDesignFiles.TabIndex = 2
@@ -168,7 +171,7 @@ Partial Class CBCopyHelperForm
         Me.uiBtnOpenFontTools.Name = "uiBtnOpenFontTools"
         Me.uiBtnOpenFontTools.Size = New System.Drawing.Size(131, 26)
         Me.uiBtnOpenFontTools.TabIndex = 4
-        Me.uiBtnOpenFontTools.Text = "Open FT Dollar"
+        Me.uiBtnOpenFontTools.Text = "Dollar"
         Me.uiBtnOpenFontTools.UseVisualStyleBackColor = False
         '
         'Label4
@@ -209,7 +212,7 @@ Partial Class CBCopyHelperForm
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label6.ForeColor = System.Drawing.Color.Salmon
-        Me.Label6.Location = New System.Drawing.Point(388, 151)
+        Me.Label6.Location = New System.Drawing.Point(380, 101)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(121, 13)
         Me.Label6.TabIndex = 11
@@ -350,7 +353,7 @@ Partial Class CBCopyHelperForm
         '
         Me.lblCopyFilesFound.AutoSize = True
         Me.lblCopyFilesFound.ForeColor = System.Drawing.SystemColors.ButtonFace
-        Me.lblCopyFilesFound.Location = New System.Drawing.Point(14, 425)
+        Me.lblCopyFilesFound.Location = New System.Drawing.Point(14, 415)
         Me.lblCopyFilesFound.Name = "lblCopyFilesFound"
         Me.lblCopyFilesFound.Size = New System.Drawing.Size(118, 13)
         Me.lblCopyFilesFound.TabIndex = 17
@@ -373,7 +376,7 @@ Partial Class CBCopyHelperForm
         Me.uiBtnStripinDollar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.uiBtnStripinDollar.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.uiBtnStripinDollar.ForeColor = System.Drawing.Color.Salmon
-        Me.uiBtnStripinDollar.Location = New System.Drawing.Point(5, 130)
+        Me.uiBtnStripinDollar.Location = New System.Drawing.Point(5, 167)
         Me.uiBtnStripinDollar.Name = "uiBtnStripinDollar"
         Me.uiBtnStripinDollar.Size = New System.Drawing.Size(264, 23)
         Me.uiBtnStripinDollar.TabIndex = 20
@@ -469,7 +472,7 @@ Partial Class CBCopyHelperForm
         Me.Label8.AutoSize = True
         Me.Label8.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label8.ForeColor = System.Drawing.Color.Salmon
-        Me.Label8.Location = New System.Drawing.Point(383, 359)
+        Me.Label8.Location = New System.Drawing.Point(380, 327)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(148, 13)
         Me.Label8.TabIndex = 27
@@ -494,7 +497,7 @@ Partial Class CBCopyHelperForm
         Me.Label9.AutoSize = True
         Me.Label9.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label9.ForeColor = System.Drawing.Color.Salmon
-        Me.Label9.Location = New System.Drawing.Point(383, 508)
+        Me.Label9.Location = New System.Drawing.Point(381, 475)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(150, 13)
         Me.Label9.TabIndex = 30
@@ -525,7 +528,7 @@ Partial Class CBCopyHelperForm
         Me.uiBtnOpenFTPremier.Name = "uiBtnOpenFTPremier"
         Me.uiBtnOpenFTPremier.Size = New System.Drawing.Size(131, 26)
         Me.uiBtnOpenFTPremier.TabIndex = 32
-        Me.uiBtnOpenFTPremier.Text = "Open FT Premier"
+        Me.uiBtnOpenFTPremier.Text = "Premier"
         Me.uiBtnOpenFTPremier.UseVisualStyleBackColor = False
         '
         'Panel1
@@ -626,7 +629,7 @@ Partial Class CBCopyHelperForm
         Me.Panel2.Controls.Add(Me.PictureBox2)
         Me.Panel2.Controls.Add(Me.Label13)
         Me.Panel2.Controls.Add(Me.PictureBox1)
-        Me.Panel2.Location = New System.Drawing.Point(199, 133)
+        Me.Panel2.Location = New System.Drawing.Point(199, 123)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(158, 196)
         Me.Panel2.TabIndex = 35
@@ -777,6 +780,7 @@ Partial Class CBCopyHelperForm
         'Panel4
         '
         Me.Panel4.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.Panel4.Controls.Add(Me.uiBtnTemplateReturn)
         Me.Panel4.Controls.Add(Me.uiBtnStripinDollar)
         Me.Panel4.Controls.Add(Me.uiBtnTemplateBookBack)
         Me.Panel4.Controls.Add(Me.uiBtnTemplateBizhub)
@@ -788,10 +792,24 @@ Partial Class CBCopyHelperForm
         Me.Panel4.Controls.Add(Me.uiBtnTemplateDollar)
         Me.Panel4.Controls.Add(Me.Label7)
         Me.Panel4.Controls.Add(Me.uiTxtFontCode)
-        Me.Panel4.Location = New System.Drawing.Point(378, 174)
+        Me.Panel4.Location = New System.Drawing.Point(378, 123)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(277, 165)
+        Me.Panel4.Size = New System.Drawing.Size(277, 196)
         Me.Panel4.TabIndex = 37
+        '
+        'uiBtnTemplateReturn
+        '
+        Me.uiBtnTemplateReturn.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.uiBtnTemplateReturn.Enabled = False
+        Me.uiBtnTemplateReturn.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.uiBtnTemplateReturn.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.uiBtnTemplateReturn.ForeColor = System.Drawing.Color.Salmon
+        Me.uiBtnTemplateReturn.Location = New System.Drawing.Point(186, 96)
+        Me.uiBtnTemplateReturn.Name = "uiBtnTemplateReturn"
+        Me.uiBtnTemplateReturn.Size = New System.Drawing.Size(83, 23)
+        Me.uiBtnTemplateReturn.TabIndex = 21
+        Me.uiBtnTemplateReturn.Text = "Return"
+        Me.uiBtnTemplateReturn.UseVisualStyleBackColor = False
         '
         'Panel5
         '
@@ -803,7 +821,7 @@ Partial Class CBCopyHelperForm
         Me.Panel5.Controls.Add(Me.uiBtnOpenPngKY)
         Me.Panel5.Controls.Add(Me.uiBtnOpenPngTN)
         Me.Panel5.Controls.Add(Me.uiBtnOpenPngDW)
-        Me.Panel5.Location = New System.Drawing.Point(372, 377)
+        Me.Panel5.Location = New System.Drawing.Point(378, 345)
         Me.Panel5.Name = "Panel5"
         Me.Panel5.Size = New System.Drawing.Size(278, 122)
         Me.Panel5.TabIndex = 38
@@ -811,13 +829,15 @@ Partial Class CBCopyHelperForm
         'Panel6
         '
         Me.Panel6.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.Panel6.Controls.Add(Me.uiBtnOpenFTWindow)
+        Me.Panel6.Controls.Add(Me.uiBtnOpenFTReturn)
         Me.Panel6.Controls.Add(Me.uiBtnPrintAllPremier)
         Me.Panel6.Controls.Add(Me.uiBtnOpenFTPremier)
         Me.Panel6.Controls.Add(Me.uiBtnPrintAllFonts)
         Me.Panel6.Controls.Add(Me.uiBtnOpenFontTools)
-        Me.Panel6.Location = New System.Drawing.Point(370, 525)
+        Me.Panel6.Location = New System.Drawing.Point(378, 494)
         Me.Panel6.Name = "Panel6"
-        Me.Panel6.Size = New System.Drawing.Size(280, 78)
+        Me.Panel6.Size = New System.Drawing.Size(280, 108)
         Me.Panel6.TabIndex = 39
         '
         'uiBtnPrintAllPremier
@@ -1057,6 +1077,34 @@ Partial Class CBCopyHelperForm
         Me.PrintPreviewDialog.Name = "PrintPreviewDialog"
         Me.PrintPreviewDialog.Visible = False
         '
+        'uiBtnOpenFTWindow
+        '
+        Me.uiBtnOpenFTWindow.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.uiBtnOpenFTWindow.Enabled = False
+        Me.uiBtnOpenFTWindow.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.uiBtnOpenFTWindow.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.uiBtnOpenFTWindow.ForeColor = System.Drawing.Color.Salmon
+        Me.uiBtnOpenFTWindow.Location = New System.Drawing.Point(145, 74)
+        Me.uiBtnOpenFTWindow.Name = "uiBtnOpenFTWindow"
+        Me.uiBtnOpenFTWindow.Size = New System.Drawing.Size(127, 26)
+        Me.uiBtnOpenFTWindow.TabIndex = 35
+        Me.uiBtnOpenFTWindow.Text = "Window"
+        Me.uiBtnOpenFTWindow.UseVisualStyleBackColor = False
+        '
+        'uiBtnOpenFTReturn
+        '
+        Me.uiBtnOpenFTReturn.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.uiBtnOpenFTReturn.Enabled = False
+        Me.uiBtnOpenFTReturn.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.uiBtnOpenFTReturn.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.uiBtnOpenFTReturn.ForeColor = System.Drawing.Color.Salmon
+        Me.uiBtnOpenFTReturn.Location = New System.Drawing.Point(8, 74)
+        Me.uiBtnOpenFTReturn.Name = "uiBtnOpenFTReturn"
+        Me.uiBtnOpenFTReturn.Size = New System.Drawing.Size(131, 26)
+        Me.uiBtnOpenFTReturn.TabIndex = 34
+        Me.uiBtnOpenFTReturn.Text = "Return"
+        Me.uiBtnOpenFTReturn.UseVisualStyleBackColor = False
+        '
         'CBCopyHelperForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1197,5 +1245,8 @@ Partial Class CBCopyHelperForm
     Friend WithEvents PrintDocument As System.Drawing.Printing.PrintDocument
     Friend WithEvents uiBtnPrintPNGPreview As System.Windows.Forms.Button
     Friend WithEvents PrintPreviewDialog As System.Windows.Forms.PrintPreviewDialog
+    Friend WithEvents uiBtnTemplateReturn As System.Windows.Forms.Button
+    Friend WithEvents uiBtnOpenFTWindow As System.Windows.Forms.Button
+    Friend WithEvents uiBtnOpenFTReturn As System.Windows.Forms.Button
 
 End Class
