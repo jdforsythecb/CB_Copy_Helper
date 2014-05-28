@@ -82,6 +82,8 @@ Partial Class CBCopyHelperForm
         Me.uiBtnTemplateReturn = New System.Windows.Forms.Button()
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.Panel6 = New System.Windows.Forms.Panel()
+        Me.uiBtnOpenFTWindow = New System.Windows.Forms.Button()
+        Me.uiBtnOpenFTReturn = New System.Windows.Forms.Button()
         Me.uiBtnPrintAllPremier = New System.Windows.Forms.Button()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Panel7 = New System.Windows.Forms.Panel()
@@ -104,8 +106,7 @@ Partial Class CBCopyHelperForm
         Me.PrintDocument = New System.Drawing.Printing.PrintDocument()
         Me.uiBtnPrintPNGPreview = New System.Windows.Forms.Button()
         Me.PrintPreviewDialog = New System.Windows.Forms.PrintPreviewDialog()
-        Me.uiBtnOpenFTWindow = New System.Windows.Forms.Button()
-        Me.uiBtnOpenFTReturn = New System.Windows.Forms.Button()
+        Me.uiBtnTemplateWindow = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -780,6 +781,7 @@ Partial Class CBCopyHelperForm
         'Panel4
         '
         Me.Panel4.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.Panel4.Controls.Add(Me.uiBtnTemplateWindow)
         Me.Panel4.Controls.Add(Me.uiBtnTemplateReturn)
         Me.Panel4.Controls.Add(Me.uiBtnStripinDollar)
         Me.Panel4.Controls.Add(Me.uiBtnTemplateBookBack)
@@ -839,6 +841,34 @@ Partial Class CBCopyHelperForm
         Me.Panel6.Name = "Panel6"
         Me.Panel6.Size = New System.Drawing.Size(280, 108)
         Me.Panel6.TabIndex = 39
+        '
+        'uiBtnOpenFTWindow
+        '
+        Me.uiBtnOpenFTWindow.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.uiBtnOpenFTWindow.Enabled = False
+        Me.uiBtnOpenFTWindow.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.uiBtnOpenFTWindow.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.uiBtnOpenFTWindow.ForeColor = System.Drawing.Color.Salmon
+        Me.uiBtnOpenFTWindow.Location = New System.Drawing.Point(145, 74)
+        Me.uiBtnOpenFTWindow.Name = "uiBtnOpenFTWindow"
+        Me.uiBtnOpenFTWindow.Size = New System.Drawing.Size(127, 26)
+        Me.uiBtnOpenFTWindow.TabIndex = 35
+        Me.uiBtnOpenFTWindow.Text = "Window"
+        Me.uiBtnOpenFTWindow.UseVisualStyleBackColor = False
+        '
+        'uiBtnOpenFTReturn
+        '
+        Me.uiBtnOpenFTReturn.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.uiBtnOpenFTReturn.Enabled = False
+        Me.uiBtnOpenFTReturn.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.uiBtnOpenFTReturn.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.uiBtnOpenFTReturn.ForeColor = System.Drawing.Color.Salmon
+        Me.uiBtnOpenFTReturn.Location = New System.Drawing.Point(8, 74)
+        Me.uiBtnOpenFTReturn.Name = "uiBtnOpenFTReturn"
+        Me.uiBtnOpenFTReturn.Size = New System.Drawing.Size(131, 26)
+        Me.uiBtnOpenFTReturn.TabIndex = 34
+        Me.uiBtnOpenFTReturn.Text = "Return"
+        Me.uiBtnOpenFTReturn.UseVisualStyleBackColor = False
         '
         'uiBtnPrintAllPremier
         '
@@ -1077,33 +1107,19 @@ Partial Class CBCopyHelperForm
         Me.PrintPreviewDialog.Name = "PrintPreviewDialog"
         Me.PrintPreviewDialog.Visible = False
         '
-        'uiBtnOpenFTWindow
+        'uiBtnTemplateWindow
         '
-        Me.uiBtnOpenFTWindow.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.uiBtnOpenFTWindow.Enabled = False
-        Me.uiBtnOpenFTWindow.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.uiBtnOpenFTWindow.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.uiBtnOpenFTWindow.ForeColor = System.Drawing.Color.Salmon
-        Me.uiBtnOpenFTWindow.Location = New System.Drawing.Point(145, 74)
-        Me.uiBtnOpenFTWindow.Name = "uiBtnOpenFTWindow"
-        Me.uiBtnOpenFTWindow.Size = New System.Drawing.Size(127, 26)
-        Me.uiBtnOpenFTWindow.TabIndex = 35
-        Me.uiBtnOpenFTWindow.Text = "Window"
-        Me.uiBtnOpenFTWindow.UseVisualStyleBackColor = False
-        '
-        'uiBtnOpenFTReturn
-        '
-        Me.uiBtnOpenFTReturn.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.uiBtnOpenFTReturn.Enabled = False
-        Me.uiBtnOpenFTReturn.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.uiBtnOpenFTReturn.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.uiBtnOpenFTReturn.ForeColor = System.Drawing.Color.Salmon
-        Me.uiBtnOpenFTReturn.Location = New System.Drawing.Point(8, 74)
-        Me.uiBtnOpenFTReturn.Name = "uiBtnOpenFTReturn"
-        Me.uiBtnOpenFTReturn.Size = New System.Drawing.Size(131, 26)
-        Me.uiBtnOpenFTReturn.TabIndex = 34
-        Me.uiBtnOpenFTReturn.Text = "Return"
-        Me.uiBtnOpenFTReturn.UseVisualStyleBackColor = False
+        Me.uiBtnTemplateWindow.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.uiBtnTemplateWindow.Enabled = False
+        Me.uiBtnTemplateWindow.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.uiBtnTemplateWindow.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.uiBtnTemplateWindow.ForeColor = System.Drawing.Color.Salmon
+        Me.uiBtnTemplateWindow.Location = New System.Drawing.Point(186, 125)
+        Me.uiBtnTemplateWindow.Name = "uiBtnTemplateWindow"
+        Me.uiBtnTemplateWindow.Size = New System.Drawing.Size(83, 23)
+        Me.uiBtnTemplateWindow.TabIndex = 22
+        Me.uiBtnTemplateWindow.Text = "Window"
+        Me.uiBtnTemplateWindow.UseVisualStyleBackColor = False
         '
         'CBCopyHelperForm
         '
@@ -1248,5 +1264,6 @@ Partial Class CBCopyHelperForm
     Friend WithEvents uiBtnTemplateReturn As System.Windows.Forms.Button
     Friend WithEvents uiBtnOpenFTWindow As System.Windows.Forms.Button
     Friend WithEvents uiBtnOpenFTReturn As System.Windows.Forms.Button
+    Friend WithEvents uiBtnTemplateWindow As System.Windows.Forms.Button
 
 End Class

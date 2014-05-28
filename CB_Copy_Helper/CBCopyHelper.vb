@@ -39,8 +39,8 @@ Public Class CBCopyHelperForm
         BookletCover = 6
         BizhubCover = 7
         Mailback = 8
-        Window = 9
-        ReturnEnv = 10
+        ReturnEnv = 9
+        Window = 10
     End Enum
 
     '' enum for types of folders
@@ -227,7 +227,8 @@ Public Class CBCopyHelperForm
         If (templateType = TemplateTypes.Dollar Or _
             templateType = TemplateTypes.Premier Or _
             templateType = TemplateTypes.Mailback Or _
-            templateType = TemplateTypes.ReturnEnv) Then
+            templateType = TemplateTypes.ReturnEnv Or _
+            templateType = TemplateTypes.Window) Then
 
             If (company = CompanyTypes.ChurchBudget) Then
                 Return "g:\CB" & prettyFolder.Substring(0, 1).ToUpper & "\" & prettyFolder
@@ -310,6 +311,8 @@ Public Class CBCopyHelperForm
                     templateOpen.TemplateType = DesignTemplates.TemplateTypes.BizhubCover
                 Case TemplateTypes.ReturnEnv
                     templateOpen.TemplateType = DesignTemplates.TemplateTypes.ReturnEnv
+                Case TemplateTypes.Window
+                    templateOpen.TemplateType = DesignTemplates.TemplateTypes.Window
                 Case Else
                     MessageBox.Show("Template Type error. Call for help.")
             End Select
@@ -356,6 +359,8 @@ Public Class CBCopyHelperForm
         uiBtnTemplateCarton.Enabled = enabled
         uiBtnTemplateBizhub.Enabled = enabled
         uiBtnTemplateReturn.Enabled = enabled
+        uiBtnTemplateWindow.Enabled = enabled
+
 
         uiBtnOpenPngDW.Enabled = enabled
         uiBtnOpenPngKY.Enabled = enabled
@@ -727,6 +732,10 @@ Public Class CBCopyHelperForm
 
     Private Sub uiBtnTemplateReturn_Click(sender As Object, e As EventArgs) Handles uiBtnTemplateReturn.Click
         openTemplate(TemplateTypes.ReturnEnv)
+    End Sub
+
+    Private Sub uiBtnTemplateWindow_Click(sender As Object, e As EventArgs) Handles uiBtnTemplateWindow.Click
+        openTemplate(TemplateTypes.Window)
     End Sub
 
     Private Sub CBCopyHelperForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load

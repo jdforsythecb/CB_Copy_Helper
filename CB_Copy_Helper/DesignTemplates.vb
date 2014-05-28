@@ -13,6 +13,7 @@ Public Class DesignTemplates
     Private Const TEMPLATECARTON As String = "g:\CopySetting\Templates\Photoshop\Carton.psd"
     Private Const TEMPLATEBIZHUBCOVER As String = "g:\CopySetting\Templates\Quark\Booklet Cover Bizhub.qxp"
     Private Const TEMPLATERETURN As String = "g:\CopySetting\Templates\Indesign\Return.indd"
+    Private Const TEMPLATEWINDOW As String = "g:\CopySetting\Templates\Indesign\Window.indd"
 
     '' Monthly Mail
     Private Const TEMPLATEMMDOLLAR As String = "g:\CopySetting\Templates\Indesign\Dollar Envelope MM.indd"
@@ -28,6 +29,7 @@ Public Class DesignTemplates
         BizhubCover = 7
         Mailback = 8
         ReturnEnv = 9
+        Window = 10
     End Enum
 
     '' company divisions
@@ -216,6 +218,9 @@ Public Class DesignTemplates
 
             Case TemplateTypes.ReturnEnv
                 Return TEMPLATERETURN
+
+            Case TemplateTypes.Window
+                Return TEMPLATEWINDOW
 
             Case Else
                 Return ""
