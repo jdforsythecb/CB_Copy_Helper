@@ -79,6 +79,7 @@ Partial Class CBCopyHelperForm
         Me.Label19 = New System.Windows.Forms.Label()
         Me.PictureBox8 = New System.Windows.Forms.PictureBox()
         Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.uiBtnTemplateWindow = New System.Windows.Forms.Button()
         Me.uiBtnTemplateReturn = New System.Windows.Forms.Button()
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.Panel6 = New System.Windows.Forms.Panel()
@@ -106,7 +107,6 @@ Partial Class CBCopyHelperForm
         Me.PrintDocument = New System.Drawing.Printing.PrintDocument()
         Me.uiBtnPrintPNGPreview = New System.Windows.Forms.Button()
         Me.PrintPreviewDialog = New System.Windows.Forms.PrintPreviewDialog()
-        Me.uiBtnTemplateWindow = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -799,6 +799,20 @@ Partial Class CBCopyHelperForm
         Me.Panel4.Size = New System.Drawing.Size(277, 196)
         Me.Panel4.TabIndex = 37
         '
+        'uiBtnTemplateWindow
+        '
+        Me.uiBtnTemplateWindow.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.uiBtnTemplateWindow.Enabled = False
+        Me.uiBtnTemplateWindow.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.uiBtnTemplateWindow.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.uiBtnTemplateWindow.ForeColor = System.Drawing.Color.Salmon
+        Me.uiBtnTemplateWindow.Location = New System.Drawing.Point(186, 125)
+        Me.uiBtnTemplateWindow.Name = "uiBtnTemplateWindow"
+        Me.uiBtnTemplateWindow.Size = New System.Drawing.Size(83, 23)
+        Me.uiBtnTemplateWindow.TabIndex = 22
+        Me.uiBtnTemplateWindow.Text = "Window"
+        Me.uiBtnTemplateWindow.UseVisualStyleBackColor = False
+        '
         'uiBtnTemplateReturn
         '
         Me.uiBtnTemplateReturn.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
@@ -1106,20 +1120,6 @@ Partial Class CBCopyHelperForm
         Me.PrintPreviewDialog.Icon = CType(resources.GetObject("PrintPreviewDialog.Icon"), System.Drawing.Icon)
         Me.PrintPreviewDialog.Name = "PrintPreviewDialog"
         Me.PrintPreviewDialog.Visible = False
-        '
-        'uiBtnTemplateWindow
-        '
-        Me.uiBtnTemplateWindow.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.uiBtnTemplateWindow.Enabled = False
-        Me.uiBtnTemplateWindow.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.uiBtnTemplateWindow.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.uiBtnTemplateWindow.ForeColor = System.Drawing.Color.Salmon
-        Me.uiBtnTemplateWindow.Location = New System.Drawing.Point(186, 125)
-        Me.uiBtnTemplateWindow.Name = "uiBtnTemplateWindow"
-        Me.uiBtnTemplateWindow.Size = New System.Drawing.Size(83, 23)
-        Me.uiBtnTemplateWindow.TabIndex = 22
-        Me.uiBtnTemplateWindow.Text = "Window"
-        Me.uiBtnTemplateWindow.UseVisualStyleBackColor = False
         '
         'CBCopyHelperForm
         '

@@ -449,6 +449,8 @@ Public Class CBCopyHelperForm
         uiLstDesignFiles.Items.Clear()
         uiLstProofFiles.Items.Clear()
 
+        uiTxtFontCode.Text = ""
+
         '' counts for copy folders/files and proof files
         Dim copyFileCount As Integer = 0
         Dim copyFolderCount As Integer = 0
